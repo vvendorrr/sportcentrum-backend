@@ -4,7 +4,7 @@
 
 | Gegeven | Waarde |
 | --- | --- |
-| Team |  |
+| Team | — |
 | Opdrachtgever | Ron de Wit, Sportcentrum De Linde |
 | Repository | [Sportcentrum-backend](https://github.com/vvendorrr/sportcentrum-backend "Repository") |
 | Versie | 1.0 |
@@ -14,8 +14,8 @@
 
 | Naam | Studentnummer | Scrum-rol | Deelproduct |
 | --- | --- | --- | --- |
-| Famke | num | rol | deelproduct |
-| Giovanni | num | rol | deelproduct |
+| Famke | [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] |
+| Giovanni | [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] |
 
 ## Versiebeheer
 
@@ -27,25 +27,25 @@
 
 ### De opdrachtgever en het probleem
 
-Lorem ipsum
+[Nog in te vullen]
 
 ### Doel van website
 
-Lorem ipsum
+[Nog in te vullen]
 
 ### Scope
 
 | Wel binnen dit project | Bewust buiten dit project |
 | --- | --- |
-| Lorem ipsum | Lorem ipsum |
+| [Nog in te vullen] | [Nog in te vullen] |
 
 ### Doelgroepen
 
 | Gebruiker | Wat doet deze persoon op de website |
 | --- | --- |
-| Bezoeker | Lorem ipsum |
-| Lid | Lorem ipsum |
-| Beheerder | Lorem ipsum |
+| Bezoeker | [Nog in te vullen] |
+| Lid | [Nog in te vullen] |
+| Beheerder | [Nog in te vullen] |
 
 ## Functionele eisen
 
@@ -53,35 +53,35 @@ Lorem ipsum
 
 | ID | User story | Deelproduct | Prioriteit | Sprint | Wie |
 | --- | --- | --- | --- | --- | --- |
-| ID | Lorem ipsum | Lorem ipsum | Lorem ipsum | Lorem ipsum | Lorem ipsum |
+| [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] |
 
 ### Uitgewerkte user stories
 
-#### ID — Titel — Prioriteit — Deelproduct — Naam
+#### [ID] — [Titel] — [Prioriteit] — [Deelproduct] — [Naam]
 
-Als ~~rol~~ wil ik ~~wat~~ zodat ~~waarom~~
-
-**Acceptatiecriteria**
-
-- Testbaar criterium
-- Testbaar criterium
-- Testbaar criterium
-
-#### ID — Titel — Prioriteit — Deelproduct — Naam
-
-Als ~~rol~~ wil ik ~~wat~~ zodat ~~waarom~~
+> **Als** ~~rol~~ wil ik ~~wat~~ zodat ~~waarom~~
 
 **Acceptatiecriteria**
 
-- Testbaar criterium
-- Testbaar criterium
-- Testbaar criterium
+- [ ] Testbaar criterium
+- [ ] Testbaar criterium
+- [ ] Testbaar criterium
+
+#### [ID] — [Titel] — [Prioriteit] — [Deelproduct] — [Naam]
+
+> **Als** ~~rol~~ wil ik ~~wat~~ zodat ~~waarom~~
+
+**Acceptatiecriteria**
+
+- [ ] Testbaar criterium
+- [ ] Testbaar criterium
+- [ ] Testbaar criterium
 
 ## Niet-functionele eisen
 
 | Nr. | Eis | Hoe controleren we dit? |
 | --- | --- | --- |
-| Nr. | Lorem ipsum | Lorem ipsum |
+| [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] |
 
 ## Technische eisen en randvoorwaarden
 
@@ -94,43 +94,43 @@ Als ~~rol~~ wil ik ~~wat~~ zodat ~~waarom~~
 | Validatie | Form Requests met Nederlandstalige meldingen |
 | Testen | Minimaal 10 feature tests met *Pest / PHPUnit* |
 | Versiebeheer | GitHub, branches per user story, pull requests met review |
-| Overige keuzes | Lorem Ipsum |
+| Overige keuzes | [Nog in te vullen] |
 
 ## Datamodel
 
-*ERD*
+> *ERD invoegen*
 
 | Entiteit | Belangrijkste velden | Relaties |
 | --- | --- | --- |
-| Lorem ipsum | Lorem ipsum | Lorem ipsum |
+| [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] |
 
 ## Pagina's en wireframes
 
 | Pagina | Deelproduct | Toegankelijk voor | Wireframe | Goedgekeurd op |
 | --- | --- | --- | --- | --- |
-| Lorem ipsum | Lorem ipsum | Lorem ipsum | Lorem ipsum | Lorem ipsum |
+| [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] |
 
 ## Afspraken met de klant
 
 | Nr. | Datum | Afspraak | Aanleiding |
 | --- | --- | --- | --- |
-| Nr. | Lorem ipsum | Lorem ipsum | Lorem ipsum |
+| [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] |
 
 ### Openstaande vragen
 
 | Vraag | Aan wie | Sinds | Status |
 | --- | --- | --- | --- |
-| Lorem ipsum | Lorem ipsum | Lorem ipsum | Lorem ipsum |
+| [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] |
 
 ## Wijzigingenlog
 
 | Nr. | Wat verandert er | Gevolg voor planning of scope | Akkoord klant |
 | --- | --- | --- | --- |
-| Nr. | Lorem ipsum | Lorem ipsum | Lorem ipsum |
+| [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] |
 
 ## Akkoord
 
-| | Naam | Datum | Akkoord |
+| Namens | Naam | Datum | Akkoord |
 | --- | --- | --- | --- |
-| Namens het team (PO) | Lorem ipsum | Lorem ipsum | Lorem ipsum |
-| Opdrachtgever | Ron de Wit | Lorem ipsum | Lorem ipsum |
+| Namens het team (PO) | [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] |
+| Opdrachtgever | Ron de Wit | [Nog in te vullen] | [Nog in te vullen] |
