@@ -37,25 +37,25 @@ Datum: 25-09
 
 ## De opdrachtgever en het probleem
 
-lorem ipsum
+Lorem ipsum
 
 ## Doel van website
 
-lorem ipsum
+Lorem ipsum
 
 ## Scope
 
 | Wel binnen dit project | Bewust buiten dit project |
 | --- | --- |
-| text | text |
+| Lorem ipsum | Lorem ipsum |
 
 ## Doelgroepen
 
 | Gebruiker | Wat doet deze persoon op de website |
 | --- | --- |
-| Bezoeker | text |
-| Lid | text |
-| Beheerder | text |
+| Bezoeker | Lorem ipsum |
+| Lid | Lorem ipsum |
+| Beheerder | Lorem ipsum |
 
 <br>
 <br>
@@ -66,17 +66,20 @@ lorem ipsum
 
 | ID | User story | Deelproduct | Prioriteit | Sprint | Wie |
 | --- | --- | --- | --- | --- | --- |
-| ID | text | text | text | text | text |
+| ID | Lorem ipsum | Lorem ipsum | Lorem ipsum | Lorem ipsum | Lorem ipsum |
 
 ## Uitgewerkte user stories
 
 ### ID | Titel - Prioriteit - Deelproduct - Naam
+<br>
 Als ~~rol~~ wil ik ~~wat~~ zodat ~~waarom~~
 
 Acceptatiecriteria:
 + testbaar criterium
 + testbaar criterium
 + testbaar criterium
+
+<br>
 
 ### ID | Titel - Prioriteit - Deelproduct - Naam
 Als ~~rol~~ wil ik ~~wat~~ zodat ~~waarom~~
@@ -93,7 +96,7 @@ Acceptatiecriteria:
 
 | Nr. | Eis | Hoe controleren we dit? |
 | --- | --- | --- |
-| Nr. | Lorem ipsum | Lorem ipsum|
+| Nr. | Lorem ipsum | Lorem ipsum |
 
 <br>
 <br>
@@ -116,7 +119,7 @@ Acceptatiecriteria:
 
 # Datamodel
 
-Lorem Ipsum *ERD*
+*ERD*
 
 | Entiteit | Belangrijkste velden | Relaties |
 | --- | --- | --- |
@@ -136,20 +139,26 @@ Lorem Ipsum *ERD*
 
 # Afspraken met de klant
 
-text
+| Nr. | Datum | Afspraak | Aanleiding |
+| --- | --- | --- | --- |
+| Nr. | Lorem ipsum | Lorem ipsum | Lorem ipsum |
 
 
 
 ## Openstaande vragen
 
-text
+| Vraag | Aan wie | Sinds | Status |
+| --- | --- | --- | --- |
+| Lorem ipsum | Lorem ipsum | Lorem ipsum | Lorem ipsum |
 
 <br>
 <br>
 
 # Wijzigingenlog
 
-text
+| Nr. | Wat verandert er | Gevolg voor planning of scope | Akkoord klant |
+| --- | --- | --- | --- |
+| Nr. | Lorem ipsum | Lorem ipsum | Lorem ipsum |
 
 <br>
 <br>
@@ -158,5 +167,5 @@ text
 
 | | Naam | Datum | Akkoord |
 | --- | --- | --- | --- |
-|Namens het team (PO) | naam | datum | |
-| Opdrachtgever | Ron de Wit | datum | |
+|Namens het team (PO) | Lorem ipsum | Lorem ipsum | Lorem ipsum |
+| Opdrachtgever | Ron de Wit | Lorem ipsum | Lorem ipsum |
