@@ -2,27 +2,20 @@
 
 ## Teamgegevens
 
-Team:
+| Gegeven | Waarde |
+| --- | --- |
+| Team |  |
+| Opdrachtgever | Ron de Wit, Sportcentrum De Linde |
+| Repository | [Sportcentrum-backend](https://github.com/vvendorrr/sportcentrum-backend "Repository") |
+| Versie | 1.0 |
+| Datum | 25-09 |
 
-Opdrachtgever: Ron de Wit, Sportcentrum De Linde
-
-Repository: [Sportcentrum-backend](https://github.com/vvendorrr/sportcentrum-backend "Repository")
-
-Versie: 1.0
-
-Datum: 25-09
-
-<br>
-
-## Teamleden, Rollen en Deelproducten
+## Teamleden, rollen en deelproducten
 
 | Naam | Studentnummer | Scrum-rol | Deelproduct |
 | --- | --- | --- | --- |
-| Famke | num | rol | deelproduct
+| Famke | num | rol | deelproduct |
 | Giovanni | num | rol | deelproduct |
-
-<br>
-<br>
 
 ## Versiebeheer
 
@@ -30,26 +23,23 @@ Datum: 25-09
 | --- | --- | --- | --- |
 | 1.0 | 25-09 | Eerste versie | Famke |
 
-<br>
-<br>
+## Inleiding
 
-# Inleiding
-
-## De opdrachtgever en het probleem
+### De opdrachtgever en het probleem
 
 Lorem ipsum
 
-## Doel van website
+### Doel van website
 
 Lorem ipsum
 
-## Scope
+### Scope
 
 | Wel binnen dit project | Bewust buiten dit project |
 | --- | --- |
 | Lorem ipsum | Lorem ipsum |
 
-## Doelgroepen
+### Doelgroepen
 
 | Gebruiker | Wat doet deze persoon op de website |
 | --- | --- |
@@ -57,51 +47,43 @@ Lorem ipsum
 | Lid | Lorem ipsum |
 | Beheerder | Lorem ipsum |
 
-<br>
-<br>
+## Functionele eisen
 
-# Functionele eisen
-
-## Overzicht van de user stories
+### Overzicht van de user stories
 
 | ID | User story | Deelproduct | Prioriteit | Sprint | Wie |
 | --- | --- | --- | --- | --- | --- |
 | ID | Lorem ipsum | Lorem ipsum | Lorem ipsum | Lorem ipsum | Lorem ipsum |
 
-## Uitgewerkte user stories
+### Uitgewerkte user stories
 
-### ID | Titel - Prioriteit - Deelproduct - Naam
-<br>
+#### ID — Titel — Prioriteit — Deelproduct — Naam
+
 Als ~~rol~~ wil ik ~~wat~~ zodat ~~waarom~~
 
-Acceptatiecriteria:
-+ testbaar criterium
-+ testbaar criterium
-+ testbaar criterium
+**Acceptatiecriteria**
 
-<br>
+- Testbaar criterium
+- Testbaar criterium
+- Testbaar criterium
 
-### ID | Titel - Prioriteit - Deelproduct - Naam
+#### ID — Titel — Prioriteit — Deelproduct — Naam
+
 Als ~~rol~~ wil ik ~~wat~~ zodat ~~waarom~~
 
-Acceptatiecriteria:
-+ testbaar criterium
-+ testbaar criterium
-+ testbaar criterium
+**Acceptatiecriteria**
 
-<br>
-<br>
+- Testbaar criterium
+- Testbaar criterium
+- Testbaar criterium
 
-# Niet-functionele eisen
+## Niet-functionele eisen
 
 | Nr. | Eis | Hoe controleren we dit? |
 | --- | --- | --- |
 | Nr. | Lorem ipsum | Lorem ipsum |
 
-<br>
-<br>
-
-# Technische eisen en randvoorwaarden
+## Technische eisen en randvoorwaarden
 
 | Onderwerp | Afspraak |
 | --- | --- |
@@ -114,10 +96,7 @@ Acceptatiecriteria:
 | Versiebeheer | GitHub, branches per user story, pull requests met review |
 | Overige keuzes | Lorem Ipsum |
 
-<br>
-<br>
-
-# Datamodel
+## Datamodel
 
 *ERD*
 
@@ -125,47 +104,33 @@ Acceptatiecriteria:
 | --- | --- | --- |
 | Lorem ipsum | Lorem ipsum | Lorem ipsum |
 
-<br>
-<br>
-
-# Pagina's en wireframes
+## Pagina's en wireframes
 
 | Pagina | Deelproduct | Toegankelijk voor | Wireframe | Goedgekeurd op |
 | --- | --- | --- | --- | --- |
 | Lorem ipsum | Lorem ipsum | Lorem ipsum | Lorem ipsum | Lorem ipsum |
 
-<br>
-<br>
-
-# Afspraken met de klant
+## Afspraken met de klant
 
 | Nr. | Datum | Afspraak | Aanleiding |
 | --- | --- | --- | --- |
 | Nr. | Lorem ipsum | Lorem ipsum | Lorem ipsum |
 
-
-
-## Openstaande vragen
+### Openstaande vragen
 
 | Vraag | Aan wie | Sinds | Status |
 | --- | --- | --- | --- |
 | Lorem ipsum | Lorem ipsum | Lorem ipsum | Lorem ipsum |
 
-<br>
-<br>
-
-# Wijzigingenlog
+## Wijzigingenlog
 
 | Nr. | Wat verandert er | Gevolg voor planning of scope | Akkoord klant |
 | --- | --- | --- | --- |
 | Nr. | Lorem ipsum | Lorem ipsum | Lorem ipsum |
 
-<br>
-<br>
-
-# Akkoord
+## Akkoord
 
 | | Naam | Datum | Akkoord |
 | --- | --- | --- | --- |
-|Namens het team (PO) | Lorem ipsum | Lorem ipsum | Lorem ipsum |
+| Namens het team (PO) | Lorem ipsum | Lorem ipsum | Lorem ipsum |
 | Opdrachtgever | Ron de Wit | Lorem ipsum | Lorem ipsum |
