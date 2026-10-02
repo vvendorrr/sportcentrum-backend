@@ -16,12 +16,14 @@
 | --- | --- | --- | --- |
 | Famke | [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] |
 | Giovanni | [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] |
+| Lucas | [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] |
 
 ## Versiebeheer
 
 | Versie | Datum | Wat is er gewijzigd | Door wie |
 | --- | --- | --- | --- |
-| 1.0 | 25-09 | Eerste versie | Famke |
+| 1.0 | 25/09 | Eerste versie | Famke |
+| 1.1 | 02/10 | . | Famke |
 
 ## Inleiding
 
@@ -31,7 +33,7 @@
 
 ### Doel van website
 
-[Nog in te vullen]
+Roosterwebsite voor Sportcentrum
 
 ### Scope
 
