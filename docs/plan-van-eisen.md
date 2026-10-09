@@ -24,7 +24,8 @@
 | ------ | ----- | --------------------------- | -------- |
 | 1.0    | 25/09 | Eerste versie               | Famke    |
 | 1.1    | 02/10 | .                           | Famke    |
-| 1.2    | 09/10 | Inleiding en doel verbeterd | Famke    |
+| 1.2    | 09/10 | Inleiding en doel verbeterd | Giovanni |
+| 1.3    | 09/10 | Doelgroepen ingevuld        | Giovanni |
 
 ## Inleiding
 
@@ -46,11 +47,11 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 
 ### Doelgroepen
 
-| Gebruiker | Wat doet deze persoon op de website |
-| --------- | ----------------------------------- |
-| Bezoeker  | [Nog in te vullen]                  |
-| Lid       | [Nog in te vullen]                  |
-| Beheerder | [Nog in te vullen]                  |
+| Gebruiker         | Wat doet deze persoon op de website                                                                                                                       |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Bezoeker          | Bekijkt het lesrooster en per les het aantal inschrijvingen, zonder de namen te zien. Kan een account aanmaken.                                           |
+| Lid               | Schrijft zich in voor lessen en kan zich afmelden.                                                                                                        |
+| Beheerder/Trainer | Maakt lessen aan en plant ze in het rooster, bekijkt wie zich heeft ingeschreven, ziet hoe vaak leden een les hebben gemist en kan accounts uitschakelen. |
 
 ## Functionele eisen
 
