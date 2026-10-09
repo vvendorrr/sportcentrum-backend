@@ -12,6 +12,8 @@ class LessonRegistration extends Model
     /** @use HasFactory<LessonRegistrationFactory> */
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'lesson_id',
         'user_id',

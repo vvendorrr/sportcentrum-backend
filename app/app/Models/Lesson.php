@@ -13,6 +13,8 @@ class Lesson extends Model
     /** @use HasFactory<LessonFactory> */
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'instructor_id',
         'starts_at',
