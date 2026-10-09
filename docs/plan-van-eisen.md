@@ -7,7 +7,7 @@
 | Team          | —                                                                                      |
 | Opdrachtgever | Ron de Wit, Sportcentrum De Linde                                                      |
 | Repository    | [Sportcentrum-backend](https://github.com/vvendorrr/sportcentrum-backend "Repository") |
-| Versie        | 1.4                                                                                    |
+| Versie        | 1.5                                                                                    |
 | Datum         | 25-09                                                                                  |
 
 ## Teamleden, rollen en deelproducten
@@ -26,7 +26,8 @@
 | 1.1    | 02/10 | .                                           | Famke    |
 | 1.2    | 09/10 | Inleiding en doel verbeterd                 | Giovanni |
 | 1.3    | 09/10 | Doelgroepen ingevuld                        | Giovanni |
-| 1.4    | 09/10 | Basis ERD ingevuld, nheeft herziening nodig |
+| 1.4    | 09/10 | Basis ERD ingevuld, nheeft herziening nodig | Giovanni |
+| 1.5    | 09/10 | Pagina’s en wireframe tabel ingevuld        | Giovanni |
 
 ## Inleiding
 
@@ -158,9 +159,15 @@ De `id`- en foreign-keykolommen zijn `BIGINT UNSIGNED`; `duration_minutes` en `m
 
 ## Pagina's en wireframes
 
-| Pagina             | Deelproduct        | Toegankelijk voor  | Wireframe          | Goedgekeurd op     |
-| ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] |
+| Pagina                  | Deelproduct        | Toegankelijk voor                                                          | Wireframe                    | Goedgekeurd op     |
+| ----------------------- | ------------------ | -------------------------------------------------------------------------- | ---------------------------- | ------------------ |
+| Homepagina              | [Nog in te vullen] | Bezoeker, lid en beheerder                                                 | Home page                    | [Nog in te vullen] |
+| Inloggen en registreren | [Nog in te vullen] | Bezoeker (niet ingelogd)                                                   | Register/Signup              | [Nog in te vullen] |
+| Accountinstellingen     | [Nog in te vullen] | Ingelogd lid en beheerder                                                  | Settings                     | [Nog in te vullen] |
+| Uitloggen (actie)       | [Nog in te vullen] | Ingelogd lid en beheerder                                                  | Navigatie; geen apart scherm | [Nog in te vullen] |
+| Rooster                 | [Nog in te vullen] | Bezoeker, lid en beheerder; bezoekers zien alleen aantallen inschrijvingen | Rooster                      | [Nog in te vullen] |
+| Deelnemers beheren      | [Nog in te vullen] | Beheerder/trainer                                                          | Deelnemers                   | [Nog in te vullen] |
+| Trainers beheren        | [Nog in te vullen] | Beheerder/trainer                                                          | Trainers                     | [Nog in te vullen] |
 
 ## Afspraken met de klant
 
