@@ -7,7 +7,7 @@
 | Team          | —                                                                                      |
 | Opdrachtgever | Ron de Wit, Sportcentrum De Linde                                                      |
 | Repository    | [Sportcentrum-backend](https://github.com/vvendorrr/sportcentrum-backend "Repository") |
-| Versie        | 1.0                                                                                    |
+| Versie        | 1.3                                                                                    |
 | Datum         | 25-09                                                                                  |
 
 ## Teamleden, rollen en deelproducten
@@ -15,25 +15,28 @@
 | Naam     | Studentnummer      | Scrum-rol          | Deelproduct        |
 | -------- | ------------------ | ------------------ | ------------------ |
 | Famke    | [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] |
-| Giovanni | [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] |
+| Giovanni | D316667            | [Nog in te vullen] | [Nog in te vullen] |
 | Lucas    | [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] |
 
 ## Versiebeheer
 
-| Versie | Datum | Wat is er gewijzigd | Door wie |
-| ------ | ----- | ------------------- | -------- |
-| 1.0    | 25/09 | Eerste versie       | Famke    |
-| 1.1    | 02/10 | .                   | Famke    |
+| Versie | Datum | Wat is er gewijzigd         | Door wie |
+| ------ | ----- | --------------------------- | -------- |
+| 1.0    | 25/09 | Eerste versie               | Famke    |
+| 1.1    | 02/10 | .                           | Famke    |
+| 1.2    | 09/10 | Inleiding en doel verbeterd | Famke    |
 
 ## Inleiding
 
 ### De opdrachtgever en het probleem
 
-[Nog in te vullen]
+De opdrachtgever is Ron de Wit, manager van Sportcentrum De Linde. Het sportcentrum heeft enkele honderden leden en organiseert wekelijks veel groepslessen.
+
+De inschrijvingen en afmeldingen worden nu telefonisch en op papieren lijsten bijgehouden. Daardoor raken lessen soms overboekt, worden afmeldingen gemist en blijven plekken onnodig leeg. Trainers weten vooraf niet hoeveel deelnemers er komen en de manager heeft geen overzicht van de bezetting.
 
 ### Doel van website
 
-Roosterwebsite voor Sportcentrum
+De website geeft leden een duidelijk overzicht van de groepslessen en laat hen online inschrijven of afmelden. Zo blijft het aantal inschrijvingen binnen de beschikbare capaciteit en kunnen trainers en beheerders vooraf zien hoeveel deelnemers er worden verwacht.
 
 ### Scope
 
