@@ -12,11 +12,11 @@
 
 ## Teamleden, rollen en deelproducten
 
-| Naam     | Studentnummer | Scrum-rol          | Deelproduct        |
-| -------- | ------------- | ------------------ | ------------------ |
-| Famke    | D315950       | [Nog in te vullen] | [Nog in te vullen] |
-| Giovanni | D316667       | [Nog in te vullen] | [Nog in te vullen] |
-| Lucas    | D310739       | [Nog in te vullen] | [Nog in te vullen] |
+| Naam     | Studentnummer | Scrum-rol     | Deelproduct        |
+| -------- | ------------- | ------------- | ------------------ |
+| Famke    | D315950       | Product owner | [Nog in te vullen] |
+| Giovanni | D316667       | Scrum master  | [Nog in te vullen] |
+| Lucas    | D310739       | Developer     | [Nog in te vullen] |
 
 ## Versiebeheer
 
@@ -29,6 +29,7 @@
 | 1.4    | 09/10 | Basis ERD ingevuld, nheeft herziening nodig | Giovanni |
 | 1.5    | 09/10 | Pagina’s en wireframe tabel ingevuld        | Giovanni |
 | 1.6    | 09/10 | Studentennummers volledig ingevuld          | Giovanni |
+| 1.7    | 09/10 | Scrum rollen volledig ingevuld              | Giovanni |
 
 ## Inleiding
 
