@@ -12,11 +12,11 @@
 
 ## Teamleden, rollen en deelproducten
 
-| Naam     | Studentnummer | Scrum-rol          | Deelproduct        |
-| -------- | ------------- | ------------------ | ------------------ |
-| Famke    | D315950       | [Nog in te vullen] | [Nog in te vullen] |
-| Giovanni | D316667       | [Nog in te vullen] | [Nog in te vullen] |
-| Lucas    | D310739       | [Nog in te vullen] | [Nog in te vullen] |
+| Naam     | Studentnummer | Scrum-rol     | Deelproduct        |
+| -------- | ------------- | ------------- | ------------------ |
+| Famke    | D315950       | Product owner | [Nog in te vullen] |
+| Giovanni | D316667       | Scrum master  | [Nog in te vullen] |
+| Lucas    | D310739       | Developer     | [Nog in te vullen] |
 
 ## Versiebeheer
 
