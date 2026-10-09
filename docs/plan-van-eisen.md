@@ -7,16 +7,16 @@
 | Team          | —                                                                                      |
 | Opdrachtgever | Ron de Wit, Sportcentrum De Linde                                                      |
 | Repository    | [Sportcentrum-backend](https://github.com/vvendorrr/sportcentrum-backend "Repository") |
-| Versie        | 1.5                                                                                    |
+| Versie        | 1.6                                                                                    |
 | Datum         | 25-09                                                                                  |
 
 ## Teamleden, rollen en deelproducten
 
-| Naam     | Studentnummer      | Scrum-rol          | Deelproduct        |
-| -------- | ------------------ | ------------------ | ------------------ |
-| Famke    | [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] |
-| Giovanni | D316667            | [Nog in te vullen] | [Nog in te vullen] |
-| Lucas    | [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] |
+| Naam     | Studentnummer | Scrum-rol          | Deelproduct        |
+| -------- | ------------- | ------------------ | ------------------ |
+| Famke    | D315950       | [Nog in te vullen] | [Nog in te vullen] |
+| Giovanni | D316667       | [Nog in te vullen] | [Nog in te vullen] |
+| Lucas    | D310739       | [Nog in te vullen] | [Nog in te vullen] |
 
 ## Versiebeheer
 
@@ -28,6 +28,7 @@
 | 1.3    | 09/10 | Doelgroepen ingevuld                        | Giovanni |
 | 1.4    | 09/10 | Basis ERD ingevuld, nheeft herziening nodig | Giovanni |
 | 1.5    | 09/10 | Pagina’s en wireframe tabel ingevuld        | Giovanni |
+| 1.6    | 09/10 | Studentennummers volledig ingevuld          | Giovanni |
 
 ## Inleiding
 
