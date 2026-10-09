@@ -7,7 +7,7 @@
 | Team          | —                                                                                      |
 | Opdrachtgever | Ron de Wit, Sportcentrum De Linde                                                      |
 | Repository    | [Sportcentrum-backend](https://github.com/vvendorrr/sportcentrum-backend "Repository") |
-| Versie        | 1.3                                                                                    |
+| Versie        | 1.4                                                                                    |
 | Datum         | 25-09                                                                                  |
 
 ## Teamleden, rollen en deelproducten
@@ -20,12 +20,13 @@
 
 ## Versiebeheer
 
-| Versie | Datum | Wat is er gewijzigd         | Door wie |
-| ------ | ----- | --------------------------- | -------- |
-| 1.0    | 25/09 | Eerste versie               | Famke    |
-| 1.1    | 02/10 | .                           | Famke    |
-| 1.2    | 09/10 | Inleiding en doel verbeterd | Giovanni |
-| 1.3    | 09/10 | Doelgroepen ingevuld        | Giovanni |
+| Versie | Datum | Wat is er gewijzigd                         | Door wie |
+| ------ | ----- | ------------------------------------------- | -------- |
+| 1.0    | 25/09 | Eerste versie                               | Famke    |
+| 1.1    | 02/10 | .                                           | Famke    |
+| 1.2    | 09/10 | Inleiding en doel verbeterd                 | Giovanni |
+| 1.3    | 09/10 | Doelgroepen ingevuld                        | Giovanni |
+| 1.4    | 09/10 | Basis ERD ingevuld, nheeft herziening nodig |
 
 ## Inleiding
 
@@ -104,11 +105,56 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 
 ## Datamodel
 
-> _ERD invoegen_
+```mermaid
+erDiagram
+    USERS ||--o{ LESSONS : teaches
+    USERS ||--o{ LESSON_REGISTRATIONS : makes
+    LESSONS ||--o{ LESSON_REGISTRATIONS : has
 
-| Entiteit           | Belangrijkste velden | Relaties           |
-| ------------------ | -------------------- | ------------------ |
-| [Nog in te vullen] | [Nog in te vullen]   | [Nog in te vullen] |
+    USERS {
+        BIGINT id PK
+        VARCHAR(255) name
+        VARCHAR(30) phone_number
+        VARCHAR(255) email UK
+        VARCHAR(255) password_hash
+        VARCHAR(20) role
+        TINYINT(1) is_active
+        DATETIME created_at
+    }
+    LESSONS {
+        BIGINT id PK
+        BIGINT instructor_id FK
+        DATETIME starts_at
+        SMALLINT duration_minutes
+        VARCHAR(30) category
+        VARCHAR(100) sport
+        SMALLINT max_participants
+    }
+    LESSON_REGISTRATIONS {
+        BIGINT id PK
+        BIGINT lesson_id FK
+        BIGINT user_id FK
+        VARCHAR(20) status
+        DATETIME registered_at
+        VARCHAR(10) attendance
+        DATETIME canceled_at
+    }
+```
+
+De `id`- en foreign-keykolommen zijn `BIGINT UNSIGNED`; `duration_minutes` en `max_participants` zijn `SMALLINT UNSIGNED`. `attendance` en `canceled_at` zijn nullable. De waarden voor `role` zijn `member` en `admin`; voor `category` zijn dit `strength`, `cardio` en `relaxation`; `status` gebruikt `enrolled`, `waitlisted` en `cancelled`; `attendance` gebruikt `attended` en `absent`.
+
+| Entiteit               | Belangrijkste velden                                                                                                                       | Relaties                                                                                                                                             |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `users`                | `name`, `phone_number`, `email`, `password_hash`, `role` (`member`/`admin`), `is_active`, `created_at`                                     | Een beheerder/trainer kan meerdere lessen geven. Een gebruiker kan zich voor meerdere lessen inschrijven.                                            |
+| `lessons`              | `instructor_id`, `starts_at`, `duration_minutes`, `category`, `sport`, `max_participants`                                                  | Een les heeft één trainer en kan meerdere inschrijvingen hebben.                                                                                     |
+| `lesson_registrations` | `lesson_id`, `user_id`, `status` (`enrolled`/`waitlisted`/`cancelled`), `registered_at`, `attendance` (`attended`/`absent`), `canceled_at` | Koppelt een gebruiker aan een les. Een gebruiker kan per les maximaal één inschrijving hebben; een afgemelde inschrijving kan opnieuw actief worden. |
+
+**Afspraken en regels**
+
+- Het maximaal aantal deelnemers wordt per les opgeslagen. Richtwaarden zijn 16 voor spinning, 12 voor yoga en 20 voor aquagym/zwemlessen.
+- Als een les vol is, krijgt een nieuwe inschrijving de status wachtlijst. Bij een vrijgekomen plek wordt de eerstvolgende op de wachtlijst automatisch ingeschreven.
+- Een lid kan zichzelf tot twee uur voor aanvang afmelden. Een beheerder/trainer kan een deelnemer ook later afmelden.
+- Een beheerder/trainer registreert na de les wie aanwezig of afwezig was. Het aantal gemiste lessen per lid kan worden berekend uit diens afwezigheidsregistraties.
 
 ## Pagina's en wireframes
 
