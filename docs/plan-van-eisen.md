@@ -161,15 +161,15 @@ De `id`- en foreign-keykolommen zijn `BIGINT UNSIGNED`; `duration_minutes` en `m
 
 ## Pagina's en wireframes
 
-| Pagina                  | Deelproduct        | Toegankelijk voor                                                          | Wireframe                    | Goedgekeurd op     |
-| ----------------------- | ------------------ | -------------------------------------------------------------------------- | ---------------------------- | ------------------ |
-| Homepagina              | [Nog in te vullen] | Bezoeker, lid en beheerder                                                 | Home page                    | [Nog in te vullen] |
-| Inloggen en registreren | [Nog in te vullen] | Bezoeker (niet ingelogd)                                                   | Register/Signup              | [Nog in te vullen] |
-| Accountinstellingen     | [Nog in te vullen] | Ingelogd lid en beheerder                                                  | Settings                     | [Nog in te vullen] |
-| Uitloggen (actie)       | [Nog in te vullen] | Ingelogd lid en beheerder                                                  | Navigatie; geen apart scherm | [Nog in te vullen] |
-| Rooster                 | [Nog in te vullen] | Bezoeker, lid en beheerder; bezoekers zien alleen aantallen inschrijvingen | Rooster                      | [Nog in te vullen] |
-| Deelnemers beheren      | [Nog in te vullen] | Beheerder/trainer                                                          | Deelnemers                   | [Nog in te vullen] |
-| Trainers beheren        | [Nog in te vullen] | Beheerder/trainer                                                          | Trainers                     | [Nog in te vullen] |
+| Pagina                  | Deelproduct                  | Toegankelijk voor                                                          | Wireframe                    | Goedgekeurd op     |
+| ----------------------- | ---------------------------- | -------------------------------------------------------------------------- | ---------------------------- | ------------------ |
+| Homepagina              | Frontend                     | Bezoeker, lid en beheerder                                                 | Home page                    | [Nog in te vullen] |
+| Inloggen en registreren | Backend, Frontend & Security | Bezoeker (niet ingelogd)                                                   | Register/Signup              | [Nog in te vullen] |
+| Accountinstellingen     | Frontend                     | Ingelogd lid en beheerder                                                  | Settings                     | [Nog in te vullen] |
+| Uitloggen (actie)       | Backend & Security           | Ingelogd lid en beheerder                                                  | Navigatie; geen apart scherm | [Nog in te vullen] |
+| Rooster                 | Frontend                     | Bezoeker, lid en beheerder; bezoekers zien alleen aantallen inschrijvingen | Rooster                      | [Nog in te vullen] |
+| Deelnemers beheren      | Backend, Frontend & Security | Beheerder/trainer                                                          | Deelnemers                   | [Nog in te vullen] |
+| Trainers beheren        | Backend, Frontend & Security | Beheerder/trainer                                                          | Trainers                     | [Nog in te vullen] |
 
 ## Afspraken met de klant
 
