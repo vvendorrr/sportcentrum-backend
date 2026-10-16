@@ -23,13 +23,14 @@
 | Versie | Datum | Wat is er gewijzigd                         | Door wie |
 | ------ | ----- | ------------------------------------------- | -------- |
 | 1.0    | 25/09 | Eerste versie                               | Famke    |
-| 1.1    | 02/10 | .                                           | Famke    |
+| 1.1    | 02/10 | Lucas toegevoegd                            | Famke    |
 | 1.2    | 09/10 | Inleiding en doel verbeterd                 | Giovanni |
 | 1.3    | 09/10 | Doelgroepen ingevuld                        | Giovanni |
 | 1.4    | 09/10 | Basis ERD ingevuld, nheeft herziening nodig | Giovanni |
 | 1.5    | 09/10 | Pagina’s en wireframe tabel ingevuld        | Giovanni |
 | 1.6    | 09/10 | Studentennummers volledig ingevuld          | Giovanni |
 | 1.7    | 09/10 | Scrum rollen volledig ingevuld              | Giovanni |
+| 1.8    | 16/10 | Scope 'wel binnen dit project' aangevuld    | Famke    |
 
 ## Inleiding
 
@@ -45,9 +46,12 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 
 ### Scope
 
-| Wel binnen dit project | Bewust buiten dit project |
-| ---------------------- | ------------------------- |
-| [Nog in te vullen]     | [Nog in te vullen]        |
+| Wel binnen dit project                                                                                                                   | Bewust buiten dit project |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
+| - Database om makkelijk lessen bij te houden                                                                                             | [Nog in te vullen]        |
+| - CRUD-Systeem om lessen toe te voegen aan Rooster                                                                                       | [Nog in te vullen]        |
+| - Account-Systeem met Deelnemer, Trainer- en Admin accounts                                                                              | [Nog in te vullen]        |
+| - Gedetailleerd overzicht van les-informatie; Naam, Type les, Datum, Duur, Trainer, Hoeveelheid Deelnemers en Hoeveelheid plekken in les | [Nog in te vullen]        |
 
 ### Doelgroepen
 
