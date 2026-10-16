@@ -7,16 +7,16 @@
 | Team          | —                                                                                      |
 | Opdrachtgever | Ron de Wit, Sportcentrum De Linde                                                      |
 | Repository    | [Sportcentrum-backend](https://github.com/vvendorrr/sportcentrum-backend "Repository") |
-| Versie        | 1.4                                                                                    |
+| Versie        | 1.6                                                                                    |
 | Datum         | 25-09                                                                                  |
 
 ## Teamleden, rollen en deelproducten
 
-| Naam     | Studentnummer      | Scrum-rol          | Deelproduct        |
-| -------- | ------------------ | ------------------ | ------------------ |
-| Famke    | [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] |
-| Giovanni | D316667            | [Nog in te vullen] | [Nog in te vullen] |
-| Lucas    | [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] |
+| Naam     | Studentnummer | Scrum-rol     | Deelproduct        |
+| -------- | ------------- | ------------- | ------------------ |
+| Famke    | D315950       | Product owner | [Nog in te vullen] |
+| Giovanni | D316667       | Scrum master  | [Nog in te vullen] |
+| Lucas    | D310739       | Developer     | [Nog in te vullen] |
 
 ## Versiebeheer
 
@@ -26,7 +26,10 @@
 | 1.1    | 02/10 | .                                           | Famke    |
 | 1.2    | 09/10 | Inleiding en doel verbeterd                 | Giovanni |
 | 1.3    | 09/10 | Doelgroepen ingevuld                        | Giovanni |
-| 1.4    | 09/10 | Basis ERD ingevuld, nheeft herziening nodig |
+| 1.4    | 09/10 | Basis ERD ingevuld, nheeft herziening nodig | Giovanni |
+| 1.5    | 09/10 | Pagina’s en wireframe tabel ingevuld        | Giovanni |
+| 1.6    | 09/10 | Studentennummers volledig ingevuld          | Giovanni |
+| 1.7    | 09/10 | Scrum rollen volledig ingevuld              | Giovanni |
 
 ## Inleiding
 
@@ -158,9 +161,15 @@ De `id`- en foreign-keykolommen zijn `BIGINT UNSIGNED`; `duration_minutes` en `m
 
 ## Pagina's en wireframes
 
-| Pagina             | Deelproduct        | Toegankelijk voor  | Wireframe          | Goedgekeurd op     |
-| ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] |
+| Pagina                  | Deelproduct                  | Toegankelijk voor                                                          | Wireframe                    | Goedgekeurd op     |
+| ----------------------- | ---------------------------- | -------------------------------------------------------------------------- | ---------------------------- | ------------------ |
+| Homepagina              | Frontend                     | Bezoeker, lid en beheerder                                                 | Home page                    | [Nog in te vullen] |
+| Inloggen en registreren | Backend, Frontend & Security | Bezoeker (niet ingelogd)                                                   | Register/Signup              | [Nog in te vullen] |
+| Accountinstellingen     | Frontend                     | Ingelogd lid en beheerder                                                  | Settings                     | [Nog in te vullen] |
+| Uitloggen (actie)       | Backend & Security           | Ingelogd lid en beheerder                                                  | Navigatie; geen apart scherm | [Nog in te vullen] |
+| Rooster                 | Frontend                     | Bezoeker, lid en beheerder; bezoekers zien alleen aantallen inschrijvingen | Rooster                      | [Nog in te vullen] |
+| Deelnemers beheren      | Backend, Frontend & Security | Beheerder/trainer                                                          | Deelnemers                   | [Nog in te vullen] |
+| Trainers beheren        | Backend, Frontend & Security | Beheerder/trainer                                                          | Trainers                     | [Nog in te vullen] |
 
 ## Afspraken met de klant
 
