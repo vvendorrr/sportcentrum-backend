@@ -32,6 +32,7 @@
 | 1.7    | 09/10 | Scrum rollen volledig ingevuld              | Giovanni |
 | 1.8    | 16/10 | Scope 'wel binnen dit project' aangevuld    | Famke    |
 | 1.9    | 29/10 | User stories aangevuld                      | Giovanni |
+| 2.0    | 06/11 | Userstories verdeeld tussen Lucas & Ik      | Famke    |
 
 ## Inleiding
 
@@ -68,16 +69,16 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 
 | ID    | User story                         | Deelproduct                  | Prioriteit | Sprint          | Wie                |
 | ----- | ---------------------------------- | ---------------------------- | ---------- | --------------- | ------------------ |
-| US-01 | Rooster bekijken                   | Frontend                     | Hoog       | 1               | [Nog in te vullen] |
-| US-02 | Account aanmaken en inloggen       | Backend, Frontend & Security | Hoog       | 1               | [Nog in te vullen] |
-| US-03 | Inschrijven voor een les           | Backend & Frontend           | Hoog       | 1               | [Nog in te vullen] |
-| US-04 | Afmelden voor een les              | Backend & Frontend           | Hoog       | 1               | [Nog in te vullen] |
-| US-05 | Deelnemers en aanwezigheid beheren | Backend & Frontend           | Hoog       | 1               | [Nog in te vullen] |
-| US-06 | Lessen aanmaken en inplannen       | Backend & Frontend           | Hoog       | [In te plannen] | [Nog in te vullen] |
-| US-07 | Accountgegevens beheren            | Backend, Frontend & Security | Gemiddeld  | [In te plannen] | [Nog in te vullen] |
-| US-08 | Ledenaccounts uitschakelen         | Backend & Security           | Gemiddeld  | [In te plannen] | [Nog in te vullen] |
-| US-09 | Traineraccounts beheren            | Backend, Frontend & Security | Gemiddeld  | [In te plannen] | [Nog in te vullen] |
-| US-10 | Eigen inschrijvingen bekijken      | Backend & Frontend           | Gemiddeld  | [In te plannen] | [Nog in te vullen] |
+| US-01 | Rooster bekijken                   | Frontend                     | Hoog       | 1               | Lucas              |
+| US-02 | Account aanmaken en inloggen       | Backend, Frontend & Security | Hoog       | 1               | Lucas & Famke      |
+| US-03 | Inschrijven voor een les           | Backend & Frontend           | Hoog       | 1               | Famke              |
+| US-04 | Afmelden voor een les              | Backend & Frontend           | Hoog       | 1               | Famke              |
+| US-05 | Deelnemers en aanwezigheid beheren | Backend & Frontend           | Hoog       | 1               | Lucas              |
+| US-06 | Lessen aanmaken en inplannen       | Backend & Frontend           | Hoog       | [In te plannen] | Lucas              |
+| US-07 | Accountgegevens beheren            | Backend, Frontend & Security | Gemiddeld  | [In te plannen] | Lucas & Famke      |
+| US-08 | Ledenaccounts uitschakelen         | Backend & Security           | Gemiddeld  | [In te plannen] | Lucas              |
+| US-09 | Traineraccounts beheren            | Backend, Frontend & Security | Gemiddeld  | [In te plannen] | Famke              |
+| US-10 | Eigen inschrijvingen bekijken      | Backend & Frontend           | Gemiddeld  | [In te plannen] | Famke              |
 
 ### Uitgewerkte user stories
 
