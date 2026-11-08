@@ -73,13 +73,13 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 | US-01 | Rooster bekijken                   | Frontend                     | Hoog       | 1               | Lucas              |
 | US-02 | Account aanmaken en inloggen       | Backend, Frontend & Security | Hoog       | 1               | Lucas & Famke      |
 | US-03 | Inschrijven voor een les           | Backend & Frontend           | Hoog       | 1               | Famke              |
-| US-04 | Afmelden voor een les              | Backend & Frontend           | Hoog       | 1               | Famke              |
+| US-04 | Afmelden voor een les              | Backend & Frontend           | Hoog       | 1               | Famke & Giovanni   |
 | US-05 | Deelnemers en aanwezigheid beheren | Backend & Frontend           | Hoog       | 1               | Lucas              |
-| US-06 | Lessen aanmaken en inplannen       | Backend & Frontend           | Hoog       | 2               | Lucas              |
+| US-06 | Lessen aanmaken en inplannen       | Backend & Frontend           | Hoog       | 2               | Lucas & Giovanni   |
 | US-07 | Accountgegevens beheren            | Backend, Frontend & Security | Gemiddeld  | 2               | Lucas & Famke      |
 | US-08 | Ledenaccounts uitschakelen         | Backend & Security           | Gemiddeld  | 2               | Lucas              |
 | US-09 | Traineraccounts beheren            | Backend, Frontend & Security | Gemiddeld  | 2               | Famke              |
-| US-10 | Eigen inschrijvingen bekijken      | Backend & Frontend           | Gemiddeld  | 2               | Famke              |
+| US-10 | Eigen inschrijvingen bekijken      | Backend & Frontend           | Gemiddeld  | 2               | Famke & Giovanni   |
 
 ### Uitgewerkte user stories
 
