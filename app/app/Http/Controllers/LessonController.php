@@ -24,10 +24,13 @@ class LessonController extends Controller
             ->orderBy('id')
             ->get();
 
-        $registrationsByLesson = $request->user()->lessonRegistrations()
-            ->whereIn('status', ['enrolled', 'waitlisted'])
-            ->get(['lesson_id', 'status'])
-            ->keyBy('lesson_id');
+        $user = $request->user();
+        $registrationsByLesson = $user === null
+            ? collect()
+            : $user->lessonRegistrations()
+                ->whereIn('status', ['enrolled', 'waitlisted'])
+                ->get(['lesson_id', 'status'])
+                ->keyBy('lesson_id');
 
         return view('lessons.index', [
             'lessons' => $lessons,

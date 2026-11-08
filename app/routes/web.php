@@ -1,16 +1,15 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LessonRegistrationController;
 use App\Http\Controllers\MyLessonRegistrationController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', HomeController::class)->name('home');
+Route::get('/lessons', [LessonController::class, 'index'])->name('lessons.index');
 
 Route::middleware('auth')->group(function (): void {
-    Route::get('/lessons', [LessonController::class, 'index'])->name('lessons.index');
     Route::get('/lessons/create', [LessonController::class, 'create'])->name('lessons.create');
     Route::post('/lessons', [LessonController::class, 'store'])->name('lessons.store');
     Route::post('/lessons/{lesson}/registrations', [LessonRegistrationController::class, 'store'])

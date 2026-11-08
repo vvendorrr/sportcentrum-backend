@@ -134,3 +134,20 @@ it('rejects missing required lesson fields', function () {
     ]);
     $this->assertDatabaseCount('lessons', 0);
 });
+
+it('makes the lesson schedule public without exposing member names', function () {
+    $lesson = Lesson::factory()->create(['sport' => 'Public yoga']);
+    $member = User::factory()->create(['name' => 'Private Member']);
+    $lesson->registrations()->create([
+        'user_id' => $member->id,
+        'status' => 'enrolled',
+        'registered_at' => now(),
+    ]);
+
+    $response = $this->get(route('lessons.index'));
+
+    $response
+        ->assertOk()
+        ->assertSeeText('Public yoga')
+        ->assertDontSeeText('Private Member');
+});
