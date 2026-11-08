@@ -23,6 +23,8 @@ it('shows the home page with upcoming lessons and available places', function ()
         ->assertOk()
         ->assertViewIs('home')
         ->assertSeeText('Welkom bij Sportcentrum De Linde')
+        ->assertSeeText('Inloggen')
+        ->assertSeeText('Account aanmaken')
         ->assertSeeText('Morning yoga')
         ->assertSeeText('1 / 8')
         ->assertSeeText('7');

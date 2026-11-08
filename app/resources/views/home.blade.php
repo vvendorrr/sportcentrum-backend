@@ -3,6 +3,12 @@
         <h1 id="welkom-heading">Welkom bij Sportcentrum De Linde</h1>
         <p>Bekijk de komende groepslessen en kies een les die bij je past.</p>
         <p><a href="{{ route('lessons.index') }}">Bekijk het lesrooster</a></p>
+        @guest
+            <p>
+                <a href="{{ route('login') }}">Inloggen</a>
+                <a href="{{ route('register') }}">Account aanmaken</a>
+            </p>
+        @endguest
         @auth
             <p><a href="{{ route('registrations.index') }}">Bekijk mijn inschrijvingen</a></p>
         @endauth

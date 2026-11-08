@@ -12,11 +12,19 @@
         <nav aria-label="Hoofdnavigatie">
             <a href="{{ route('home') }}">Sportcentrum De Linde</a>
             <a href="{{ route('lessons.index') }}">Rooster</a>
+            @guest
+                <a href="{{ route('login') }}">Inloggen</a>
+                <a href="{{ route('register') }}">Account aanmaken</a>
+            @endguest
             @auth
                 <a href="{{ route('registrations.index') }}">Mijn inschrijvingen</a>
                 @can('create', \App\Models\Lesson::class)
                     <a href="{{ route('lessons.create') }}">Les aanmaken</a>
                 @endcan
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit">Uitloggen</button>
+                </form>
             @endauth
         </nav>
     </header>
