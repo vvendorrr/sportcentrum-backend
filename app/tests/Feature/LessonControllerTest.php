@@ -21,7 +21,7 @@ it('allows an admin to create a lesson with an admin instructor', function () {
 
     $response
         ->assertRedirectToRoute('lessons.index')
-        ->assertSessionHas('status', 'Lesson created.');
+        ->assertSessionHas('status', 'Les aangemaakt.');
 
     $this->assertDatabaseHas('lessons', [
         'instructor_id' => $instructor->id,
@@ -59,7 +59,9 @@ it('rejects a lesson with zero capacity', function () {
             'max_participants' => 0,
         ]);
 
-    $response->assertRedirectBackWithErrors(['max_participants']);
+    $response->assertRedirectBackWithErrors([
+        'max_participants' => 'De maximale capaciteit moet tussen 1 en 65.535 deelnemers liggen.',
+    ]);
     expect(Lesson::query()->count())->toBe(0);
 });
 
@@ -97,7 +99,7 @@ it('renders the lesson creation form for an admin', function () {
 
     $response
         ->assertOk()
-        ->assertSeeText('Create lesson')
+        ->assertSeeText('Les aanmaken')
         ->assertSeeText('Lesson Instructor');
 });
 
@@ -114,7 +116,7 @@ it('renders upcoming lessons with a registration action for members', function (
     $response
         ->assertOk()
         ->assertSeeText('Morning yoga')
-        ->assertSeeText('Register');
+        ->assertSeeText('Inschrijven');
 });
 
 it('rejects missing required lesson fields', function () {

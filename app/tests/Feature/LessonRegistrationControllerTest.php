@@ -17,7 +17,7 @@ it('enrolls a member when the lesson has an available place', function () {
 
     $response
         ->assertRedirectToRoute('lessons.index')
-        ->assertSessionHas('status', 'You are enrolled in the lesson.');
+        ->assertSessionHas('status', 'Je bent ingeschreven voor de les.');
 
     $this->assertDatabaseHas('lesson_registrations', [
         'lesson_id' => $lesson->id,
@@ -44,7 +44,7 @@ it('waitlists a member when the lesson is full', function () {
     $response = $this->actingAs($member)
         ->post(route('lessons.register', $lesson));
 
-    $response->assertSessionHas('status', 'The lesson is full. You have been added to the waitlist.');
+    $response->assertSessionHas('status', 'De les is vol. Je bent op de wachtlijst geplaatst.');
     $this->assertDatabaseHas('lesson_registrations', [
         'lesson_id' => $lesson->id,
         'user_id' => $member->id,
@@ -69,7 +69,7 @@ it('reactivates a cancelled registration and resets its timestamps', function ()
     $response = $this->actingAs($member)
         ->post(route('lessons.register', $lesson));
 
-    $response->assertSessionHas('status', 'You are enrolled in the lesson.');
+    $response->assertSessionHas('status', 'Je bent ingeschreven voor de les.');
 
     $registration->refresh();
     expect($registration->status)->toBe('enrolled')

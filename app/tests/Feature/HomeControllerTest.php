@@ -22,7 +22,7 @@ it('shows the home page with upcoming lessons and available places', function ()
     $response
         ->assertOk()
         ->assertViewIs('home')
-        ->assertSeeText('Welcome to Sportcentrum de Linde')
+        ->assertSeeText('Welkom bij Sportcentrum De Linde')
         ->assertSeeText('Morning yoga')
         ->assertSeeText('1 / 8')
         ->assertSeeText('7');
@@ -33,5 +33,5 @@ it('shows an empty state when there are no upcoming lessons', function () {
 
     $response
         ->assertOk()
-        ->assertSeeText('There are no upcoming lessons.');
+        ->assertSeeText('Er zijn geen komende lessen.');
 });

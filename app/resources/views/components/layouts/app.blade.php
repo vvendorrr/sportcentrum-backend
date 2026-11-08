@@ -1,7 +1,7 @@
-@props(['title' => 'Sportcentrum de Linde'])
+@props(['title' => 'Sportcentrum De Linde'])
 
 <!doctype html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,13 +9,13 @@
 </head>
 <body>
     <header>
-        <nav aria-label="Main navigation">
-            <a href="{{ route('home') }}">Sportcentrum de Linde</a>
-            <a href="{{ route('lessons.index') }}">Lessons</a>
+        <nav aria-label="Hoofdnavigatie">
+            <a href="{{ route('home') }}">Sportcentrum De Linde</a>
+            <a href="{{ route('lessons.index') }}">Rooster</a>
             @auth
-                <a href="{{ route('registrations.index') }}">My registrations</a>
+                <a href="{{ route('registrations.index') }}">Mijn inschrijvingen</a>
                 @can('create', \App\Models\Lesson::class)
-                    <a href="{{ route('lessons.create') }}">Create lesson</a>
+                    <a href="{{ route('lessons.create') }}">Les aanmaken</a>
                 @endcan
             @endauth
         </nav>

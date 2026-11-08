@@ -56,6 +56,6 @@ class LessonController extends Controller
 
         return redirect()
             ->route('lessons.index')
-            ->with('status', 'Lesson created.');
+            ->with('status', 'Les aangemaakt.');
     }
 }

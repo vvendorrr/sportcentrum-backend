@@ -17,8 +17,8 @@ class LessonRegistrationController extends Controller
 
         $registration = $registrations->register($request->user(), $lesson);
         $message = $registration->status === 'enrolled'
-            ? 'You are enrolled in the lesson.'
-            : 'The lesson is full. You have been added to the waitlist.';
+            ? 'Je bent ingeschreven voor de les.'
+            : 'De les is vol. Je bent op de wachtlijst geplaatst.';
 
         return redirect()
             ->route('lessons.index')
@@ -38,6 +38,6 @@ class LessonRegistrationController extends Controller
 
         return redirect()
             ->route('registrations.index')
-            ->with('status', 'Your lesson registration has been cancelled.');
+            ->with('status', 'Je bent afgemeld voor de les.');
     }
 }

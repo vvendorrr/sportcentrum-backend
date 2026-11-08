@@ -20,7 +20,7 @@ class LessonRegistrationService
 
             if ($lockedLesson->starts_at->lessThanOrEqualTo(now())) {
                 throw ValidationException::withMessages([
-                    'lesson' => 'You cannot register for a lesson that has already started.',
+                    'lesson' => 'Je kunt je niet meer inschrijven voor een les die al is begonnen.',
                 ]);
             }
 
@@ -82,7 +82,7 @@ class LessonRegistrationService
 
             if ($now->greaterThan($cancellationDeadline)) {
                 throw ValidationException::withMessages([
-                    'registration' => 'You can only cancel a lesson at least two hours before it starts.',
+                    'registration' => 'Je kunt je tot uiterlijk twee uur voor aanvang van de les afmelden.',
                 ]);
             }
 
