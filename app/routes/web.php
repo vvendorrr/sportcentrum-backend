@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LessonRegistrationController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MyLessonRegistrationController;
 use App\Http\Controllers\PeopleDirectoryController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +23,8 @@ Route::middleware('guest')->group(function (): void {
 
 Route::middleware('auth')->group(function (): void {
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
+    Route::get('/my/account', [PageController::class, 'account'])->name('account.show');
+    Route::delete('/my/account', [AccountController::class, 'destroy'])->name('account.destroy');
     Route::get('/lessons/create', [LessonController::class, 'create'])->name('lessons.create');
     Route::post('/lessons', [LessonController::class, 'store'])->name('lessons.store');
     Route::get('/lessons/{lesson}/edit', [LessonController::class, 'edit'])->name('lessons.edit');

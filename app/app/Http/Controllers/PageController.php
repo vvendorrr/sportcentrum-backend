@@ -62,15 +62,24 @@ class PageController extends Controller
             $user = User::query()->first();
         }
 
-        $account = DemoData::account();
         if ($user !== null) {
             $nameParts = preg_split('/\s+/', trim($user->name), 2);
             $account = [
-                ...$account,
                 'account_name' => strstr($user->email, '@', true) ?: $user->name,
                 'email' => $user->email,
                 'first_name' => $nameParts[0] ?? '',
                 'last_name' => $nameParts[1] ?? '',
+                'gender' => 'Niet opgegeven',
+                'birth_date' => null,
+            ];
+        } else {
+            $account = [
+                'account_name' => '',
+                'email' => '',
+                'first_name' => '',
+                'last_name' => '',
+                'gender' => 'Niet opgegeven',
+                'birth_date' => null,
             ];
         }
 
@@ -90,8 +99,8 @@ class PageController extends Controller
 
         return view('users.account', [
             'account' => $account,
-            'registeredLessons' => $registeredLessons ?: DemoData::registeredLessons(),
-            'regularLessons' => DemoData::regularLessons(),
+            'registeredLessons' => $registeredLessons,
+            'regularLessons' => [],
         ]);
     }
 

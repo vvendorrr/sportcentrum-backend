@@ -25,7 +25,7 @@
                     </div>
                     <div class="rounded-2xl bg-slate-50 p-4">
                         <dt class="text-xs font-bold uppercase tracking-wide text-slate-500">Trainer</dt>
-                        <dd class="mt-2 text-lg font-extrabold text-brand-950">{{ $lesson->instructor->name }}</dd>
+                        <dd class="mt-2 text-lg font-extrabold text-brand-950">{{ $lesson->instructor?->name ?? 'Voormalige trainer' }}</dd>
                     </div>
                 </dl>
 

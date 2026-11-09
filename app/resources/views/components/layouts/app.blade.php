@@ -53,6 +53,15 @@
                             </a>
                         @endif
 
+                        <a @class([
+                            'flex shrink-0 items-center gap-3 rounded-xl px-4 py-3 text-sm font-bold transition focus-visible:outline-2 focus-visible:outline-brand-600',
+                            'bg-brand-50 text-brand-800' => request()->routeIs('account.*'),
+                            'text-slate-600 hover:bg-brand-50 hover:text-brand-800' => ! request()->routeIs('account.*'),
+                        ]) href="{{ route('account.show') }}">
+                            <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="4" /><path stroke-linecap="round" stroke-linejoin="round" d="M5 21a7 7 0 0 1 14 0" /></svg>
+                            Mijn account
+                        </a>
+
                         @can('create', \App\Models\Lesson::class)
                             <p class="hidden px-4 pb-1 pt-5 text-xs font-extrabold uppercase tracking-[0.16em] text-slate-400 md:block">Beheer</p>
                             <a @class([
