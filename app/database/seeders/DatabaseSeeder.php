@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'r.dewit@example.com',
         ]);
 
+        User::factory()->admin()->count(4)->create();
+
         User::factory()->count(8)->create();
 
         $this->call([
