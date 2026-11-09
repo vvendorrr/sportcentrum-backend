@@ -24,6 +24,9 @@ Route::middleware('guest')->group(function (): void {
 Route::middleware('auth')->group(function (): void {
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
     Route::get('/my/account', [PageController::class, 'account'])->name('account.show');
+    Route::patch('/my/account', [AccountController::class, 'update'])->name('account.update');
+    Route::patch('/my/account/email', [AccountController::class, 'updateEmail'])->name('account.email.update');
+    Route::patch('/my/account/password', [AccountController::class, 'updatePassword'])->name('account.password.update');
     Route::delete('/my/account', [AccountController::class, 'destroy'])->name('account.destroy');
     Route::get('/lessons/create', [LessonController::class, 'create'])->name('lessons.create');
     Route::post('/lessons', [LessonController::class, 'store'])->name('lessons.store');

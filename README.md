@@ -154,22 +154,21 @@ Deze sectie houdt bij hoe ver de user stories uit [`docs/plan-van-eisen.md`](doc
 | US-04 | Afmelden voor een les (tot 2 uur voor start, wachtlijst-promotie) | ✅ Afgerond | `LessonRegistrationController::destroy` |
 | US-05 | Deelnemers en aanwezigheid beheren | 🚧 Deels | `PeopleDirectoryController::participants` (overzicht klaar); aanwezigheid registreren ontbreekt nog |
 | US-06 | Lessen aanmaken en inplannen | ✅ Afgerond | `LessonController::create/edit/store/update/destroy` |
-| US-07 | Accountgegevens beheren (profiel, e-mail, wachtwoord) | 🚧 Deels | Accountpagina (`account.show`) met profiel, wachtwoord-UI en account verwijderen (`AccountController::destroy`); opslaan van gewijzigde gegevens (`PATCH`) ontbreekt nog |
+| US-07 | Accountgegevens beheren (profiel, e-mail, wachtwoord) | ✅ Afgerond | `AccountController::update/updateEmail/updatePassword` (`PATCH`-endpoints), Form Requests met Nederlandstalige meldingen, accountpagina met opslaan/wachtwoord-verificatie; account verwijderen (`AccountController::destroy`) |
 | US-08 | Ledenaccounts uitschakelen | ⬜ Te starten | — |
 | US-09 | Traineraccounts beheren | 🚧 Deels | `PeopleDirectoryController::trainers` (overzicht); aanmaken/bewerken ontbreekt nog |
 | US-10 | Eigen inschrijvingen bekijken | ✅ Afgerond | `MyLessonRegistrationController::index` |
 
 ### Next steps (sprint 2)
 
-1. **US-07 afronden** — versturen van het profielformulier: `PATCH`-endpoint met Form Request (Nederlandstalige meldingen) voor naam/telefoonnummer/e-mail (unique-validatie) en wachtwoord wijzigen met huidige wachtwoord-controle; feature tests met Pest.
-2. **US-08** — ledenaccounts uitschakelen (`is_active`): beheerder-actie, inloggen voor uitgeschakelde accounts weigeren, gegevens en inschrijvingen bewaren.
-3. **US-05** — per les attendance registreren (`attended`/`absent`) en gemiste lessen samenvatten in het deelnemersoverzicht.
-4. **US-09** — traineraccounts aanmaken/bewerken met rollen-policies.
-5. **US-07 variant** — de resterende accountpagina-velden (geslacht/geboortedatum) koppelen aan echte databasekolommen, of verwijderen als de klant die data niet bewaard wil hebben.
+1. **US-08** — ledenaccounts uitschakelen (`is_active`): beheerder-actie, inloggen voor uitgeschakelde accounts weigeren, gegevens en inschrijvingen bewaren.
+2. **US-05** — per les attendance registreren (`attended`/`absent`) en gemiste lessen samenvatten in het deelnemersoverzicht.
+3. **US-09** — traineraccounts aanmaken/bewerken met rollen-policies.
+4. **US-07 variant** — de resterende accountpagina-velden (geslacht/geboortedatum) koppelen aan echte databasekolommen, of verwijderen als de klant die data niet bewaard wil hebben.
 
 ### Niet-functionele eisen (uit plan van eisen)
 
-- Minimaal 10 feature tests met Pest (er draait er nu 47 in `app/tests/Feature/`).
+- Minimaal 10 feature tests met Pest (de suite telt nu 56 tests, vrijwel allemaal feature tests).
 - Blade-views met één gedeelde layout, Form Requests met Nederlandstalige meldingen.
 - Branches per user story, pull requests met review.
 

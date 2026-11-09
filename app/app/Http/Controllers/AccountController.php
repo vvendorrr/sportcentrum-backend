@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateAccountEmailRequest;
+use App\Http\Requests\UpdateAccountPasswordRequest;
+use App\Http\Requests\UpdateAccountRequest;
 use App\Models\Lesson;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -10,6 +13,42 @@ use Illuminate\Support\Facades\DB;
 
 class AccountController extends Controller
 {
+    public function update(UpdateAccountRequest $request): RedirectResponse
+    {
+        $validated = $request->validated();
+
+        $request->user()->fill([
+            'name' => trim($validated['first_name'].' '.$validated['last_name']),
+            'phone_number' => $validated['phone_number'] ?? null,
+        ])->save();
+
+        return redirect()
+            ->route('account.show')
+            ->with('status', 'Je accountgegevens zijn bijgewerkt.');
+    }
+
+    public function updateEmail(UpdateAccountEmailRequest $request): RedirectResponse
+    {
+        $request->user()->forceFill([
+            'email' => $request->validated('email'),
+        ])->save();
+
+        return redirect()
+            ->route('account.show', ['tab' => 'security'])
+            ->with('status', 'Je e-mailadres is bijgewerkt.');
+    }
+
+    public function updatePassword(UpdateAccountPasswordRequest $request): RedirectResponse
+    {
+        $request->user()->fill([
+            'password_hash' => $request->validated('new_password'),
+        ])->save();
+
+        return redirect()
+            ->route('account.show', ['tab' => 'security'])
+            ->with('status', 'Je wachtwoord is gewijzigd.');
+    }
+
     public function destroy(Request $request): RedirectResponse
     {
         $request->validate([

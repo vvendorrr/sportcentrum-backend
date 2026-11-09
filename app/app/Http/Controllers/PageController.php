@@ -69,6 +69,7 @@ class PageController extends Controller
                 'email' => $user->email,
                 'first_name' => $nameParts[0] ?? '',
                 'last_name' => $nameParts[1] ?? '',
+                'phone_number' => $user->phone_number,
                 'gender' => 'Niet opgegeven',
                 'birth_date' => null,
             ];
@@ -78,6 +79,7 @@ class PageController extends Controller
                 'email' => '',
                 'first_name' => '',
                 'last_name' => '',
+                'phone_number' => null,
                 'gender' => 'Niet opgegeven',
                 'birth_date' => null,
             ];
