@@ -19,8 +19,10 @@ it('allows an admin to create a lesson with an admin instructor', function () {
             'max_participants' => 16,
         ]);
 
+    $lesson = Lesson::query()->firstOrFail();
+
     $response
-        ->assertRedirectToRoute('lessons.index')
+        ->assertRedirectToRoute('lessons.show', $lesson)
         ->assertSessionHas('status', 'Les aangemaakt.');
 
     $this->assertDatabaseHas('lessons', [
@@ -116,7 +118,8 @@ it('renders upcoming lessons with a registration action for members', function (
     $response
         ->assertOk()
         ->assertSeeText('Morning yoga')
-        ->assertSeeText('Inschrijven');
+        ->assertSeeText('Inschrijven')
+        ->assertSee(route('lessons.show', $lesson), false);
 });
 
 it('rejects missing required lesson fields', function () {
@@ -151,5 +154,143 @@ it('makes the lesson schedule public without exposing member names', function ()
     $response
         ->assertOk()
         ->assertSeeText('Public yoga')
-        ->assertDontSeeText('Private Member');
+        ->assertDontSeeText('Private Member')
+        ->assertSee(route('lessons.show', $lesson), false);
+});
+
+it('shows lesson details to visitors without showing member names', function () {
+    $lesson = Lesson::factory()->create(['sport' => 'Public yoga']);
+    $member = User::factory()->create(['name' => 'Private Member']);
+    $lesson->registrations()->create([
+        'user_id' => $member->id,
+        'status' => 'enrolled',
+        'registered_at' => now(),
+    ]);
+
+    $response = $this->get(route('lessons.show', $lesson));
+
+    $response
+        ->assertOk()
+        ->assertSeeText('Public yoga')
+        ->assertSeeText('Trainer')
+        ->assertDontSeeText('Private Member')
+        ->assertSeeText('Log in om je in te schrijven');
+});
+
+it('shows edit and delete actions to admins on lesson details', function () {
+    $admin = User::factory()->admin()->create();
+    $lesson = Lesson::factory()->create();
+
+    $response = $this->actingAs($admin)->get(route('lessons.show', $lesson));
+
+    $response
+        ->assertOk()
+        ->assertSeeText('Les bewerken')
+        ->assertSeeText('Les verwijderen');
+});
+
+it('does not show lesson management actions to members', function () {
+    $member = User::factory()->create();
+    $lesson = Lesson::factory()->create();
+
+    $response = $this->actingAs($member)->get(route('lessons.show', $lesson));
+
+    $response
+        ->assertOk()
+        ->assertDontSeeText('Les bewerken')
+        ->assertDontSeeText('Les verwijderen');
+});
+
+it('allows an admin to update a lesson', function () {
+    $this->travelTo('2026-10-10 09:00:00');
+    $admin = User::factory()->admin()->create();
+    $instructor = User::factory()->admin()->create();
+    $lesson = Lesson::factory()->create([
+        'sport' => 'Old lesson name',
+        'starts_at' => '2026-10-11 09:00:00',
+        'max_participants' => 10,
+    ]);
+
+    $response = $this->actingAs($admin)
+        ->from(route('lessons.edit', $lesson))
+        ->patch(route('lessons.update', $lesson), [
+            'instructor_id' => $instructor->id,
+            'starts_at' => '2026-10-12 10:00:00',
+            'duration_minutes' => 60,
+            'category' => 'strength',
+            'sport' => 'New lesson name',
+            'max_participants' => 12,
+        ]);
+
+    $response->assertRedirectToRoute('lessons.show', $lesson);
+    $this->assertDatabaseHas('lessons', [
+        'id' => $lesson->id,
+        'instructor_id' => $instructor->id,
+        'sport' => 'New lesson name',
+        'max_participants' => 12,
+    ]);
+});
+
+it('does not allow an admin to reduce capacity below current enrollment', function () {
+    $this->travelTo('2026-10-10 09:00:00');
+    $admin = User::factory()->admin()->create();
+    $instructor = User::factory()->admin()->create();
+    $lesson = Lesson::factory()->create([
+        'starts_at' => '2026-10-11 09:00:00',
+        'max_participants' => 2,
+    ]);
+    $members = User::factory()->count(2)->create();
+
+    foreach ($members as $member) {
+        $lesson->registrations()->create([
+            'user_id' => $member->id,
+            'status' => 'enrolled',
+            'registered_at' => now(),
+        ]);
+    }
+
+    $response = $this->actingAs($admin)
+        ->from(route('lessons.edit', $lesson))
+        ->patch(route('lessons.update', $lesson), [
+            'instructor_id' => $instructor->id,
+            'starts_at' => '2026-10-11 09:00:00',
+            'duration_minutes' => 45,
+            'category' => 'cardio',
+            'sport' => 'Spinning',
+            'max_participants' => 1,
+        ]);
+
+    $response->assertRedirectBackWithErrors([
+        'max_participants' => 'De capaciteit kan niet lager zijn dan het huidige aantal ingeschreven leden.',
+    ]);
+    expect($lesson->fresh()->max_participants)->toBe(2);
+});
+
+it('forbids a member from deleting a lesson', function () {
+    $member = User::factory()->create();
+    $lesson = Lesson::factory()->create();
+
+    $response = $this->actingAs($member)->delete(route('lessons.destroy', $lesson));
+
+    $response->assertForbidden();
+    $this->assertModelExists($lesson);
+});
+
+it('allows an admin to delete a lesson and its registrations', function () {
+    $admin = User::factory()->admin()->create();
+    $member = User::factory()->create();
+    $lesson = Lesson::factory()->create();
+    $registration = $lesson->registrations()->create([
+        'user_id' => $member->id,
+        'status' => 'enrolled',
+        'registered_at' => now(),
+    ]);
+
+    $response = $this->actingAs($admin)->delete(route('lessons.destroy', $lesson));
+
+    $response
+        ->assertRedirectToRoute('lessons.index')
+        ->assertSessionHas('status', 'De les en bijbehorende inschrijvingen zijn verwijderd.');
+    $this->assertModelMissing($lesson);
+    $this->assertModelMissing($registration);
 });

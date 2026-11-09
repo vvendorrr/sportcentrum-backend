@@ -28,6 +28,7 @@ it('shows the home page with the weekday schedule and available places', functio
         ->assertSeeText('Dinsdag')
         ->assertSeeText('Morning yoga')
         ->assertSeeText('1 / 8 deelnemers')
+        ->assertSee(route('lessons.show', $lesson), false)
         ->assertDontSeeText('Aantal deelnemers vandaag');
 });
 

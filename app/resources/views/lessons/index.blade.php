@@ -35,7 +35,7 @@
                             ])>{{ $isFull ? 'Vol' : 'Plek beschikbaar' }}</span>
                         </div>
 
-                        <h2 class="mt-5 text-2xl font-black tracking-tight text-brand-950">{{ $lesson->sport }}</h2>
+                        <h2 class="mt-5 text-2xl font-black tracking-tight text-brand-950"><a class="rounded focus-visible:outline-2 focus-visible:outline-brand-600" href="{{ route('lessons.show', $lesson) }}">{{ $lesson->sport }}</a></h2>
                         <p class="mt-2 text-sm font-semibold text-slate-500">{{ $lesson->starts_at->format('d-m-Y · H:i') }} UTC</p>
 
                         <dl class="mt-5 grid grid-cols-2 gap-3 rounded-2xl bg-slate-50 p-4 text-sm">

@@ -12,6 +12,16 @@ class LessonPolicy
         return $user->role === 'admin';
     }
 
+    public function update(User $user, Lesson $lesson): bool
+    {
+        return $user->role === 'admin';
+    }
+
+    public function delete(User $user, Lesson $lesson): bool
+    {
+        return $user->role === 'admin';
+    }
+
     public function register(User $user, Lesson $lesson): bool
     {
         return $user->role === 'member';

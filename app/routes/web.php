@@ -22,6 +22,9 @@ Route::middleware('auth')->group(function (): void {
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
     Route::get('/lessons/create', [LessonController::class, 'create'])->name('lessons.create');
     Route::post('/lessons', [LessonController::class, 'store'])->name('lessons.store');
+    Route::get('/lessons/{lesson}/edit', [LessonController::class, 'edit'])->name('lessons.edit');
+    Route::patch('/lessons/{lesson}', [LessonController::class, 'update'])->name('lessons.update');
+    Route::delete('/lessons/{lesson}', [LessonController::class, 'destroy'])->name('lessons.destroy');
     Route::post('/lessons/{lesson}/registrations', [LessonRegistrationController::class, 'store'])
         ->name('lessons.register');
 
@@ -30,3 +33,5 @@ Route::middleware('auth')->group(function (): void {
     Route::delete('/my/registrations/{lessonRegistration}', [LessonRegistrationController::class, 'destroy'])
         ->name('registrations.cancel');
 });
+
+Route::get('/lessons/{lesson}', [LessonController::class, 'show'])->name('lessons.show');
