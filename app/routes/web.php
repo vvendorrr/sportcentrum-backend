@@ -5,6 +5,7 @@ use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LessonRegistrationController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MyLessonRegistrationController;
+use App\Http\Controllers\PeopleDirectoryController;
 use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,10 @@ Route::middleware('auth')->group(function (): void {
 
     Route::get('/my/registrations', [MyLessonRegistrationController::class, 'index'])
         ->name('registrations.index');
+    Route::get('/deelnemers', [PeopleDirectoryController::class, 'participants'])
+        ->name('participants.index');
+    Route::get('/trainers', [PeopleDirectoryController::class, 'trainers'])
+        ->name('trainers.index');
     Route::delete('/my/registrations/{lessonRegistration}', [LessonRegistrationController::class, 'destroy'])
         ->name('registrations.cancel');
 });
