@@ -70,8 +70,7 @@
                                 <th class="w-20 px-3 py-3 text-center text-xs font-extrabold uppercase tracking-wider" scope="col">Tijd</th>
                                 @foreach ($weekDays as $day)
                                     <th class="px-3 py-3 text-center" scope="col">
-                                        <span class="block text-xs font-bold uppercase tracking-wider text-blue-100">{{ ucfirst($day['name']) }}</span>
-                                        <span class="mt-1 block text-sm font-extrabold">{{ $day['date']->format('d-m') }}</span>
+                                        <span class="block text-xs font-bold uppercase tracking-wider text-blue-100">{{ $day['date']->format('d') }} {{ $day['name'] }}</span>
                                     </th>
                                 @endforeach
                             </tr>

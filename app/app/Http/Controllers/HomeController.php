@@ -16,7 +16,7 @@ class HomeController extends Controller
         $weekEnd = $weekStart->copy()->addDays(4)->endOfDay();
         $todayStart = $now->copy()->startOfDay();
         $tomorrowStart = $todayStart->copy()->addDay();
-        $dayNames = ['maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag'];
+        $dayNames = ['Ma', 'Di', 'Wo', 'Do', 'Vr'];
         $weekDays = collect(range(0, 4))
             ->map(fn (int $offset): array => [
                 'date' => $weekStart->copy()->addDays($offset),
