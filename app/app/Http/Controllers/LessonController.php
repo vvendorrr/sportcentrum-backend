@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LessonIndexRequest;
 use App\Http\Requests\StoreLessonRequest;
 use App\Http\Requests\UpdateLessonRequest;
 use App\Models\Lesson;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
@@ -16,14 +18,33 @@ use Illuminate\Validation\ValidationException;
 
 class LessonController extends Controller
 {
-    public function index(Request $request): View
+    public function index(LessonIndexRequest $request): View
     {
-        $lessons = Lesson::query()
+        $filters = $request->validated();
+        $weekStart = Carbon::parse($filters['week'] ?? now()->toDateString())->startOfWeek(Carbon::MONDAY);
+        $weekEnd = $weekStart->copy()->addDays(4)->endOfDay();
+        $sportSearch = trim($filters['sport'] ?? '');
+
+        $query = Lesson::query()
             ->with('instructor')
             ->withCount([
                 'registrations as enrolled_count' => fn ($query) => $query->where('status', 'enrolled'),
             ])
-            ->where('starts_at', '>', now())
+            ->whereBetween('starts_at', [$weekStart, $weekEnd]);
+
+        if (isset($filters['category'])) {
+            $query->where('category', $filters['category']);
+        }
+
+        if (isset($filters['instructor_id'])) {
+            $query->where('instructor_id', $filters['instructor_id']);
+        }
+
+        if ($sportSearch !== '') {
+            $query->where('sport', 'like', '%'.$sportSearch.'%');
+        }
+
+        $lessons = $query
             ->orderBy('starts_at')
             ->orderBy('id')
             ->get();
@@ -33,12 +54,38 @@ class LessonController extends Controller
             ? collect()
             : $user->lessonRegistrations()
                 ->whereIn('status', ['enrolled', 'waitlisted'])
+                ->whereIn('lesson_id', $lessons->modelKeys())
                 ->get(['lesson_id', 'status'])
                 ->keyBy('lesson_id');
 
+        $dayNames = ['Ma', 'Di', 'Wo', 'Do', 'Vr'];
+        $weekDays = collect(range(0, 4))
+            ->map(fn (int $offset): array => [
+                'date' => $weekStart->copy()->addDays($offset),
+                'name' => $dayNames[$offset],
+            ]);
+        $preservedFilters = array_filter([
+            'category' => $filters['category'] ?? null,
+            'instructor_id' => $filters['instructor_id'] ?? null,
+            'sport' => $sportSearch !== '' ? $sportSearch : null,
+        ], fn ($value) => $value !== null && $value !== '');
+
         return view('lessons.index', [
             'lessons' => $lessons,
+            'lessonsByDay' => $lessons->groupBy(fn (Lesson $lesson) => $lesson->starts_at->format('Y-m-d')),
             'registrationsByLesson' => $registrationsByLesson,
+            'weekDays' => $weekDays,
+            'timeSlots' => range(6, 19),
+            'selectedWeek' => $weekStart,
+            'selectedWeekLabel' => $weekStart->format('d-m-Y').' t/m '.$weekEnd->format('d-m-Y'),
+            'filters' => [
+                'category' => $filters['category'] ?? '',
+                'instructor_id' => $filters['instructor_id'] ?? '',
+                'sport' => $sportSearch,
+            ],
+            'instructors' => User::query()->where('role', 'admin')->orderBy('name')->get(['id', 'name']),
+            'previousWeekUrl' => route('lessons.index', [...$preservedFilters, 'week' => $weekStart->copy()->subWeek()->toDateString()]),
+            'nextWeekUrl' => route('lessons.index', [...$preservedFilters, 'week' => $weekStart->copy()->addWeek()->toDateString()]),
         ]);
     }
 

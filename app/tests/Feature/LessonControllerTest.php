@@ -105,12 +105,12 @@ it('renders the lesson creation form for an admin', function () {
         ->assertSeeText('Lesson Instructor');
 });
 
-it('renders upcoming lessons with a registration action for members', function () {
-    $this->travelTo('2026-10-10 09:00:00');
+it('renders the weekly roster and links lessons to their detail pages for members', function () {
+    $this->travelTo('2026-10-12 09:00:00');
     $member = User::factory()->create();
     $lesson = Lesson::factory()->create([
         'sport' => 'Morning yoga',
-        'starts_at' => '2026-10-11 09:00:00',
+        'starts_at' => '2026-10-13 09:00:00',
     ]);
 
     $response = $this->actingAs($member)->get(route('lessons.index'));
@@ -118,7 +118,6 @@ it('renders upcoming lessons with a registration action for members', function (
     $response
         ->assertOk()
         ->assertSeeText('Morning yoga')
-        ->assertSeeText('Inschrijven')
         ->assertSee(route('lessons.show', $lesson), false);
 });
 
@@ -141,7 +140,11 @@ it('rejects missing required lesson fields', function () {
 });
 
 it('makes the lesson schedule public without exposing member names', function () {
-    $lesson = Lesson::factory()->create(['sport' => 'Public yoga']);
+    $this->travelTo('2026-10-12 09:00:00');
+    $lesson = Lesson::factory()->create([
+        'sport' => 'Public yoga',
+        'starts_at' => '2026-10-13 09:00:00',
+    ]);
     $member = User::factory()->create(['name' => 'Private Member']);
     $lesson->registrations()->create([
         'user_id' => $member->id,
@@ -156,6 +159,36 @@ it('makes the lesson schedule public without exposing member names', function ()
         ->assertSeeText('Public yoga')
         ->assertDontSeeText('Private Member')
         ->assertSee(route('lessons.show', $lesson), false);
+});
+
+it('filters the weekly roster by category, trainer and sport', function () {
+    $this->travelTo('2026-10-12 09:00:00');
+    $selectedTrainer = User::factory()->admin()->create();
+    $otherTrainer = User::factory()->admin()->create();
+    $selectedLesson = Lesson::factory()->create([
+        'instructor_id' => $selectedTrainer->id,
+        'starts_at' => '2026-10-13 09:00:00',
+        'category' => 'relaxation',
+        'sport' => 'Morning yoga',
+    ]);
+    Lesson::factory()->create([
+        'instructor_id' => $otherTrainer->id,
+        'starts_at' => '2026-10-14 10:00:00',
+        'category' => 'cardio',
+        'sport' => 'Spinning',
+    ]);
+
+    $response = $this->get(route('lessons.index', [
+        'week' => '2026-10-12',
+        'category' => 'relaxation',
+        'instructor_id' => $selectedTrainer->id,
+        'sport' => 'yoga',
+    ]));
+
+    $response
+        ->assertOk()
+        ->assertSeeText($selectedLesson->sport)
+        ->assertDontSeeText('Spinning');
 });
 
 it('shows lesson details to visitors without showing member names', function () {
