@@ -6,8 +6,8 @@ use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LessonRegistrationController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MyLessonRegistrationController;
-use App\Http\Controllers\PeopleDirectoryController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PeopleDirectoryController;
 use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
