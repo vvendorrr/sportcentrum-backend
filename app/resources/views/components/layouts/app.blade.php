@@ -63,12 +63,22 @@
                                 <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" d="M12 5v14M5 12h14" /></svg>
                                 Les aanmaken
                             </a>
-                            <span class="flex shrink-0 items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold text-slate-400" aria-disabled="true">
-                                <span>Deelnemers</span><span class="text-xs">Binnenkort</span>
-                            </span>
-                            <span class="flex shrink-0 items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold text-slate-400" aria-disabled="true">
-                                <span>Trainers</span><span class="text-xs">Binnenkort</span>
-                            </span>
+                            <a @class([
+                                'flex shrink-0 items-center gap-3 rounded-xl px-4 py-3 text-sm font-bold transition focus-visible:outline-2 focus-visible:outline-brand-600',
+                                'bg-brand-50 text-brand-800' => request()->routeIs('participants.*'),
+                                'text-slate-600 hover:bg-brand-50 hover:text-brand-800' => ! request()->routeIs('participants.*'),
+                            ]) href="{{ route('participants.index') }}">
+                                <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2m12-13a4 4 0 1 1-8 0 4 4 0 0 1 8 0Zm3 4a4 4 0 0 1 3 4v2m-3-18a4 4 0 0 1 0 8" /></svg>
+                                Deelnemers
+                            </a>
+                            <a @class([
+                                'flex shrink-0 items-center gap-3 rounded-xl px-4 py-3 text-sm font-bold transition focus-visible:outline-2 focus-visible:outline-brand-600',
+                                'bg-brand-50 text-brand-800' => request()->routeIs('trainers.*'),
+                                'text-slate-600 hover:bg-brand-50 hover:text-brand-800' => ! request()->routeIs('trainers.*'),
+                            ]) href="{{ route('trainers.index') }}">
+                                <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-8 7a8 8 0 0 1 16 0M19 8l1.5 1.5L23 7" /></svg>
+                                Trainers
+                            </a>
                         @endcan
                     @endauth
 
