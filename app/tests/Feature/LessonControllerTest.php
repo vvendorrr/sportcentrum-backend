@@ -210,6 +210,50 @@ it('shows lesson details to visitors without showing member names', function () 
         ->assertSeeText('Log in om je in te schrijven');
 });
 
+it('shows the cancel action for enrolled and waitlisted members before the deadline', function (string $status) {
+    $this->travelTo('2026-10-10 10:00:00');
+    $member = User::factory()->create();
+    $lesson = Lesson::factory()->create([
+        'starts_at' => '2026-10-10 12:00:00',
+        'max_participants' => 1,
+    ]);
+    $registration = $lesson->registrations()->create([
+        'user_id' => $member->id,
+        'status' => $status,
+        'registered_at' => now(),
+    ]);
+
+    $response = $this->actingAs($member)->get(route('lessons.show', $lesson));
+
+    $response
+        ->assertOk()
+        ->assertSeeText('Afmelden voor deze les')
+        ->assertSee(route('registrations.cancel', $registration), false);
+})->with([
+    'ingeschreven' => 'enrolled',
+    'op de wachtlijst' => 'waitlisted',
+]);
+
+it('hides the cancel action after the cancellation deadline', function () {
+    $this->travelTo('2026-10-10 10:00:01');
+    $member = User::factory()->create();
+    $lesson = Lesson::factory()->create([
+        'starts_at' => '2026-10-10 12:00:00',
+    ]);
+    $lesson->registrations()->create([
+        'user_id' => $member->id,
+        'status' => 'enrolled',
+        'registered_at' => now()->subHour(),
+    ]);
+
+    $response = $this->actingAs($member)->get(route('lessons.show', $lesson));
+
+    $response
+        ->assertOk()
+        ->assertSeeText('De afmeldtermijn is verstreken.')
+        ->assertDontSeeText('Afmelden voor deze les');
+});
+
 it('shows edit and delete actions to admins on lesson details', function () {
     $admin = User::factory()->admin()->create();
     $lesson = Lesson::factory()->create();

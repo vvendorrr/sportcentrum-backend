@@ -40,6 +40,17 @@
                                 <p class="mt-5 rounded-xl {{ $registration->status === 'enrolled' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-900' }} px-4 py-3 text-sm font-bold" role="status">
                                     {{ $registration->status === 'enrolled' ? 'Je bent ingeschreven voor deze les.' : 'Je staat op de wachtlijst voor deze les.' }}
                                 </p>
+
+                                @if (now()->lessThanOrEqualTo($lesson->starts_at->copy()->subHours(2)))
+                                    <form class="mt-4" method="POST" action="{{ route('registrations.cancel', $registration) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="w-full rounded-full border border-red-200 bg-white px-5 py-3 text-sm font-bold text-red-700 transition hover:bg-red-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600" type="submit">Afmelden voor deze les</button>
+                                    </form>
+                                    <p class="mt-2 text-xs text-slate-500">Afmelden kan tot twee uur voor aanvang.</p>
+                                @else
+                                    <p class="mt-4 rounded-xl bg-slate-100 px-4 py-3 text-sm font-semibold text-slate-600">De afmeldtermijn is verstreken.</p>
+                                @endif
                             @else
                                 <form class="mt-5" method="POST" action="{{ route('lessons.register', $lesson) }}">
                                     @csrf
