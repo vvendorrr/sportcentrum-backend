@@ -67,9 +67,9 @@
                     <table class="min-w-[1050px] w-full table-fixed border-collapse text-left text-sm">
                         <thead>
                             <tr class="bg-brand-800 text-white">
-                                <th class="w-20 px-3 py-4 text-center text-xs font-extrabold uppercase tracking-wider" scope="col">Tijd</th>
+                                <th class="w-20 px-3 py-3 text-center text-xs font-extrabold uppercase tracking-wider" scope="col">Tijd</th>
                                 @foreach ($weekDays as $day)
-                                    <th class="px-3 py-4 text-center" scope="col">
+                                    <th class="px-3 py-3 text-center" scope="col">
                                         <span class="block text-xs font-bold uppercase tracking-wider text-blue-100">{{ ucfirst($day['name']) }}</span>
                                         <span class="mt-1 block text-sm font-extrabold">{{ $day['date']->format('d-m') }}</span>
                                     </th>
