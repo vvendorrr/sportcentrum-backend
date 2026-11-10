@@ -9,6 +9,7 @@ use App\Http\Controllers\MemberAccountController;
 use App\Http\Controllers\MyLessonRegistrationController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PeopleDirectoryController;
+use App\Http\Controllers\TrainerAccountController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Middleware\EnsureActiveUser;
 use Illuminate\Support\Facades\Route;
@@ -37,10 +38,10 @@ Route::middleware(['auth', EnsureActiveUser::class])->group(function (): void {
     Route::delete('/lessons/{lesson}', [LessonController::class, 'destroy'])->name('lessons.destroy');
     Route::post('/lessons/{lesson}/registrations', [LessonRegistrationController::class, 'store'])
         ->name('lessons.register');
-
     Route::patch(
-    '/lessons/{lesson}/registrations/{lessonRegistration}/attendance',
-    [LessonRegistrationController::class, 'attendance'])
+        '/lessons/{lesson}/registrations/{lessonRegistration}/attendance',
+        [LessonRegistrationController::class, 'attendance']
+    )
         ->name('lessons.attendance');
     Route::patch('/members/{member}/deactivate', [MemberAccountController::class, 'deactivate'])
         ->name('members.deactivate');
@@ -50,6 +51,10 @@ Route::middleware(['auth', EnsureActiveUser::class])->group(function (): void {
         ->name('participants.index');
     Route::get('/trainers', [PeopleDirectoryController::class, 'trainers'])
         ->name('trainers.index');
+    Route::post('/trainers', [TrainerAccountController::class, 'store'])
+        ->name('trainers.store');
+    Route::patch('/trainers/{trainer}', [TrainerAccountController::class, 'update'])
+        ->name('trainers.update');
     Route::delete('/my/registrations/{lessonRegistration}', [LessonRegistrationController::class, 'destroy'])
         ->name('registrations.cancel');
 });
