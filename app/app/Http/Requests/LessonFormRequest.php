@@ -13,11 +13,10 @@ abstract class LessonFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'instructor_id' => [
-                'required',
-                'integer',
-                Rule::exists('users', 'id')->where('role', 'admin'),
-            ],
+            'instructor_id' => [   'required', 'integer',
+                Rule::exists('users', 'id')
+                    ->where('role', 'admin')
+                    ->where('is_active', true),],
             'starts_at' => ['required', 'date', 'after:now'],
             'duration_minutes' => ['required', 'integer', 'between:1,65535'],
             'category' => ['required', Rule::in(['strength', 'cardio', 'relaxation'])],
