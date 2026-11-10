@@ -132,7 +132,26 @@ it('does not authenticate inactive accounts', function () {
         'password' => 'secure-password',
     ]);
 
-    $response->assertRedirectBackWithErrors(['email']);
+    $response->assertRedirectBackWithErrors([
+        'email' => 'Je account is uitgeschakeld. Neem contact op met een beheerder.',
+    ]);
+    $this->assertGuest();
+});
+
+it('does not disclose that an account is disabled when the password is incorrect', function () {
+    User::factory()->inactive()->create([
+        'email' => 'inactive@example.com',
+        'password_hash' => 'secure-password',
+    ]);
+
+    $response = $this->from(route('login'))->post(route('login.store'), [
+        'email' => 'inactive@example.com',
+        'password' => 'incorrect-password',
+    ]);
+
+    $response->assertRedirectBackWithErrors([
+        'email' => 'De combinatie van e-mailadres en wachtwoord is onjuist.',
+    ]);
     $this->assertGuest();
 });
 
