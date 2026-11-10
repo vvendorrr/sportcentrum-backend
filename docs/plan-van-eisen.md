@@ -7,16 +7,16 @@
 | Team          | —                                                                                      |
 | Opdrachtgever | Ron de Wit, Sportcentrum De Linde                                                      |
 | Repository    | [Sportcentrum-backend](https://github.com/vvendorrr/sportcentrum-backend "Repository") |
-| Versie        | 2.1                                                                                    |
-| Datum         | 25-09                                                                                  |
+| Versie        | 2.2                                                                                    |
+| Datum         | 10-11                                                                                  |
 
 ## Teamleden, rollen en deelproducten
 
 | Naam     | Studentnummer | Scrum-rol     | Deelproduct        |
 | -------- | ------------- | ------------- | ------------------ |
-| Famke    | D315950       | Product owner | [Nog in te vullen] |
-| Giovanni | D316667       | Scrum master  | [Nog in te vullen] |
-| Lucas    | D310739       | Developer     | [Nog in te vullen] |
+| Famke    | D315950       | Product owner | Plan van eisen (scope & user stories), product backlog |
+| Giovanni | D316667       | Scrum master  | Datamodel (ERD) en wireframe-overzichten               |
+| Lucas    | D310739       | Developer     | Rooster en lessenbeheer (US-01, US-05, US-06)          |
 
 ## Versiebeheer
 
@@ -26,7 +26,7 @@
 | 1.1    | 02/10 | Lucas toegevoegd                            | Famke    |
 | 1.2    | 09/10 | Inleiding en doel verbeterd                 | Giovanni |
 | 1.3    | 09/10 | Doelgroepen ingevuld                        | Giovanni |
-| 1.4    | 09/10 | Basis ERD ingevuld, nheeft herziening nodig | Giovanni |
+| 1.4    | 09/10 | Basis ERD ingevuld; heeft herziening nodig  | Giovanni |
 | 1.5    | 09/10 | Pagina’s en wireframe tabel ingevuld        | Giovanni |
 | 1.6    | 09/10 | Studentennummers volledig ingevuld          | Giovanni |
 | 1.7    | 09/10 | Scrum rollen volledig ingevuld              | Giovanni |
@@ -34,6 +34,7 @@
 | 1.9    | 29/10 | User stories aangevuld                      | Giovanni |
 | 2.0    | 06/11 | Userstories verdeeld tussen Lucas & Ik      | Famke    |
 | 2.1    | 06/11 | Userstories afgemaakt en verbeterd          | Famke    |
+| 2.2    | 10/11 | Realisatiestatus per user story toegevoegd, niet-functionele eisen ingevuld en database-verschillen bijgewerkt | Famke |
 
 ## Inleiding
 
@@ -51,10 +52,10 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 
 | Wel binnen dit project                                                                                                                   | Bewust buiten dit project |
 | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
-| - Database om makkelijk lessen bij te houden                                                                                             |                           |
-| - CRUD-Systeem om lessen toe te voegen aan Rooster                                                                                       |                           |
-| - Account-Systeem met Deelnemer, Trainer- en Admin accounts                                                                              |                           |
-| - Gedetailleerd overzicht van les-informatie; Naam, Type les, Datum, Duur, Trainer, Hoeveelheid Deelnemers en Hoeveelheid plekken in les |                           |
+| - Database om makkelijk lessen bij te houden                                                                                             | Online betalingen en contributie-administratie   |
+| - CRUD-Systeem om lessen toe te voegen aan Rooster                                                                                       | E-mail- of SMS-notificaties en herinneringen     |
+| - Account-Systeem met Deelnemer, Trainer- en Admin accounts                                                                              | Mobiele app of koppelingen met externe systemen  |
+| - Gedetailleerd overzicht van les-informatie; Naam, Type les, Datum, Duur, Trainer, Hoeveelheid Deelnemers en Hoeveelheid plekken in les | Beheer van meerdere vestigingen of ruimtes       |
 
 ### Doelgroepen
 
@@ -68,18 +69,18 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 
 ### Overzicht van de user stories
 
-| ID    | User story                         | Deelproduct                  | Prioriteit | Sprint          | Wie                |
-| ----- | ---------------------------------- | ---------------------------- | ---------- | --------------- | ------------------ |
-| US-01 | Rooster bekijken                   | Frontend                     | Hoog       | 1               | Lucas              |
-| US-02 | Account aanmaken en inloggen       | Backend, Frontend & Security | Hoog       | 1               | Lucas & Famke      |
-| US-03 | Inschrijven voor een les           | Backend & Frontend           | Hoog       | 1               | Famke              |
-| US-04 | Afmelden voor een les              | Backend & Frontend           | Hoog       | 1               | Famke & Giovanni   |
-| US-05 | Deelnemers en aanwezigheid beheren | Backend & Frontend           | Hoog       | 1               | Lucas              |
-| US-06 | Lessen aanmaken en inplannen       | Backend & Frontend           | Hoog       | 2               | Lucas & Giovanni   |
-| US-07 | Accountgegevens beheren            | Backend, Frontend & Security | Gemiddeld  | 2               | Lucas & Famke      |
-| US-08 | Ledenaccounts uitschakelen         | Backend & Security           | Gemiddeld  | 2               | Lucas              |
-| US-09 | Traineraccounts beheren            | Backend, Frontend & Security | Gemiddeld  | 2               | Famke              |
-| US-10 | Eigen inschrijvingen bekijken      | Backend & Frontend           | Gemiddeld  | 2               | Famke & Giovanni   |
+| ID    | User story                         | Deelproduct                  | Prioriteit | Sprint          | Wie                | Status realisatie                                                         |
+| ----- | ---------------------------------- | ---------------------------- | ---------- | --------------- | ------------------ | ------------------------------------------------------------------------- |
+| US-01 | Rooster bekijken                   | Frontend                     | Hoog       | 1               | Lucas              | ✅ Afgerond   |
+| US-02 | Account aanmaken en inloggen       | Backend, Frontend & Security | Hoog       | 1               | Lucas & Famke      | ✅ Afgerond   |
+| US-03 | Inschrijven voor een les           | Backend & Frontend           | Hoog       | 1               | Famke              | ✅ Afgerond   |
+| US-04 | Afmelden voor een les              | Backend & Frontend           | Hoog       | 1               | Famke & Giovanni   | ✅ Afgerond   |
+| US-05 | Deelnemers en aanwezigheid beheren | Backend & Frontend           | Hoog       | 1               | Lucas              | 🚧 Deels (overzicht klaar; aanwezigheid registreren ontbreekt nog) |
+| US-06 | Lessen aanmaken en inplannen       | Backend & Frontend           | Hoog       | 2               | Lucas & Giovanni   | ✅ Afgerond   |
+| US-07 | Accountgegevens beheren            | Backend, Frontend & Security | Gemiddeld  | 2               | Lucas & Famke      | ✅ Afgerond   |
+| US-08 | Ledenaccounts uitschakelen         | Backend & Security           | Gemiddeld  | 2               | Lucas              | ⬜ Te starten (inlogblokkade voor inactieve accounts bestaat al) |
+| US-09 | Traineraccounts beheren            | Backend, Frontend & Security | Gemiddeld  | 2               | Famke              | 🚧 Deels (overzicht klaar; aanmaken/bewerken ontbreekt nog) |
+| US-10 | Eigen inschrijvingen bekijken      | Backend & Frontend           | Gemiddeld  | 2               | Famke & Giovanni   | ✅ Afgerond   |
 
 ### Uitgewerkte user stories
 
@@ -133,6 +134,8 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 - [ ] Een beheerder/trainer kan na afloop per deelnemer `attended` of `absent` registreren.
 - [ ] Het aantal gemiste lessen van een lid is gebaseerd op diens afwezigheidsregistraties.
 
+> **Opm. status (10/11):** Het deelnemersoverzicht is afgerond (`PeopleDirectoryController::participants`). Het registreren van aanwezigheid (`attended`/`absent`) moet nog worden gebouwd; de databasekolom bestaat al.
+
 #### US-06 — Lessen aanmaken en inplannen — Hoog — Backend & Frontend — Lucas
 
 > **Als** beheerder/trainer wil ik lessen kunnen aanmaken en inplannen, zodat leden het actuele lesaanbod kunnen bekijken en zich kunnen inschrijven.
@@ -163,6 +166,8 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 - [ ] Een uitgeschakeld lid kan niet inloggen.
 - [ ] De accountgegevens en eerdere inschrijvingen van het lid blijven bewaard.
 
+> **Opm. status (10/11):** Inloggen is voor inactieve accounts al geblokkeerd (`LoginRequest`); de beheerdersactie om `is_active` aan/uit te zetten moet nog worden gebouwd.
+
 #### US-09 — Traineraccounts beheren — Gemiddeld — Backend, Frontend & Security — Famke
 
 > **Als** beheerder/trainer wil ik traineraccounts kunnen beheren, zodat alleen actieve trainers aan lessen gekoppeld kunnen worden.
@@ -172,6 +177,8 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 - [ ] Een beheerder/trainer kan een traineraccount aanmaken met naam, e-mailadres en telefoonnummer.
 - [ ] Het systeem weigert een traineraccount met een e-mailadres dat al in gebruik is.
 - [ ] Een uitgeschakelde trainer kan niet aan nieuwe lessen worden gekoppeld.
+
+> **Opm. status (10/11):** Het traineroverzicht bestaat (`PeopleDirectoryController::trainers`); het aanmaken en bewerken van traineraccounts moet nog worden gebouwd. In het datamodel is een trainer bewust een `admin`-gebruiker — zie ook de openstaande vraag hieronder.
 
 #### US-10 — Eigen inschrijvingen bekijken — Gemiddeld — Backend & Frontend — Famke
 
@@ -185,22 +192,29 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 
 ## Niet-functionele eisen
 
-| Nr.                | Eis                | Hoe controleren we dit? |
-| ------------------ | ------------------ | ----------------------- |
-| [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen]      |
+| Nr.   | Eis                                       | Hoe controleren we dit?                                                                                         |
+| ----- | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| NFE-1 | **Beveiliging:** wachtwoorden worden gehasht opgeslagen en de applicatie is beschermd tegen CSRF. | Feature tests voor registratie/inloggen; inspectie van migrations (`password_hash`) en Laravel-middleware |
+| NFE-2 | **Autorisatie:** bezoekers zien geen namen van deelnemers; alleen leden kunnen zich inschrijven en alleen beheerders lessen beheren. | Policies (`LessonPolicy`) en Pest feature tests op HTTP-statuscodes                              |
+| NFE-3 | **Betrouwbaarheid:** een les wordt nooit overboekt; wachtlijst-promotie gebeurt automatisch en in volgorde van aanmelding. | Exclusieve unieke constraint (`lesson_id`, `user_id`) en feature tests (volle les → wachtlijst; afmelden → promotie) |
+| NFE-4 | **Bruikbaarheid:** de interface en validatiefouten zijn volledig Nederlandstalig en begrijpelijk geformuleerd. | Form Requests met Nederlandstalige meldingen; handmatig doorlopen van de flows                                   |
+| NFE-5 | **Performance:** het rooster laadt binnen één seconde bij honderden leden en tientallen lessen, zonder N+1-queries. | Eager loading van relaties; controle met query-timing/debugbar                                                    |
+| NFE-6 | **Onderhoudbaarheid:** minimaal 10 feature tests en een consistente codestijl die met elke commit meekomt.         | `vendor/bin/pint --test`; `vendor/bin/pest` (stand: 10/11 — 56 tests, 247 assertions, allemaal groen)              |
+| NFE-7 | **Data-integriteit:** alleen geldige waarden voor rol, categorie, status en aanwezigheid komen in de database. | Enum-kolommen in migrations; uniek e-mailadres (`users.email`); validatie weigert ongeldige invoer                     |
 
 ## Technische eisen en randvoorwaarden
 
 | Onderwerp      | Afspraak                                                        |
 | -------------- | --------------------------------------------------------------- |
-| Framework      | Laravel 13                                                      |
+| Framework      | Laravel 13, PHP ≥ 8.3                                           |
 | Views          | Blade-views met één gedeelde layout; geen React, Vue of Inertia |
-| Database       | alle tabellen via migrations, gevuld met seeders                |
-| Authenticatie  | Met de rollen lid en beheerder                                  |
+| Styling        | Tailwind CSS via Vite                                           |
+| Database       | SQLite (standaard; MySQL kan via `.env`), alle tabellen via migrations, gevuld met seeders |
+| Authenticatie  | Session-based, met de rollen `member` (lid) en `admin` (beheerder/trainer) |
 | Validatie      | Form Requests met Nederlandstalige meldingen                    |
 | Testen         | Minimaal 10 feature tests met _Pest / PHPUnit_                  |
 | Versiebeheer   | GitHub, branches per user story, pull requests met review       |
-| Overige keuzes |                                                                 |
+| Overige keuzes | Codestijl met Laravel Pint; routes en policies in de applicatiecode |
 
 ## Datamodel
 
@@ -240,7 +254,7 @@ erDiagram
     }
 ```
 
-De `id`- en foreign-keykolommen zijn `BIGINT UNSIGNED`; `duration_minutes` en `max_participants` zijn `SMALLINT UNSIGNED`. `attendance` en `canceled_at` zijn nullable. De waarden voor `role` zijn `member` en `admin`; voor `category` zijn dit `strength`, `cardio` en `relaxation`; `status` gebruikt `enrolled`, `waitlisted` en `cancelled`; `attendance` gebruikt `attended` en `absent`.
+De `id`- en foreign-keykolommen zijn `BIGINT UNSIGNED`; `duration_minutes` en `max_participants` zijn `SMALLINT UNSIGNED`. `phone_number`, `attendance` en `canceled_at` zijn nullable, net als `instructor_id`: die is nullable met `nullOnDelete`, zodat een account verwijderd kan worden zonder de lessen te verwijderen. De waarden voor `role` zijn `member` en `admin`; er is bewust geen aparte `trainer`-rol (zie ook de openstaande vraag hieronder). Voor `category` zijn dit `strength`, `cardio` en `relaxation`; `status` gebruikt `enrolled`, `waitlisted` en `cancelled`; `attendance` gebruikt `attended` en `absent`.
 
 | Entiteit               | Belangrijkste velden                                                                                                                       | Relaties                                                                                                                                             |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -275,9 +289,10 @@ De `id`- en foreign-keykolommen zijn `BIGINT UNSIGNED`; `duration_minutes` en `m
 
 ### Openstaande vragen
 
-| Vraag              | Aan wie            | Sinds              | Status             |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] | [Nog in te vullen] |
+| Vraag                                                                                                                     | Aan wie   | Sinds | Status |
+| ------------------------------------------------------------------------------------------------------------------------- | --------- | ----- | ------ |
+| Worden geslacht en geboortedatum van leden bewaard? Ja → kolommen toevoegen aan `users`; nee → velden van de accountpagina verwijderen. | Ron de Wit | 06/11 | Open   |
+| Is de combinatie "Beheerder/Trainer" in één rol (`admin`) voldoende, of moet een trainer aparte rechten krijgen dan een beheerder? | Ron de Wit | 10/11 | Open   |
 
 ## Wijzigingenlog
 
