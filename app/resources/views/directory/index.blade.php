@@ -3,7 +3,81 @@
         <div class="mb-8">
             <p class="text-sm font-bold uppercase tracking-[0.16em] text-brand-600">Sportcentrum De Linde</p>
             <h1 id="directory-heading" class="mt-1 text-3xl font-black tracking-tight text-brand-950 sm:text-4xl">
-                {{ $title }}</h1>
+                {{ $title }}
+            </h1>
+
+            @if ($directoryType === 'trainers')
+                <section class="mt-6 rounded-3xl border border-slate-200 bg-white p-6">
+                    <h2 class="mb-4 text-lg font-extrabold">
+                        Nieuwe trainer toevoegen
+                    </h2>
+
+                    <form method="POST" action="{{ route('trainers.store') }}" class="grid gap-4 sm:grid-cols-2">
+
+                        @csrf
+
+                        <div>
+                            <label for="name">Naam</label>
+                            <input id="name" name="name" type="text" value="{{ old('name') }}" required
+                                class="mt-1 w-full rounded-xl border p-3">
+                        </div>
+
+                        <div>
+                            <label for="email">E-mailadres</label>
+                            <input id="email" name="email" type="email" value="{{ old('email') }}" required
+                                class="mt-1 w-full rounded-xl border p-3">
+                        </div>
+
+                        @if ($directoryType === 'trainers')
+                                    <div>
+                                        <dt class="text-xs font-bold uppercase tracking-wide text-slate-500">
+                                            Telefoonnummer
+                                        </dt>
+                                        <dd class="mt-1 text-sm font-bold text-slate-800">
+                                            {{ $selectedPerson->phone_number ?: 'Niet ingevuld' }}
+                                        </dd>
+                                    </div>
+
+                                    <div>
+                                        <dt class="text-xs font-bold uppercase tracking-wide text-slate-500">
+                                            Accountstatus
+                                        </dt>
+                                        <dd class="mt-1 text-sm font-bold
+                            {{ $selectedPerson->is_active ? 'text-emerald-700' : 'text-red-700' }}">
+                                            {{ $selectedPerson->is_active ? 'Actief' : 'Uitgeschakeld' }}
+                                        </dd>
+                                    </div>
+                        @endif
+
+                        <div>
+                            <label for="phone_number">Telefoonnummer</label>
+                            <input id="phone_number" name="phone_number" type="tel" value="{{ old('phone_number') }}"
+                                required class="mt-1 w-full rounded-xl border p-3">
+                        </div>
+
+                        <div>
+                            <label for="password">Tijdelijk wachtwoord</label>
+                            <input id="password" name="password" type="password" minlength="12" required
+                                autocomplete="new-password" class="mt-1 w-full rounded-xl border p-3">
+                        </div>
+
+                        <div>
+                            <label for="password_confirmation">
+                                Herhaal wachtwoord
+                            </label>
+                            <input id="password_confirmation" name="password_confirmation" type="password" minlength="12"
+                                required autocomplete="new-password" class="mt-1 w-full rounded-xl border p-3">
+                        </div>
+
+                        <div class="sm:col-span-2">
+                            <button type="submit" class="rounded-full bg-brand-700 px-6 py-3
+                                font-bold text-white hover:bg-brand-800">
+                                Trainer aanmaken
+                            </button>
+                        </div>
+                    </form>
+                </section>
+            @endif
         </div>
 
         <div class="grid gap-5 lg:grid-cols-[minmax(15rem,0.7fr)_minmax(0,2fr)]">
@@ -11,7 +85,8 @@
                 aria-label="{{ $listHeading }}">
                 <h2
                     class="border-b border-slate-100 px-5 py-4 text-sm font-extrabold uppercase tracking-wide text-slate-500">
-                    {{ $listHeading }}</h2>
+                    {{ $listHeading }}
+                </h2>
                 @if ($people->isEmpty())
                     <p class="px-5 py-6 text-sm text-slate-500">Er zijn nog geen {{ strtolower($title) }} beschikbaar.</p>
                 @else
@@ -43,7 +118,8 @@
                         class="grid size-12 shrink-0 place-items-center rounded-full bg-brand-100 text-lg font-black text-brand-800"
                         aria-hidden="true">{{ str($selectedPerson->name)->substr(0, 1)->upper() }}</span>
                     <h2 class="min-w-0 flex-1 truncate text-xl font-extrabold text-brand-950">
-                        {{ $selectedPerson->name }}</h2>
+                        {{ $selectedPerson->name }}
+                    </h2>
                     @if ($directoryType === 'trainers')
                         <span class="text-sm font-semibold text-slate-500">Trainer</span>
                     @endif
@@ -53,7 +129,8 @@
                     <section class="min-h-72 rounded-3xl border border-slate-200 p-4 sm:p-5"
                         aria-labelledby="directory-items-heading">
                         <h3 id="directory-items-heading" class="mb-4 text-sm font-extrabold text-slate-500">
-                            {{ $itemsHeading }}</h3>
+                            {{ $itemsHeading }}
+                        </h3>
                         @if ($items->isEmpty())
                             <p class="rounded-2xl bg-slate-50 px-4 py-5 text-sm text-slate-500">{{ $emptyItemsMessage }}</p>
                         @else
@@ -86,10 +163,68 @@
                                             <h3 id="directory-information-heading" class="mb-5 text-lg font-extrabold text-brand-950">
                                                 Informatie</h3>
                                             <dl class="space-y-5">
+
+                                                @if ($directoryType === 'trainers')
+                                                    <form method="POST" action="{{ route('trainers.update', $selectedPerson) }}"
+                                                        class="mt-6 border-t border-slate-100 pt-5">
+
+                                                        @csrf
+                                                        @method('PATCH')
+
+                                                        <h3 class="mb-4 font-extrabold">
+                                                            Traineraccount aanpassen
+                                                        </h3>
+
+                                                        <div class="space-y-4">
+
+                                                            <div>
+                                                                <label for="edit-name">Naam</label>
+                                                                <input id="edit-name" name="name" value="{{ $selectedPerson->name }}" required
+                                                                    class="mt-1 w-full rounded-xl border p-3">
+                                                            </div>
+
+                                                            <div>
+                                                                <label for="edit-email">E-mailadres</label>
+                                                                <input id="edit-email" name="email" type="email"
+                                                                    value="{{ $selectedPerson->email }}" required
+                                                                    class="mt-1 w-full rounded-xl border p-3">
+                                                            </div>
+
+                                                            <div>
+                                                                <label for="edit-phone">Telefoonnummer</label>
+                                                                <input id="edit-phone" name="phone_number" type="tel"
+                                                                    value="{{ $selectedPerson->phone_number }}" required
+                                                                    class="mt-1 w-full rounded-xl border p-3">
+                                                            </div>
+
+                                                            <div>
+                                                                <label for="edit-active">Accountstatus</label>
+                                                                <select id="edit-active" name="is_active"
+                                                                    class="mt-1 w-full rounded-xl border p-3">
+
+                                                                    <option value="1" @selected($selectedPerson->is_active)>
+                                                                        Actief
+                                                                    </option>
+
+                                                                    <option value="0" @selected(!$selectedPerson->is_active)>
+                                                                        Uitgeschakeld
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <button type="submit" class="mt-5 rounded-full bg-brand-700 px-6 py-3
+                                                                            font-bold text-white hover:bg-brand-800">
+                                                            Wijzigingen opslaan
+                                                        </button>
+                                                    </form>
+                                                @endif
                                                 <div>
                                                     <dt class="text-xs font-bold uppercase tracking-wide text-slate-500">Naam</dt>
                                                     <dd class="mt-1 break-words text-sm font-bold text-slate-800">
-                                                        {{ $selectedPerson->name }}</dd>
+                                                        {{ $selectedPerson->name }}
+                                                    </dd>
                                                 </div>
                                                 <div>
                                                     <dt class="text-xs font-bold uppercase tracking-wide text-slate-500">E-mailadres</dt>
@@ -102,7 +237,8 @@
                                                         <dt class="text-xs font-bold uppercase tracking-wide text-slate-500">Accountstatus</dt>
                                                         <dd
                                                             class="mt-1 text-sm font-bold {{ $selectedPerson->is_active ? 'text-emerald-700' : 'text-red-700' }}">
-                                                            {{ $selectedPerson->is_active ? 'Actief' : 'Uitgeschakeld' }}</dd>
+                                                            {{ $selectedPerson->is_active ? 'Actief' : 'Uitgeschakeld' }}
+                                                        </dd>
                                                     </div>
                                                 @endif
 
