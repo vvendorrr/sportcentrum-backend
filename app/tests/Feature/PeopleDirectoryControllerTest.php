@@ -66,6 +66,11 @@ it('shows only upcoming lessons for a trainer and their contact information', fu
     ]);
     $otherTrainer = User::factory()->admin()->create(['name' => 'Another Trainer']);
     User::factory()->admin()->create(['name' => 'Trainer without lessons']);
+    $otherTrainerLesson = Lesson::factory()->create([
+        'instructor_id' => $otherTrainer->id,
+        'sport' => 'Other trainer’s class',
+        'starts_at' => '2026-10-11 11:00:00',
+    ]);
     Lesson::factory()->create([
         'instructor_id' => $trainer->id,
         'sport' => 'Upcoming yoga',
@@ -81,11 +86,6 @@ it('shows only upcoming lessons for a trainer and their contact information', fu
         'sport' => 'Past class',
         'starts_at' => '2026-10-09 10:00:00',
     ]);
-    Lesson::factory()->create([
-        'instructor_id' => $otherTrainer->id,
-        'sport' => 'Other trainer’s class',
-        'starts_at' => '2026-10-11 11:00:00',
-    ]);
 
     $response = $this->actingAs($admin)->get(route('trainers.index', ['trainer' => $trainer->id]));
 
@@ -97,7 +97,7 @@ it('shows only upcoming lessons for a trainer and their contact information', fu
         ->assertSeeText('Upcoming yoga')
         ->assertSeeText('Later spinning')
         ->assertDontSeeText('Past class')
-        ->assertDontSeeText('Other trainer’s class');
+        ->assertDontSee(route('lessons.show', $otherTrainerLesson), false);
 });
 
 it('restricts participant and trainer directories to admins', function () {

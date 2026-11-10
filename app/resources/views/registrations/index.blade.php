@@ -33,7 +33,7 @@
                         <dl class="mt-5 space-y-3 rounded-2xl bg-slate-50 p-4 text-sm">
                             <div class="flex justify-between gap-4">
                                 <dt class="font-semibold text-slate-500">Trainer</dt>
-                                <dd class="text-right font-bold text-slate-800">{{ $registration->lesson->instructor->name }}</dd>
+                                <dd class="text-right font-bold text-slate-800">{{ $registration->lesson->instructor?->name ?? 'Voormalige trainer' }}</dd>
                             </div>
                             <div class="flex justify-between gap-4">
                                 <dt class="font-semibold text-slate-500">Duur</dt>

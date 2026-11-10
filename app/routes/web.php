@@ -10,6 +10,7 @@ use App\Http\Controllers\MyLessonRegistrationController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PeopleDirectoryController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\TrainerAccountController;
 use App\Http\Middleware\EnsureActiveUser;
 use Illuminate\Support\Facades\Route;
 
@@ -46,6 +47,16 @@ Route::middleware(['auth', EnsureActiveUser::class])->group(function (): void {
         ->name('participants.index');
     Route::get('/trainers', [PeopleDirectoryController::class, 'trainers'])
         ->name('trainers.index');
+    Route::get('/trainers/create', [TrainerAccountController::class, 'create'])
+        ->name('trainers.create');
+    Route::post('/trainers', [TrainerAccountController::class, 'store'])
+        ->name('trainers.store');
+    Route::patch('/trainers/{trainer}', [TrainerAccountController::class, 'update'])
+        ->name('trainers.update');
+    Route::post('/trainers/{trainer}/lessons', [TrainerAccountController::class, 'assignLessons'])
+        ->name('trainers.lessons.assign');
+    Route::delete('/trainers/{trainer}/lessons/{lesson}', [TrainerAccountController::class, 'detachLesson'])
+        ->name('trainers.lessons.detach');
     Route::delete('/my/registrations/{lessonRegistration}', [LessonRegistrationController::class, 'destroy'])
         ->name('registrations.cancel');
 });

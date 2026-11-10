@@ -60,6 +60,15 @@ class PeopleDirectoryController extends Controller
             ->where('starts_at', '>', now())
             ->orderBy('starts_at')
             ->get() ?? collect();
+        $assignableLessons = $selectedPerson === null
+            ? collect()
+            : Lesson::query()
+                ->with('instructor:id,name')
+                ->where('starts_at', '>', now())
+                ->where(fn ($query) => $query->whereNull('instructor_id')
+                    ->orWhere('instructor_id', '!=', $selectedPerson->getKey()))
+                ->orderBy('starts_at')
+                ->get();
 
         return view('directory.index', [
             'directoryType' => 'trainers',
@@ -67,6 +76,7 @@ class PeopleDirectoryController extends Controller
             'people' => $trainers,
             'selectedPerson' => $selectedPerson,
             'items' => $items,
+            'assignableLessons' => $assignableLessons,
             'selectionParameter' => 'trainer',
             'listHeading' => 'Alle trainers',
             'itemsHeading' => 'Aankomende lessen',
