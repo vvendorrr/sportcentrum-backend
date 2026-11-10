@@ -181,7 +181,7 @@
                     >
                         <div class="border-b border-slate-100 px-5 py-4 sm:px-7">
                             <h2 id="trainer-edit-heading" class="text-lg font-extrabold text-brand-950">Traineraccount bewerken</h2>
-                            <p class="mt-1 text-xs leading-5 text-slate-500">Wijzig de accountgegevens van {{ $selectedPerson->name }}. Een uitgeschakeld account kan niet meer inloggen.</p>
+                            <p class="mt-1 text-xs leading-5 text-slate-500">Wijzig de accountgegevens van {{ $selectedPerson->name }}. Bij uitschakeling kan de trainer niet meer inloggen en worden alle lessen vrijgegeven.</p>
                         </div>
 
                         <form class="grid gap-4 p-4 sm:grid-cols-2 sm:p-6" method="POST" action="{{ route('trainers.update', $selectedPerson) }}">

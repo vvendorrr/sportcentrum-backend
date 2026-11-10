@@ -46,6 +46,79 @@ it('allows an admin to deactivate a trainer account', function () {
     $this->assertDatabaseHas('users', ['id' => $trainer->id, 'is_active' => false]);
 });
 
+it('unassigns all lessons when a trainer account is deactivated', function () {
+    $this->travelTo('2026-10-10 09:00:00');
+    $admin = User::factory()->admin()->create();
+    $trainer = User::factory()->admin()->create();
+    $otherTrainer = User::factory()->admin()->create();
+    $upcomingLesson = Lesson::factory()->create([
+        'instructor_id' => $trainer->id,
+        'starts_at' => '2026-10-11 09:00:00',
+    ]);
+    $pastLesson = Lesson::factory()->create([
+        'instructor_id' => $trainer->id,
+        'starts_at' => '2026-10-09 09:00:00',
+    ]);
+    $otherLesson = Lesson::factory()->create([
+        'instructor_id' => $otherTrainer->id,
+        'starts_at' => '2026-10-12 09:00:00',
+    ]);
+
+    $this->actingAs($admin)
+        ->patch(route('trainers.update', $trainer), [
+            'name' => $trainer->name,
+            'email' => $trainer->email,
+            'phone_number' => $trainer->phone_number,
+            'is_active' => '0',
+        ])
+        ->assertRedirectToRoute('trainers.index', ['trainer' => $trainer->id])
+        ->assertSessionHas('status', 'Het traineraccount is uitgeschakeld en de lessen zijn vrijgegeven.');
+
+    $this->assertDatabaseHas('lessons', ['id' => $upcomingLesson->id, 'instructor_id' => null]);
+    $this->assertDatabaseHas('lessons', ['id' => $pastLesson->id, 'instructor_id' => null]);
+    $this->assertDatabaseHas('lessons', ['id' => $otherLesson->id, 'instructor_id' => $otherTrainer->id]);
+});
+
+it('keeps lessons assigned when a trainer account stays active', function () {
+    $this->travelTo('2026-10-10 09:00:00');
+    $admin = User::factory()->admin()->create();
+    $trainer = User::factory()->admin()->create();
+    $lesson = Lesson::factory()->create([
+        'instructor_id' => $trainer->id,
+        'starts_at' => '2026-10-11 09:00:00',
+    ]);
+
+    $this->actingAs($admin)
+        ->patch(route('trainers.update', $trainer), [
+            'name' => 'Gewijzigde Naam',
+            'email' => $trainer->email,
+            'phone_number' => $trainer->phone_number,
+            'is_active' => '1',
+        ])
+        ->assertRedirectToRoute('trainers.index', ['trainer' => $trainer->id])
+        ->assertSessionHas('status', 'Het traineraccount is bijgewerkt.');
+
+    $this->assertDatabaseHas('lessons', ['id' => $lesson->id, 'instructor_id' => $trainer->id]);
+    $this->assertDatabaseHas('users', ['id' => $trainer->id, 'name' => 'Gewijzigde Naam', 'is_active' => true]);
+});
+
+it('does not repeat the unassignment message when editing an already inactive trainer', function () {
+    $admin = User::factory()->admin()->create();
+    $trainer = User::factory()->admin()->inactive()->create();
+
+    $this->actingAs($admin)
+        ->patch(route('trainers.update', $trainer), [
+            'name' => 'Nieuwe Naam',
+            'email' => 'nieuw@example.com',
+            'phone_number' => $trainer->phone_number,
+            'is_active' => '0',
+        ])
+        ->assertRedirectToRoute('trainers.index', ['trainer' => $trainer->id])
+        ->assertSessionHas('status', 'Het traineraccount is bijgewerkt.');
+
+    $this->assertDatabaseHas('users', ['id' => $trainer->id, 'name' => 'Nieuwe Naam', 'is_active' => false]);
+});
+
 it('rejects a duplicate email when updating a trainer account', function () {
     $admin = User::factory()->admin()->create();
     User::factory()->admin()->create(['email' => 'bezocht@example.com']);

@@ -9,6 +9,7 @@ use App\Models\Lesson;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class TrainerAccountController extends Controller
@@ -42,16 +43,33 @@ class TrainerAccountController extends Controller
     {
         $attributes = $request->validated();
 
-        $trainer->fill([
-            'name' => trim($attributes['name']),
-            'email' => $attributes['email'],
-            'phone_number' => $attributes['phone_number'] ?? null,
-            'is_active' => $attributes['is_active'],
-        ])->save();
+        $deactivated = DB::transaction(function () use ($trainer, $attributes): bool {
+            $lockedTrainer = User::query()
+                ->whereKey($trainer->getKey())
+                ->lockForUpdate()
+                ->firstOrFail();
+
+            $lockedTrainer->fill([
+                'name' => trim($attributes['name']),
+                'email' => $attributes['email'],
+                'phone_number' => $attributes['phone_number'] ?? null,
+                'is_active' => $attributes['is_active'],
+            ])->save();
+
+            if (! $lockedTrainer->is_active) {
+                Lesson::query()
+                    ->where('instructor_id', $lockedTrainer->getKey())
+                    ->update(['instructor_id' => null]);
+            }
+
+            return $lockedTrainer->wasChanged('is_active') && ! $lockedTrainer->is_active;
+        });
 
         return redirect()
             ->route('trainers.index', ['trainer' => $trainer->getKey()])
-            ->with('status', 'Het traineraccount is bijgewerkt.');
+            ->with('status', $deactivated
+                ? 'Het traineraccount is uitgeschakeld en de lessen zijn vrijgegeven.'
+                : 'Het traineraccount is bijgewerkt.');
     }
 
     public function assignLessons(AssignTrainerLessonsRequest $request, User $trainer): RedirectResponse
