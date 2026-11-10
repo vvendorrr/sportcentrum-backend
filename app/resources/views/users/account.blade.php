@@ -104,8 +104,8 @@
                 </div>
             </form>
 
-            <section class="mt-8 border-t border-slate-100 pt-6" aria-labelledby="recent-lessons-heading">
-                <h3 id="recent-lessons-heading" class="text-sm font-bold uppercase tracking-[0.14em] text-slate-500">Laatst gevolgde lessen</h3>
+            <section class="mt-8 border-t border-slate-100 pt-6" aria-labelledby="registered-lessons-heading">
+                <h3 id="registered-lessons-heading" class="text-sm font-bold uppercase tracking-[0.14em] text-slate-500">Ingeschreven lessen</h3>
 
                 @forelse ($registeredLessons as $lesson)
                     <article class="mt-4 rounded-2xl bg-slate-50 p-4 text-sm">

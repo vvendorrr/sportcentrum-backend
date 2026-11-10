@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\User;
+use Database\Seeders\DatabaseSeeder;
+use Database\Seeders\DemoMemberSeeder;
 use Illuminate\Support\Facades\Hash;
 
 it('renders the login form', function () {
@@ -81,6 +83,27 @@ it('authenticates an active member and redirects to the lesson schedule', functi
     $this->assertAuthenticatedAs($user);
 });
 
+it('can log in with the predictable seeded member account', function () {
+    $this->seed(DatabaseSeeder::class);
+    $user = User::query()->where('email', 'deelnemer@example.com')->firstOrFail();
+
+    $response = $this->from(route('login'))->post(route('login.store'), [
+        'email' => 'deelnemer@example.com',
+        'password' => 'LindeLid123!',
+    ]);
+
+    $response->assertRedirectToRoute('lessons.index');
+    $this->assertAuthenticatedAs($user);
+    expect($user->role)->toBe('member')->and($user->is_active)->toBeTrue();
+});
+
+it('can seed the demo member on an existing database without duplicating it', function () {
+    $this->seed(DemoMemberSeeder::class);
+    $this->seed(DemoMemberSeeder::class);
+
+    expect(User::query()->where('email', 'deelnemer@example.com')->count())->toBe(1);
+});
+
 it('rejects incorrect credentials', function () {
     User::factory()->create([
         'email' => 'sam@example.com',
@@ -109,7 +132,26 @@ it('does not authenticate inactive accounts', function () {
         'password' => 'secure-password',
     ]);
 
-    $response->assertRedirectBackWithErrors(['email']);
+    $response->assertRedirectBackWithErrors([
+        'email' => 'Je account is uitgeschakeld. Neem contact op met een beheerder.',
+    ]);
+    $this->assertGuest();
+});
+
+it('does not disclose that an account is disabled when the password is incorrect', function () {
+    User::factory()->inactive()->create([
+        'email' => 'inactive@example.com',
+        'password_hash' => 'secure-password',
+    ]);
+
+    $response = $this->from(route('login'))->post(route('login.store'), [
+        'email' => 'inactive@example.com',
+        'password' => 'incorrect-password',
+    ]);
+
+    $response->assertRedirectBackWithErrors([
+        'email' => 'De combinatie van e-mailadres en wachtwoord is onjuist.',
+    ]);
     $this->assertGuest();
 });
 

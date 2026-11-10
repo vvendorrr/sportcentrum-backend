@@ -5,10 +5,12 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LessonRegistrationController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MemberAccountController;
 use App\Http\Controllers\MyLessonRegistrationController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PeopleDirectoryController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Middleware\EnsureActiveUser;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
@@ -21,7 +23,7 @@ Route::middleware('guest')->group(function (): void {
     Route::post('/register', [RegistrationController::class, 'store'])->name('register.store');
 });
 
-Route::middleware('auth')->group(function (): void {
+Route::middleware(['auth', EnsureActiveUser::class])->group(function (): void {
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
     Route::get('/my/account', [PageController::class, 'account'])->name('account.show');
     Route::patch('/my/account', [AccountController::class, 'update'])->name('account.update');
@@ -36,6 +38,8 @@ Route::middleware('auth')->group(function (): void {
     Route::post('/lessons/{lesson}/registrations', [LessonRegistrationController::class, 'store'])
         ->name('lessons.register');
 
+    Route::patch('/members/{member}/deactivate', [MemberAccountController::class, 'deactivate'])
+        ->name('members.deactivate');
     Route::get('/my/registrations', [MyLessonRegistrationController::class, 'index'])
         ->name('registrations.index');
     Route::get('/deelnemers', [PeopleDirectoryController::class, 'participants'])

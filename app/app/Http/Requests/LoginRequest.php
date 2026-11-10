@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -38,6 +39,22 @@ class LoginRequest extends FormRequest
         ];
 
         if (! Auth::attempt($credentials, $this->boolean('remember'))) {
+            $inactiveUser = User::query()
+                ->where('email', $credentials['email'])
+                ->where('is_active', false)
+                ->first();
+
+            if ($inactiveUser !== null && Auth::validate([
+                'email' => $credentials['email'],
+                'password' => $credentials['password'],
+            ])) {
+                RateLimiter::clear($this->throttleKey());
+
+                throw ValidationException::withMessages([
+                    'email' => 'Je account is uitgeschakeld. Neem contact op met een beheerder.',
+                ]);
+            }
+
             RateLimiter::hit($this->throttleKey(), 60);
 
             throw ValidationException::withMessages([
