@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\User;
+use Database\Seeders\DatabaseSeeder;
+use Database\Seeders\DemoMemberSeeder;
 use Illuminate\Support\Facades\Hash;
 
 it('renders the login form', function () {
@@ -79,6 +81,27 @@ it('authenticates an active member and redirects to the lesson schedule', functi
 
     $response->assertRedirectToRoute('lessons.index');
     $this->assertAuthenticatedAs($user);
+});
+
+it('can log in with the predictable seeded member account', function () {
+    $this->seed(DatabaseSeeder::class);
+    $user = User::query()->where('email', 'deelnemer@example.com')->firstOrFail();
+
+    $response = $this->from(route('login'))->post(route('login.store'), [
+        'email' => 'deelnemer@example.com',
+        'password' => 'LindeLid123!',
+    ]);
+
+    $response->assertRedirectToRoute('lessons.index');
+    $this->assertAuthenticatedAs($user);
+    expect($user->role)->toBe('member')->and($user->is_active)->toBeTrue();
+});
+
+it('can seed the demo member on an existing database without duplicating it', function () {
+    $this->seed(DemoMemberSeeder::class);
+    $this->seed(DemoMemberSeeder::class);
+
+    expect(User::query()->where('email', 'deelnemer@example.com')->count())->toBe(1);
 });
 
 it('rejects incorrect credentials', function () {
