@@ -24,6 +24,6 @@ class LessonPolicy
 
     public function register(User $user, Lesson $lesson): bool
     {
-        return $user->role === 'member';
+        return $user->role === 'member' && $user->is_active;
     }
 }

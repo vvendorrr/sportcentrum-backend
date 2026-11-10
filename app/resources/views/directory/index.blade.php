@@ -78,7 +78,22 @@
                                     <dt class="text-xs font-bold uppercase tracking-wide text-slate-500">E-mailadres</dt>
                                     <dd class="mt-1 break-words text-sm font-bold text-slate-800"><a class="rounded hover:text-brand-700 focus-visible:outline-2 focus-visible:outline-brand-600" href="mailto:{{ $selectedPerson->email }}">{{ $selectedPerson->email }}</a></dd>
                                 </div>
+                                @if ($directoryType === 'participants')
+                                    <div>
+                                        <dt class="text-xs font-bold uppercase tracking-wide text-slate-500">Accountstatus</dt>
+                                        <dd class="mt-1 text-sm font-bold {{ $selectedPerson->is_active ? 'text-emerald-700' : 'text-red-700' }}">{{ $selectedPerson->is_active ? 'Actief' : 'Uitgeschakeld' }}</dd>
+                                    </div>
+                                @endif
                             </dl>
+
+                            @if ($directoryType === 'participants' && $selectedPerson->is_active)
+                                <form class="mt-6 border-t border-slate-100 pt-5" method="POST" action="{{ route('members.deactivate', $selectedPerson) }}" onsubmit="return confirm('Weet je zeker dat je dit ledenaccount wilt uitschakelen? De accountgegevens en inschrijvingen blijven bewaard.')">
+                                    @csrf
+                                    @method('PATCH')
+                                    <p class="mb-3 text-xs leading-5 text-slate-500">Het lid kan na uitschakeling niet meer inloggen of zich inschrijven. Bestaande gegevens en inschrijvingen blijven bewaard.</p>
+                                    <button class="w-full rounded-full border border-red-200 bg-white px-5 py-3 text-sm font-bold text-red-700 transition hover:bg-red-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600" type="submit">Ledenaccount uitschakelen</button>
+                                </form>
+                            @endif
                         </section>
                     </div>
                 </article>
