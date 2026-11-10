@@ -87,6 +87,41 @@ it('rejects a member as the lesson instructor', function () {
     expect(Lesson::query()->count())->toBe(0);
 });
 
+it('rejects an inactive trainer as the lesson instructor', function () {
+    $this->travelTo('2026-10-10 09:00:00');
+    $admin = User::factory()->admin()->create();
+    $inactiveTrainer = User::factory()->admin()->inactive()->create();
+
+    $response = $this->actingAs($admin)
+        ->from(route('lessons.create'))
+        ->post(route('lessons.store'), [
+            'instructor_id' => $inactiveTrainer->id,
+            'starts_at' => '2026-10-11 09:00:00',
+            'duration_minutes' => 45,
+            'category' => 'cardio',
+            'sport' => 'Spinning',
+            'max_participants' => 16,
+        ]);
+
+    $response
+        ->assertRedirectBackWithErrors([
+            'instructor_id' => 'De geselecteerde trainer bestaat niet of is geen actieve beheerder.',
+        ]);
+    expect(Lesson::query()->count())->toBe(0);
+});
+
+it('only offers active trainers in the lesson creation form', function () {
+    $admin = User::factory()->admin()->create();
+    User::factory()->admin()->create(['name' => 'Actieve Trainer']);
+    User::factory()->admin()->inactive()->create(['name' => 'Inactieve Trainer']);
+
+    $this->actingAs($admin)
+        ->get(route('lessons.create'))
+        ->assertOk()
+        ->assertSeeText('Actieve Trainer')
+        ->assertDontSeeText('Inactieve Trainer');
+});
+
 it('redirects guests away from lesson management', function () {
     $response = $this->get(route('lessons.create'));
 

@@ -54,21 +54,20 @@ class PeopleDirectoryController extends Controller
             ])
             ->orderBy('name')
             ->get();
-        $selectedPerson = $trainers->firstWhere('id', $request->integer('trainer'))
-            ?? $trainers->first();
+        $selectedPerson = $trainers->firstWhere('id', $request->integer('trainer'));
         $items = $selectedPerson?->taughtLessons()
             ->where('starts_at', '>', now())
             ->orderBy('starts_at')
             ->get() ?? collect();
-        $assignableLessons = $selectedPerson === null
-            ? collect()
-            : Lesson::query()
+        $assignableLessons = $selectedPerson !== null && $selectedPerson->is_active
+            ? Lesson::query()
                 ->with('instructor:id,name')
                 ->where('starts_at', '>', now())
                 ->where(fn ($query) => $query->whereNull('instructor_id')
                     ->orWhere('instructor_id', '!=', $selectedPerson->getKey()))
                 ->orderBy('starts_at')
-                ->get();
+                ->get()
+            : collect();
 
         return view('directory.index', [
             'directoryType' => 'trainers',

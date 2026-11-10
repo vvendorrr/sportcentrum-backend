@@ -1,4 +1,5 @@
 <x-layouts.app :title="$title">
+    @php($trainerEditOpen = $errors->hasAny(['name', 'email', 'phone_number', 'is_active']) || old('name') !== null)
     <section aria-labelledby="directory-heading">
         <div class="mb-8 flex flex-wrap items-center justify-between gap-4">
             <div>
@@ -45,7 +46,22 @@
                 <article class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
                     <header class="flex flex-wrap items-center gap-4 border-b border-slate-100 px-5 py-5 sm:px-7">
                         <span class="grid size-12 shrink-0 place-items-center rounded-full bg-brand-100 text-lg font-black text-brand-800" aria-hidden="true">{{ str($selectedPerson->name)->substr(0, 1)->upper() }}</span>
-                        <h2 class="min-w-0 flex-1 truncate text-xl font-extrabold text-brand-950">{{ $selectedPerson->name }}</h2>
+                        <h2 class="min-w-0 flex-1 truncate text-xl font-extrabold text-brand-950">
+                            @if ($directoryType === 'trainers')
+                                <button
+                                    id="trainer-edit-toggle"
+                                    class="flex w-full items-center gap-2 rounded-lg text-left transition hover:text-brand-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
+                                    type="button"
+                                    aria-expanded="{{ $trainerEditOpen ? 'true' : 'false' }}"
+                                    aria-controls="trainer-edit-section"
+                                >
+                                    <span class="min-w-0 truncate">{{ $selectedPerson->name }}</span>
+                                    <svg class="size-4 shrink-0 text-slate-400 transition" data-trainer-edit-chevron viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" /></svg>
+                                </button>
+                            @else
+                                {{ $selectedPerson->name }}
+                            @endif
+                        </h2>
                         @if ($directoryType === 'trainers')
                             <span class="text-sm font-semibold text-slate-500">Trainer</span>
                         @endif
@@ -107,7 +123,7 @@
                                 @endif
                             </dl>
 
-                            @if ($directoryType === 'trainers')
+                            @if ($directoryType === 'trainers' && $selectedPerson->is_active)
                                 <form class="mt-6 border-t border-slate-100 pt-5" method="POST" action="{{ route('trainers.lessons.assign', $selectedPerson) }}">
                                     @csrf
 
@@ -140,6 +156,8 @@
                                         </button>
                                     @endif
                                 </form>
+                            @elseif ($directoryType === 'trainers')
+                                <p class="mt-6 rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-500">Dit traineraccount is inactief. Activeer het account om weer lessen toe te wijzen.</p>
                             @endif
 
                             @if ($directoryType === 'participants' && $selectedPerson->is_active)
@@ -155,7 +173,12 @@
                 </article>
 
                 @if ($directoryType === 'trainers')
-                    <section class="rounded-3xl border border-slate-200 bg-white shadow-sm lg:col-span-2" aria-labelledby="trainer-edit-heading">
+                    <section
+                        id="trainer-edit-section"
+                        class="rounded-3xl border border-slate-200 bg-white shadow-sm lg:col-span-2"
+                        aria-labelledby="trainer-edit-heading"
+                        @unless ($trainerEditOpen) hidden @endunless
+                    >
                         <div class="border-b border-slate-100 px-5 py-4 sm:px-7">
                             <h2 id="trainer-edit-heading" class="text-lg font-extrabold text-brand-950">Traineraccount bewerken</h2>
                             <p class="mt-1 text-xs leading-5 text-slate-500">Wijzig de accountgegevens van {{ $selectedPerson->name }}. Een uitgeschakeld account kan niet meer inloggen.</p>
@@ -238,8 +261,39 @@
                 @endif
             @else
                 <div class="grid min-h-64 place-items-center rounded-3xl border border-dashed border-brand-200 bg-white p-8 text-center">
-                    <p class="text-sm font-semibold text-slate-500">Er zijn nog geen gegevens om weer te geven.</p>
+                    <p class="text-sm font-semibold text-slate-500">
+                        @if ($directoryType === 'trainers')
+                            {{ $people->isEmpty() ? 'Er zijn nog geen trainers beschikbaar.' : 'Kies een trainer uit de lijst om de gegevens te bekijken en te bewerken.' }}
+                        @else
+                            Er zijn nog geen gegevens om weer te geven.
+                        @endif
+                    </p>
                 </div>
+            @endif
+
+            @if ($directoryType === 'trainers')
+                <script>
+                    (() => {
+                        const trainerEditToggle = document.getElementById('trainer-edit-toggle');
+                        const trainerEditSection = document.getElementById('trainer-edit-section');
+                        const trainerEditChevron = trainerEditToggle?.querySelector('[data-trainer-edit-chevron]');
+
+                        if (! trainerEditToggle || ! trainerEditSection) {
+                            return;
+                        }
+
+                        trainerEditToggle.addEventListener('click', () => {
+                            const isHidden = trainerEditSection.hidden;
+                            trainerEditSection.hidden = ! isHidden;
+                            trainerEditToggle.setAttribute('aria-expanded', String(isHidden));
+                            trainerEditChevron?.classList.toggle('rotate-180', isHidden);
+
+                            if (isHidden) {
+                                document.getElementById('trainer-name')?.focus();
+                            }
+                        });
+                    })();
+                </script>
             @endif
         </div>
     </section>

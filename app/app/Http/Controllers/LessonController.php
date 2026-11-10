@@ -184,6 +184,7 @@ class LessonController extends Controller
     {
         return User::query()
             ->where('role', 'admin')
+            ->where('is_active', true)
             ->orderBy('name')
             ->get(['id', 'name']);
     }

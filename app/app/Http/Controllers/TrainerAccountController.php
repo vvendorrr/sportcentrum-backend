@@ -68,7 +68,7 @@ class TrainerAccountController extends Controller
 
     public function detachLesson(User $trainer, Lesson $lesson): RedirectResponse
     {
-        Gate::authorize('assignLessons', $trainer);
+        Gate::authorize('detachLesson', $trainer);
 
         if ($lesson->instructor_id !== $trainer->getKey() || $lesson->starts_at->isPast()) {
             abort(404);

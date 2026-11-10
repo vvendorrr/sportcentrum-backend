@@ -16,7 +16,9 @@ abstract class LessonFormRequest extends FormRequest
             'instructor_id' => [
                 'required',
                 'integer',
-                Rule::exists('users', 'id')->where('role', 'admin'),
+                Rule::exists('users', 'id')
+                    ->where('role', 'admin')
+                    ->where('is_active', 1),
             ],
             'starts_at' => ['required', 'date', 'after:now'],
             'duration_minutes' => ['required', 'integer', 'between:1,65535'],
@@ -34,7 +36,7 @@ abstract class LessonFormRequest extends FormRequest
         return [
             'instructor_id.required' => 'Selecteer een trainer.',
             'instructor_id.integer' => 'Selecteer een geldige trainer.',
-            'instructor_id.exists' => 'De geselecteerde trainer bestaat niet of is geen beheerder.',
+            'instructor_id.exists' => 'De geselecteerde trainer bestaat niet of is geen actieve beheerder.',
             'starts_at.required' => 'Vul de startdatum en -tijd in.',
             'starts_at.date' => 'Vul een geldige startdatum en -tijd in.',
             'starts_at.after' => 'De startdatum en -tijd moeten in de toekomst liggen.',

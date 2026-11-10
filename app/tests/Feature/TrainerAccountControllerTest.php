@@ -231,6 +231,105 @@ it('renders the trainer edit and assignment forms for admins', function () {
         ->assertDontSee(route('trainers.lessons.detach', [$trainer, $assignableLesson]), false);
 });
 
+it('hides the trainer management UI until a trainer is selected', function () {
+    $admin = User::factory()->admin()->create();
+    User::factory()->admin()->create(['name' => 'D. Jones']);
+
+    $this->actingAs($admin)
+        ->get(route('trainers.index'))
+        ->assertOk()
+        ->assertSeeText('D. Jones')
+        ->assertDontSeeText('Traineraccount bewerken')
+        ->assertDontSeeText('Lessen toewijzen')
+        ->assertSeeText('Kies een trainer uit de lijst om de gegevens te bekijken en te bewerken.');
+});
+
+it('does not allow assigning lessons to an inactive trainer', function () {
+    $this->travelTo('2026-10-10 09:00:00');
+    $admin = User::factory()->admin()->create();
+    $trainer = User::factory()->admin()->inactive()->create();
+    $otherTrainer = User::factory()->admin()->create();
+    $lesson = Lesson::factory()->create([
+        'instructor_id' => $otherTrainer->id,
+        'starts_at' => '2026-10-11 09:00:00',
+    ]);
+
+    $this->actingAs($admin)
+        ->post(route('trainers.lessons.assign', $trainer), [
+            'lessons' => [$lesson->id],
+        ])
+        ->assertForbidden();
+
+    $this->assertDatabaseHas('lessons', ['id' => $lesson->id, 'instructor_id' => $otherTrainer->id]);
+});
+
+it('does not show the assignment form for an inactive trainer', function () {
+    $this->travelTo('2026-10-10 09:00:00');
+    $admin = User::factory()->admin()->create();
+    $trainer = User::factory()->admin()->inactive()->create(['name' => 'I. Trainer']);
+    $lesson = Lesson::factory()->create([
+        'instructor_id' => $trainer->id,
+        'starts_at' => '2026-10-11 09:00:00',
+    ]);
+
+    $this->actingAs($admin)
+        ->get(route('trainers.index', ['trainer' => $trainer->id]))
+        ->assertOk()
+        ->assertSeeText('Traineraccount bewerken')
+        ->assertDontSeeText('Lessen toewijzen')
+        ->assertSeeText('Dit traineraccount is inactief. Activeer het account om weer lessen toe te wijzen.')
+        ->assertSee(route('trainers.lessons.detach', [$trainer, $lesson]), false);
+});
+
+it('allows an admin to detach a lesson from an inactive trainer', function () {
+    $this->travelTo('2026-10-10 09:00:00');
+    $admin = User::factory()->admin()->create();
+    $trainer = User::factory()->admin()->inactive()->create();
+    $lesson = Lesson::factory()->create([
+        'instructor_id' => $trainer->id,
+        'starts_at' => '2026-10-11 09:00:00',
+    ]);
+
+    $this->actingAs($admin)
+        ->delete(route('trainers.lessons.detach', [$trainer, $lesson]))
+        ->assertRedirectToRoute('trainers.index', ['trainer' => $trainer->id])
+        ->assertSessionHas('status', 'De toewijzing van deze les is opgeheven.');
+
+    $this->assertDatabaseHas('lessons', ['id' => $lesson->id, 'instructor_id' => null]);
+});
+
+it('keeps the trainer editor collapsed until the trainer name is pressed', function () {
+    $admin = User::factory()->admin()->create();
+    $trainer = User::factory()->admin()->create();
+
+    $this->actingAs($admin)
+        ->get(route('trainers.index', ['trainer' => $trainer->id]))
+        ->assertOk()
+        ->assertSee('id="trainer-edit-toggle"', false)
+        ->assertSee('aria-expanded="false"', false)
+        ->assertSee('id="trainer-edit-section"', false)
+        ->assertSeeText('Traineraccount bewerken');
+});
+
+it('reveals the trainer editor when saving fails validation', function () {
+    $admin = User::factory()->admin()->create();
+    $trainer = User::factory()->admin()->create();
+    User::factory()->admin()->create(['email' => 'bezocht@example.com']);
+
+    $this->actingAs($admin)
+        ->from(route('trainers.index', ['trainer' => $trainer->id]))
+        ->patch(route('trainers.update', $trainer), [
+            'name' => $trainer->name,
+            'email' => 'bezocht@example.com',
+            'is_active' => '1',
+        ])
+        ->assertRedirectBackWithErrors();
+
+    $this->get(route('trainers.index', ['trainer' => $trainer->id]))
+        ->assertOk()
+        ->assertSee('aria-expanded="true"', false);
+});
+
 it('renders the trainer creation form for admins', function () {
     $admin = User::factory()->admin()->create();
 
@@ -381,5 +480,6 @@ it('does not render trainer management forms in the participants directory', fun
         ->assertOk()
         ->assertDontSeeText('Traineraccount bewerken')
         ->assertDontSeeText('Lessen toewijzen')
+        ->assertDontSee('trainer-edit-toggle', false)
         ->assertDontSee(route('trainers.create'), false);
 });

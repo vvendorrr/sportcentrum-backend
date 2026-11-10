@@ -18,6 +18,11 @@ class UserPolicy
 
     public function assignLessons(User $actor, User $trainer): bool
     {
+        return $this->update($actor, $trainer) && $trainer->is_active;
+    }
+
+    public function detachLesson(User $actor, User $trainer): bool
+    {
         return $this->update($actor, $trainer);
     }
 
