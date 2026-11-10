@@ -10,4 +10,13 @@ class UserPolicy
     {
         return $actor->role === 'admin' && $member->role === 'member';
     }
+     public function create(User $actor): bool
+    {
+        return $actor->role === 'admin';
+    }
+
+    public function update(User $actor, User $trainer): bool
+    {
+        return $actor->role === 'admin' && $trainer->role === 'admin';
+    }
 }
