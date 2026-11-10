@@ -40,6 +40,12 @@ class PeopleDirectoryController extends Controller
             'listHeading' => 'Alle deelnemers',
             'itemsHeading' => 'Inschrijvingen',
             'emptyItemsMessage' => 'Deze deelnemer heeft nog geen inschrijvingen.',
+            'missedLessonsCount' => $selectedPerson
+                ? $selectedPerson->lessonRegistrations()
+                    ->where('attendance', 'absent')
+                    ->count()
+                : 0,
+
         ]);
     }
 
@@ -50,7 +56,7 @@ class PeopleDirectoryController extends Controller
         $trainers = User::query()
             ->where('role', 'admin')
             ->withCount([
-                'taughtLessons as upcoming_lessons_count' => fn ($query) => $query->where('starts_at', '>', now()),
+                'taughtLessons as upcoming_lessons_count' => fn($query) => $query->where('starts_at', '>', now()),
             ])
             ->orderBy('name')
             ->get();
