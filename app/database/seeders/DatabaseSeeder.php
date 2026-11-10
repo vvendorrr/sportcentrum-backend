@@ -20,6 +20,15 @@ class DatabaseSeeder extends Seeder
             'email' => 'beheerder@example.com',
         ]);
 
+        User::factory()->admin()->create([
+            'name' => 'R. de Wit',
+            'email' => 'r.dewit@example.com',
+        ]);
+
+        User::factory()->admin()->count(4)->create();
+
+        $this->call(DemoMemberSeeder::class);
+
         User::factory()->count(8)->create();
 
         $this->call([
