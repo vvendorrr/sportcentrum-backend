@@ -28,7 +28,7 @@ class LessonController extends Controller
         $query = Lesson::query()
             ->with('instructor')
             ->withCount([
-                'registrations as enrolled_count' => fn ($query) => $query->where('status', 'enrolled'),
+                'registrations as enrolled_count' => fn($query) => $query->where('status', 'enrolled'),
             ])
             ->whereBetween('starts_at', [$weekStart, $weekEnd]);
 
@@ -41,7 +41,7 @@ class LessonController extends Controller
         }
 
         if ($sportSearch !== '') {
-            $query->where('sport', 'like', '%'.$sportSearch.'%');
+            $query->where('sport', 'like', '%' . $sportSearch . '%');
         }
 
         $lessons = $query
@@ -60,7 +60,7 @@ class LessonController extends Controller
 
         $dayNames = ['Ma', 'Di', 'Wo', 'Do', 'Vr'];
         $weekDays = collect(range(0, 4))
-            ->map(fn (int $offset): array => [
+            ->map(fn(int $offset): array => [
                 'date' => $weekStart->copy()->addDays($offset),
                 'name' => $dayNames[$offset],
             ]);
@@ -68,16 +68,16 @@ class LessonController extends Controller
             'category' => $filters['category'] ?? null,
             'instructor_id' => $filters['instructor_id'] ?? null,
             'sport' => $sportSearch !== '' ? $sportSearch : null,
-        ], fn ($value) => $value !== null && $value !== '');
+        ], fn($value) => $value !== null && $value !== '');
 
         return view('lessons.index', [
             'lessons' => $lessons,
-            'lessonsByDay' => $lessons->groupBy(fn (Lesson $lesson) => $lesson->starts_at->format('Y-m-d')),
+            'lessonsByDay' => $lessons->groupBy(fn(Lesson $lesson) => $lesson->starts_at->format('Y-m-d')),
             'registrationsByLesson' => $registrationsByLesson,
             'weekDays' => $weekDays,
             'timeSlots' => range(6, 19),
             'selectedWeek' => $weekStart,
-            'selectedWeekLabel' => $weekStart->format('d-m-Y').' t/m '.$weekEnd->format('d-m-Y'),
+            'selectedWeekLabel' => $weekStart->format('d-m-Y') . ' t/m ' . $weekEnd->format('d-m-Y'),
             'filters' => [
                 'category' => $filters['category'] ?? '',
                 'instructor_id' => $filters['instructor_id'] ?? '',
@@ -92,7 +92,7 @@ class LessonController extends Controller
     public function show(Request $request, Lesson $lesson): View
     {
         $lesson->load('instructor')->loadCount([
-            'registrations as enrolled_count' => fn ($query) => $query->where('status', 'enrolled'),
+            'registrations as enrolled_count' => fn($query) => $query->where('status', 'enrolled'),
         ]);
 
         $registration = $request->user()?->lessonRegistrations()
@@ -100,9 +100,26 @@ class LessonController extends Controller
             ->whereIn('status', ['enrolled', 'waitlisted'])
             ->first();
 
+        $canManageAttendance = $request->user()?->role === 'admin';
+
+        $participants = $canManageAttendance
+            ? $lesson->registrations()
+                ->with('user')
+                ->where('status', 'enrolled')
+                ->orderBy('registered_at')
+                ->get()
+            : collect();
+
         return view('lessons.show', [
             'lesson' => $lesson,
             'registration' => $registration,
+
+            'participants' => $participants,
+            'canManageAttendance' => $canManageAttendance,
+            'attendanceIsOpen' => now()->greaterThanOrEqualTo(
+                $lesson->starts_at->copy()
+                    ->addMinutes($lesson->duration_minutes)
+            ),
         ]);
     }
 
