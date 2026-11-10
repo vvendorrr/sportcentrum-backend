@@ -38,6 +38,10 @@ Route::middleware(['auth', EnsureActiveUser::class])->group(function (): void {
     Route::post('/lessons/{lesson}/registrations', [LessonRegistrationController::class, 'store'])
         ->name('lessons.register');
 
+    Route::patch(
+    '/lessons/{lesson}/registrations/{lessonRegistration}/attendance',
+    [LessonRegistrationController::class, 'attendance'])
+        ->name('lessons.attendance');
     Route::patch('/members/{member}/deactivate', [MemberAccountController::class, 'deactivate'])
         ->name('members.deactivate');
     Route::get('/my/registrations', [MyLessonRegistrationController::class, 'index'])
