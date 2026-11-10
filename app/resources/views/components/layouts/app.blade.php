@@ -11,7 +11,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-    <div class="min-h-screen">
+    <div class="flex min-h-screen flex-col">
         @unless ($minimal)
             <aside class="z-20 flex w-full flex-col border-b border-brand-100 bg-white md:fixed md:inset-y-0 md:left-0 md:w-64 md:border-r md:border-b-0">
                 <a class="flex items-center gap-3 border-b border-slate-100 px-5 py-5" href="{{ route('home') }}" aria-label="Sportcentrum De Linde - startpagina">
@@ -126,7 +126,7 @@
         @endunless
 
         <div @class([
-            'min-h-screen md:ml-64' => ! $minimal,
+            'flex flex-1 flex-col md:ml-64' => ! $minimal,
             'flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-brand-50 via-white to-sky-100 px-4 py-10' => $minimal,
         ])>
             @if ($minimal)
@@ -140,7 +140,7 @@
             @endif
 
             <main @class([
-                'mx-auto w-full max-w-[1600px] px-4 py-6 sm:px-6 sm:py-8 lg:px-8' => ! $minimal,
+                'mx-auto w-full max-w-[1600px] flex-1 px-4 py-6 sm:px-6 sm:py-8 lg:px-8' => ! $minimal,
                 'w-full max-w-xl' => $minimal,
             ])>
                 @if (session('status'))
