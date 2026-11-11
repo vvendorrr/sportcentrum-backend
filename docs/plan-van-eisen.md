@@ -52,7 +52,9 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Bezoeker          | Bekijkt het lesrooster en per les het aantal inschrijvingen, zonder de namen te zien. Kan een account aanmaken.                                           |
 | Lid               | Schrijft zich in voor lessen en kan zich afmelden.                                                                                                        |
-| Beheerder/Trainer | Maakt lessen aan en plant ze in het rooster, bekijkt wie zich heeft ingeschreven, ziet hoe vaak leden een les hebben gemist en kan accounts uitschakelen. |
+| Trainer           | Bekijkt de deelnemers en aanwezigheid van de eigen lessen en registreert wie aanwezig of afwezig was. |
+| Beheerder         | Beheert leden- en traineraccounts, maakt lessen aan en plant deze in, en bekijkt de bezetting van het lesaanbod. |
+
 
 ## Functionele eisen
 
@@ -123,24 +125,24 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 
 #### US-05 — Deelnemers en aanwezigheid beheren — Hoog — Backend & Frontend — Lucas
 
-> **Als** beheerder/trainer wil ik deelnemers per les kunnen bekijken en hun aanwezigheid registreren, zodat ik weet wie er komt en gemiste lessen kan bijhouden.
+> **Als** trainer wil ik deelnemers van mijn lessen kunnen bekijken en hun aanwezigheid registreren, zodat ik weet wie er komt en gemiste lessen kan bijhouden.
 
 **Acceptatiecriteria**
 
-- [x] Alleen een beheerder/trainer kan de namen van ingeschreven deelnemers bekijken.
-- [x] Een beheerder/trainer kan na afloop per deelnemer `attended` of `absent` registreren.
+- [x] Alleen trainers die aan de les zijn gekoppeld en beheerders kunnen de namen van ingeschreven deelnemers bekijken.
+- [x] Een trainer die aan de les is gekoppeld of een beheerder kan na afloop per deelnemer `attended` of `absent` registreren.
 - [x] Het aantal gemiste lessen van een lid is gebaseerd op diens afwezigheidsregistraties.
 
-> **Opm. status (11/11):** US-05 is geïmplementeerd. Het deelnemersoverzicht per les en het registreren van aanwezigheid zijn beschikbaar voor beheerders/trainers; gemiste lessen worden afgeleid van afwezigheidsregistraties.
+> **Opm. status (11/11):** US-05 is geïmplementeerd. Het deelnemersoverzicht per les en het registreren van aanwezigheid zijn beschikbaar voor de gekoppelde trainer en beheerders; gemiste lessen worden afgeleid van afwezigheidsregistraties.
 
 #### US-06 — Lessen aanmaken en inplannen — Hoog — Backend & Frontend — Lucas
 
-> **Als** beheerder/trainer wil ik lessen kunnen aanmaken en inplannen, zodat leden het actuele lesaanbod kunnen bekijken en zich kunnen inschrijven.
+> **Als** beheerder wil ik lessen kunnen aanmaken en inplannen, zodat leden het actuele lesaanbod kunnen bekijken en zich kunnen inschrijven.
 
 **Acceptatiecriteria**
 
-- [ ] Een beheerder/trainer kan een les aanmaken met een trainer, starttijd, duur, categorie, sport en maximale capaciteit.
-- [ ] Alleen een bestaande gebruiker met de rol beheerder kan als trainer aan een les worden gekoppeld.
+- [ ] Alleen een beheerder kan een les aanmaken met een trainer, starttijd, duur, categorie, sport en maximale capaciteit.
+- [ ] Alleen een actieve gebruiker met de rol trainer kan aan een les worden gekoppeld.
 - [ ] Het systeem weigert een les met ontbrekende of ongeldige verplichte gegevens, zoals een capaciteit van nul.
 
 #### US-07 — Accountgegevens beheren — Gemiddeld — Backend, Frontend & Security — Lucas & Famke
@@ -155,11 +157,11 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 
 #### US-08 — Ledenaccounts uitschakelen — Gemiddeld — Backend & Security — Lucas
 
-> **Als** beheerder/trainer wil ik een ledenaccount kunnen uitschakelen, zodat een account niet langer toegang heeft tot de inschrijffuncties.
+> **Als** beheerder wil ik een ledenaccount kunnen uitschakelen, zodat een account niet langer toegang heeft tot de inschrijffuncties.
 
 **Acceptatiecriteria**
 
-- [ ] Alleen een beheerder/trainer kan een ledenaccount uitschakelen.
+- [ ] Alleen een beheerder kan een ledenaccount uitschakelen.
 - [ ] Een uitgeschakeld lid kan niet inloggen.
 - [ ] De accountgegevens en eerdere inschrijvingen van het lid blijven bewaard.
 
@@ -167,15 +169,15 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 
 #### US-09 — Traineraccounts beheren — Gemiddeld — Backend, Frontend & Security — Famke
 
-> **Als** beheerder/trainer wil ik traineraccounts kunnen beheren, zodat alleen actieve trainers aan lessen gekoppeld kunnen worden.
+> **Als** beheerder wil ik traineraccounts kunnen beheren, zodat alleen actieve trainers aan lessen gekoppeld kunnen worden.
 
 **Acceptatiecriteria**
 
-- [ ] Een beheerder/trainer kan een traineraccount aanmaken met naam, e-mailadres en telefoonnummer.
+- [ ] Een beheerder kan een traineraccount aanmaken met naam, e-mailadres en telefoonnummer.
 - [ ] Het systeem weigert een traineraccount met een e-mailadres dat al in gebruik is.
 - [ ] Een uitgeschakelde trainer kan niet aan nieuwe lessen worden gekoppeld.
 
-> **Opm. status (10/11):** Het traineroverzicht bestaat (`PeopleDirectoryController::trainers`); het aanmaken en bewerken van traineraccounts moet nog worden gebouwd. In het datamodel is een trainer bewust een `admin`-gebruiker — zie ook de openstaande vraag hieronder.
+> **Opm. status (10/11):** Het traineroverzicht bestaat (`PeopleDirectoryController::trainers`); het aanmaken en bewerken van traineraccounts moet nog worden gebouwd. Trainers en beheerders zijn aparte rollen; beheerders beheren traineraccounts.
 
 #### US-10 — Eigen inschrijvingen bekijken — Gemiddeld — Backend & Frontend — Famke
 
@@ -200,7 +202,7 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 
 #### US-12 — Bezettingsoverzicht voor beheerder — Hoog — Backend & Frontend — Nog te bepalen
 
-> **Als** manager wil ik in één overzicht de bezetting van lessen kunnen zien, zodat ik weet welke lessen vol zitten en welke nog veel vrije plekken hebben.
+> **Als** beheerder wil ik in één overzicht de bezetting van lessen kunnen zien, zodat ik weet welke lessen vol zitten en welke nog veel vrije plekken hebben.
 
 **Acceptatiecriteria**
 
@@ -246,8 +248,8 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 
 **Acceptatiecriteria**
 
-- [ ] De opdrachtgever bevestigt welke rollen er zijn en of trainer, beheerder en baliemedewerker aparte rollen zijn.
-- [ ] Per bevestigde rol is vastgelegd wie lessen mag beheren, deelnemers mag inzien of afmelden, aanwezigheid mag registreren en accounts mag beheren.
+- [ ] Trainer en beheerder zijn aparte rollen; met de opdrachtgever wordt nog vastgelegd of baliemedewerker ook een aparte rol is.
+- [ ] Per rol is vastgelegd wie lessen mag beheren, deelnemers mag inzien of afmelden, aanwezigheid mag registreren en accounts mag beheren.
 - [ ] De applicatie handhaaft de goedgekeurde bevoegdheden; onbevoegde acties zijn ook via directe URL-aanroepen niet mogelijk.
 - [ ] De rollen en bevoegdheden zijn met autorisatietests gecontroleerd.
 
@@ -290,7 +292,7 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 | Views          | Blade-views met één gedeelde layout; geen React, Vue of Inertia                            |
 | Styling        | Tailwind CSS via Vite                                                                      |
 | Database       | SQLite (standaard; MySQL kan via `.env`), alle tabellen via migrations, gevuld met seeders |
-| Authenticatie  | Session-based, met de rollen `member` (lid) en `admin` (beheerder/trainer)                 |
+| Authenticatie  | Session-based, met de rollen `member` (lid), `trainer` en `admin` (beheerder)                 |
 | Validatie      | Form Requests met Nederlandstalige meldingen                                               |
 | Testen         | Minimaal 10 feature tests met _Pest / PHPUnit_                                             |
 | Versiebeheer   | GitHub, branches per user story, pull requests met review                                  |
@@ -334,11 +336,11 @@ erDiagram
     }
 ```
 
-De `id`- en foreign-keykolommen zijn `BIGINT UNSIGNED`; `duration_minutes` en `max_participants` zijn `SMALLINT UNSIGNED`. `phone_number`, `attendance` en `canceled_at` zijn nullable, net als `instructor_id`: die is nullable met `nullOnDelete`, zodat een account verwijderd kan worden zonder de lessen te verwijderen. De waarden voor `role` zijn `member` en `admin`; er is bewust geen aparte `trainer`-rol (zie ook de openstaande vraag hieronder). Voor `category` zijn dit `strength`, `cardio` en `relaxation`; `status` gebruikt `enrolled`, `waitlisted` en `cancelled`; `attendance` gebruikt `attended` en `absent`.
+De `id`- en foreign-keykolommen zijn `BIGINT UNSIGNED`; `duration_minutes` en `max_participants` zijn `SMALLINT UNSIGNED`. `phone_number`, `attendance` en `canceled_at` zijn nullable, net als `instructor_id`: die is nullable met `nullOnDelete`, zodat een account verwijderd kan worden zonder de lessen te verwijderen. De waarden voor `role` zijn `member`, `trainer` en `admin`; trainer en beheerder zijn aparte rollen. Voor `category` zijn dit `strength`, `cardio` en `relaxation`; `status` gebruikt `enrolled`, `waitlisted` en `cancelled`; `attendance` gebruikt `attended` en `absent`.
 
 | Entiteit               | Belangrijkste velden                                                                                                                       | Relaties                                                                                                                                             |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `users`                | `name`, `phone_number`, `email`, `password_hash`, `role` (`member`/`admin`), `is_active`, `created_at`                                     | Een beheerder/trainer kan meerdere lessen geven. Een gebruiker kan zich voor meerdere lessen inschrijven.                                            |
+| `users`                | `name`, `phone_number`, `email`, `password_hash`, `role` (`member`/`trainer`/`admin`), `is_active`, `created_at`                            | Een trainer kan meerdere lessen geven. Een gebruiker kan zich voor meerdere lessen inschrijven.                                                       |
 | `lessons`              | `instructor_id`, `starts_at`, `duration_minutes`, `category`, `sport`, `max_participants`                                                  | Een les heeft één trainer en kan meerdere inschrijvingen hebben.                                                                                     |
 | `lesson_registrations` | `lesson_id`, `user_id`, `status` (`enrolled`/`waitlisted`/`cancelled`), `registered_at`, `attendance` (`attended`/`absent`), `canceled_at` | Koppelt een gebruiker aan een les. Een gebruiker kan per les maximaal één inschrijving hebben; een afgemelde inschrijving kan opnieuw actief worden. |
 
@@ -346,8 +348,8 @@ De `id`- en foreign-keykolommen zijn `BIGINT UNSIGNED`; `duration_minutes` en `m
 
 - Het maximaal aantal deelnemers wordt per les opgeslagen. Richtwaarden zijn 16 voor spinning, 12 voor yoga en 20 voor aquagym/zwemlessen.
 - Als een les vol is, krijgt een nieuwe inschrijving de status wachtlijst. Bij een vrijgekomen plek wordt de eerstvolgende op de wachtlijst automatisch ingeschreven.
-- Een lid kan zichzelf tot twee uur voor aanvang afmelden. Een beheerder/trainer kan een deelnemer ook later afmelden.
-- Een beheerder/trainer registreert na de les wie aanwezig of afwezig was. Het aantal gemiste lessen per lid kan worden berekend uit diens afwezigheidsregistraties.
+- Een lid kan zichzelf tot twee uur voor aanvang afmelden. Een bevoegde medewerker kan een deelnemer ook later afmelden; welke rollen dit mogen, wordt nog bevestigd.
+- De gekoppelde trainer of een beheerder registreert na de les wie aanwezig of afwezig was. Het aantal gemiste lessen per lid kan worden berekend uit diens afwezigheidsregistraties.
 
 ## Pagina's en wireframes
 
@@ -358,8 +360,8 @@ De `id`- en foreign-keykolommen zijn `BIGINT UNSIGNED`; `duration_minutes` en `m
 | Accountinstellingen     | Frontend                     | Ingelogd lid en beheerder                                                  | Settings                     | [Nog in te vullen] |
 | Uitloggen (actie)       | Backend & Security           | Ingelogd lid en beheerder                                                  | Navigatie; geen apart scherm | [Nog in te vullen] |
 | Rooster                 | Frontend                     | Bezoeker, lid en beheerder; bezoekers zien alleen aantallen inschrijvingen | Rooster                      | [Nog in te vullen] |
-| Deelnemers beheren      | Backend, Frontend & Security | Beheerder/trainer                                                          | Deelnemers                   | [Nog in te vullen] |
-| Trainers beheren        | Backend, Frontend & Security | Beheerder/trainer                                                          | Trainers                     | [Nog in te vullen] |
+| Deelnemers beheren      | Backend, Frontend & Security | Gekoppelde trainer en beheerder                                            | Deelnemers                   | [Nog in te vullen] |
+| Trainers beheren        | Backend, Frontend & Security | Beheerder                                                                  | Trainers                     | [Nog in te vullen] |
 
 ## Afspraken met de klant
 
@@ -372,7 +374,7 @@ De `id`- en foreign-keykolommen zijn `BIGINT UNSIGNED`; `duration_minutes` en `m
 | Vraag                                                                                                                                                  | Aan wie    | Sinds              | Status |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | ------------------ | ------ |
 | Worden geslacht en geboortedatum van leden bewaard? Ja → kolommen toevoegen aan `users`; nee → velden van de accountpagina verwijderen.                | Ron de Wit | 06/11              | Open   |
-| Is de combinatie "Beheerder/Trainer" in één rol (`admin`) voldoende, of moet een trainer aparte rechten krijgen dan een beheerder?                     | Ron de Wit | 10/11              | Open   |
+| Welke acties mogen trainers en beheerders elk uitvoeren, nu dit aparte rollen zijn?                                                                  | Ron de Wit | 10/11              | Open   |
 | Is een baliemedewerker een aparte rol, en welke acties mag deze uitvoeren (zoals deelnemers bekijken of afmeldingen registreren)?                      | Ron de Wit | [Nog in te vullen] | Open   |
 | Mogen leden zonder inschrijving aansluiten als er plek is, en wat gebeurt er als de lescapaciteit al is bereikt?                                       | Ron de Wit | [Nog in te vullen] | Open   |
 | Moeten leden bij een wachtlijststatus of promotie alleen de website kunnen raadplegen, of is ook een melding gewenst? E-mail/sms valt nu buiten scope. | Ron de Wit | [Nog in te vullen] | Open   |
