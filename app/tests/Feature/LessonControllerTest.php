@@ -318,6 +318,25 @@ it('shows edit and delete actions to admins on lesson details', function () {
         ->assertSeeText('Les verwijderen');
 });
 
+it('shows the participants link to the assigned trainer but not lesson management actions', function () {
+    $trainer = User::factory()->trainer()->create();
+    $otherTrainer = User::factory()->trainer()->create();
+    $lesson = Lesson::factory()->create(['instructor_id' => $trainer->id]);
+
+    $this->actingAs($trainer)
+        ->get(route('lessons.show', $lesson))
+        ->assertOk()
+        ->assertSee(route('lessons.participants', $lesson), false)
+        ->assertSeeText('Deelnemers en aanwezigheid')
+        ->assertDontSeeText('Les bewerken')
+        ->assertDontSeeText('Les verwijderen');
+
+    $this->actingAs($otherTrainer)
+        ->get(route('lessons.show', $lesson))
+        ->assertOk()
+        ->assertDontSee(route('lessons.participants', $lesson), false);
+});
+
 it('does not show lesson management actions to members', function () {
     $member = User::factory()->create();
     $lesson = Lesson::factory()->create();
