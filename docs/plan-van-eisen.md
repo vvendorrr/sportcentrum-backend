@@ -7,7 +7,7 @@
 | Team          | —                                                                                      |
 | Opdrachtgever | Ron de Wit, Sportcentrum De Linde                                                      |
 | Repository    | [Sportcentrum-backend](https://github.com/vvendorrr/sportcentrum-backend "Repository") |
-| Versie        | 2.2                                                                                    |
+| Versie        | 0.2                                                                                    |
 | Datum         | 10-11                                                                                  |
 
 ## Teamleden, rollen en deelproducten
@@ -20,21 +20,10 @@
 
 ## Versiebeheer
 
-| Versie | Datum | Wat is er gewijzigd                                                                                            | Door wie |
-| ------ | ----- | -------------------------------------------------------------------------------------------------------------- | -------- |
-| 1.0    | 25/09 | Eerste versie                                                                                                  | Famke    |
-| 1.1    | 02/10 | Lucas toegevoegd                                                                                               | Famke    |
-| 1.2    | 09/10 | Inleiding en doel verbeterd                                                                                    | Giovanni |
-| 1.3    | 09/10 | Doelgroepen ingevuld                                                                                           | Giovanni |
-| 1.4    | 09/10 | Basis ERD ingevuld; heeft herziening nodig                                                                     | Giovanni |
-| 1.5    | 09/10 | Pagina’s en wireframe tabel ingevuld                                                                           | Giovanni |
-| 1.6    | 09/10 | Studentennummers volledig ingevuld                                                                             | Giovanni |
-| 1.7    | 09/10 | Scrum rollen volledig ingevuld                                                                                 | Giovanni |
-| 1.8    | 16/10 | Scope 'wel binnen dit project' aangevuld                                                                       | Famke    |
-| 1.9    | 29/10 | User stories aangevuld                                                                                         | Giovanni |
-| 2.0    | 06/11 | Userstories verdeeld tussen Lucas & Ik                                                                         | Famke    |
-| 2.1    | 06/11 | Userstories afgemaakt en verbeterd                                                                             | Famke    |
-| 2.2    | 10/11 | Realisatiestatus per user story toegevoegd, niet-functionele eisen ingevuld en database-verschillen bijgewerkt | Famke    |
+| Versie | Datum | Wat is er gewijzigd     | Door wie        |
+| ------ | ----- | ----------------------- | --------------- |
+| 0.1    | 25/09 | Eerste versie           | Famke, Giovanni |
+| 0.2    | 11/11 | Wijzigingen userstories | Famke, Giovanni |
 
 ## Inleiding
 
