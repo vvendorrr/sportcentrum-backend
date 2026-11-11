@@ -1,6 +1,6 @@
 # Sportcentrum-backend
 
-Online lesrooster en inschrijfsysteem voor **Sportcentrum De Linde**. Leden bekijken het rooster, schrijven zich online in voor lessen (met automatische wachtlijst bij een volle les) en melden zich tijdig af; beheerders/trainers beheren lessen, deelnemers en traineraccounts.
+Online lesrooster en inschrijfsysteem voor **Sportcentrum De Linde**. Leden bekijken het rooster, schrijven zich online in voor lessen (met automatische wachtlijst bij een volle les) en melden zich tijdig af; trainers bekijken deelnemers en aanwezigheid van hun eigen lessen, en beheerders beheren lessen, leden- en traineraccounts en de bezetting van het lesaanbod.
 
 > De applicatiecode staat in de map [`app/`](app/) en is een Laravel + Blade project. De eisen (plan van eisen) en wireframes staan in [`docs/`](docs/).
 
@@ -12,7 +12,7 @@ Online lesrooster en inschrijfsysteem voor **Sportcentrum De Linde**. Leden beki
 | Views | Blade met één gedeelde layout (geen React/Vue/Inertia) |
 | Styling | [Tailwind CSS](https://tailwindcss.com) 4 via [Vite](https://vitejs.dev) |
 | Database | SQLite (default), schema via migrations, data via seeders |
-| Authenticatie | Session-based, met de rollen `member` en `admin` |
+| Authenticatie | Session-based, met de rollen `member` (lid), `trainer` en `admin` (beheerder) |
 | Testen | [Pest](https://pestphp.com) feature tests |
 | Code style | [Laravel Pint](https://laravel.com/docs/pint) |
 
@@ -115,12 +115,13 @@ Open daarna **http://localhost:8000**. Krijg je een Vite-manifestfout of zien pa
 
 ### 5. Demo-accounts (seeded data)
 
-Heb je het project via `composer run setup` opgezet? Draai daarna nog `php artisan db:seed` voor de demo-data. Bij de handmatige setup zit `--seed` al in de migrate-stap. In totaal maak je dan: twee benoemde beheerders, vier willekeurige beheerders, acht leden, lessen en lesinschrijvingen aan.
+Heb je het project via `composer run setup` opgezet? Draai daarna nog `php artisan db:seed` voor de demo-data. Bij de handmatige setup zit `--seed` al in de migrate-stap. In totaal maak je dan: twee benoemde beheerders, vier willekeurige beheerders, vier trainers, acht leden, lessen en lesinschrijvingen aan.
 
 | Rol | E-mail | Wachtwoord |
 | --- | --- | --- |
 | Beheerder | `beheerder@example.com` | `password` |
 | Beheerder | `r.dewit@example.com` | `password` |
+| Trainer (willekeurig, via Trainers-overzicht) | — | `password` |
 | Lid (willekeurig, via overzicht) | — | `password` |
 
 Het wachtwoord van **alle** seeded accounts is `password`. Leden e-mailadressen zie je in de Deelnemers-pagina (als beheerder ingelogd).
@@ -156,7 +157,7 @@ Deze sectie houdt bij hoe ver de user stories uit [`docs/plan-van-eisen.md`](doc
 | US-06 | Lessen aanmaken en inplannen | ✅ Afgerond | `LessonController::create/edit/store/update/destroy` |
 | US-07 | Accountgegevens beheren (profiel, e-mail, wachtwoord) | ✅ Afgerond | `AccountController::update/updateEmail/updatePassword` (`PATCH`-endpoints) |
 | US-08 | Ledenaccounts uitschakelen | ✅ Afgerond | `MemberAccountController::deactivate`, `UserPolicy::deactivate`, `EnsureActiveUser` |
-| US-09 | Traineraccounts beheren | ✅ Afgerond | `TrainerAccountController`, `StoreTrainerRequest`, `UpdateTrainerRequest` |
+| US-09 | Traineraccounts beheren | ✅ Afgerond | `TrainerAccountController`, `StoreTrainerRequest`, `UpdateTrainerRequest` — trainer en beheerder zijn aparte rollen |
 | US-10 | Eigen inschrijvingen bekijken | ✅ Afgerond | `MyLessonRegistrationController::index` |
 | US-11 | Rooster filteren | ✅ Afgerond | `LessonIndexRequest`, `LessonController::index` |
 | US-12 | Bezettingsoverzicht voor beheerder | ✅ Afgerond | `LessonOccupancyController`, `resources/views/lessons/occupancy.blade.php` |
@@ -165,14 +166,16 @@ Deze sectie houdt bij hoe ver de user stories uit [`docs/plan-van-eisen.md`](doc
 | US-15 | Wachtlijststatus bekijken | ✅ Afgerond | `MyLessonRegistrationController::index`, `resources/views/registrations/index.blade.php` |
 | US-16 | Rollen en bevoegdheden vaststellen | ⬜ Besluit opdrachtgever nodig | Baliemedewerker en bevoegdheden per rol moeten nog met de opdrachtgever worden afgestemd |
 | US-17 | Onverwachte deelnemers afhandelen | ⬜ Besluit opdrachtgever nodig | Aansluiten zonder inschrijving en handelen bij volle lessen zijn nog niet vastgesteld |
-| US-18 | Nederlandstalige, sportieve website | ⬜ Opdrachtgeverbeoordeling nodig | Nederlandse teksten en blauw-witte vormgeving zijn aanwezig; definitieve goedkeuring ontbreekt |
+| US-18 | Nederlandstalige, sportieve website | ⬜ Te valideren | Nederlandse teksten en blauw-witte vormgeving zijn aanwezig; definitieve goedkeuring van de opdrachtgever ontbreekt |
 
 ### Openstaande besluiten en validatie
 
 - **US-13** — bevestig welke medewerkers namens leden mogen afmelden en of zij na de twee-uursgrens mogen afmelden.
-- **US-16** — bevestig of een baliemedewerker een aparte rol is en leg de volledige bevoegdhedenmatrix vast.
+- **US-16** — bevestig of een baliemedewerker een aparte rol is en leg de volledige bevoegdhedenmatrix voor trainers en beheerders vast.
 - **US-17** — bepaal hoe deelnemers zonder inschrijving en situaties zonder beschikbare plek worden afgehandeld.
 - **US-18** — laat de opdrachtgever de blauw-witte, Nederlandstalige vormgeving beoordelen.
+- **US-12** — bepaal welke aantallen of grens een les als "weinig bezocht" markeren in het bezettingsoverzicht.
+- **US-15** — bevestig dat leden bij wachtlijststatus of promotie alleen de website raadplegen; e-mail/sms-meldingen vallen buiten scope.
 - **US-07 aanvullende velden** — de opdrachtgever moet nog bepalen of geslacht en geboortedatum worden bewaard; deze velden vallen buiten de uitgewerkte criteria voor US-07.
 
 ### Niet-functionele eisen (uit plan van eisen)
