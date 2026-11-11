@@ -66,17 +66,17 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 | US-02 | Account aanmaken en inloggen          | Backend, Frontend & Security | Hoog       | 1              | Lucas & Famke    | ✅ Afgerond                                                        |
 | US-03 | Inschrijven voor een les              | Backend & Frontend           | Hoog       | 1              | Famke            | ✅ Afgerond                                                        |
 | US-04 | Afmelden voor een les                 | Backend & Frontend           | Hoog       | 1              | Famke & Giovanni | ✅ Afgerond                                                        |
-| US-05 | Deelnemers en aanwezigheid beheren    | Backend & Frontend           | Hoog       | 1              | Lucas            | 🚧 Deels (overzicht klaar; aanwezigheid registreren ontbreekt nog) |
+| US-05 | Deelnemers en aanwezigheid beheren    | Backend & Frontend           | Hoog       | 1              | Lucas            | ✅ Afgerond                                                        |
 | US-06 | Lessen aanmaken en inplannen          | Backend & Frontend           | Hoog       | 2              | Lucas & Giovanni | ✅ Afgerond                                                        |
 | US-07 | Accountgegevens beheren               | Backend, Frontend & Security | Gemiddeld  | 2              | Lucas & Famke    | ✅ Afgerond                                                        |
-| US-08 | Ledenaccounts uitschakelen            | Backend & Security           | Gemiddeld  | 2              | Lucas            | ⬜ Te starten (inlogblokkade voor inactieve accounts bestaat al)   |
-| US-09 | Traineraccounts beheren               | Backend, Frontend & Security | Gemiddeld  | 2              | Famke            | 🚧 Deels (overzicht klaar; aanmaken/bewerken ontbreekt nog)        |
+| US-08 | Ledenaccounts uitschakelen            | Backend & Security           | Gemiddeld  | 2              | Lucas            | ✅ Afgerond                                                        |
+| US-09 | Traineraccounts beheren               | Backend, Frontend & Security | Gemiddeld  | 2              | Famke            | ✅ Afgerond                                                        |
 | US-10 | Eigen inschrijvingen bekijken         | Backend & Frontend           | Gemiddeld  | 2              | Famke & Giovanni | ✅ Afgerond                                                        |
 | US-11 | Rooster filteren                      | Backend & Frontend           | Gemiddeld  | Giovanni       | Nog te bepalen   | ✅ Afgerond                                                        |
-| US-12 | Bezettingsoverzicht voor beheerder    | Backend & Frontend           | Hoog       | Nog te bepalen | Nog te bepalen   | ⬜ Te valideren                                                    |
-| US-13 | Afmelding door medewerker registreren | Backend & Frontend           | Hoog       | Nog te bepalen | Nog te bepalen   | ⬜ Te valideren                                                    |
-| US-14 | Komende lessen voor trainer           | Backend & Frontend           | Hoog       | Nog te bepalen | Nog te bepalen   | ⬜ Te valideren                                                    |
-| US-15 | Wachtlijststatus bekijken             | Backend & Frontend           | Gemiddeld  | Nog te bepalen | Nog te bepalen   | ⬜ Te valideren                                                    |
+| US-12 | Bezettingsoverzicht voor beheerder    | Backend & Frontend           | Hoog       | Nog te bepalen | Nog te bepalen   | ✅ Afgerond                                                        |
+| US-13 | Afmelding door medewerker registreren | Backend & Frontend           | Hoog       | Nog te bepalen | Nog te bepalen   | ⬜ Besluit opdrachtgever nodig                                     |
+| US-14 | Komende lessen voor trainer           | Backend & Frontend           | Hoog       | Nog te bepalen | Nog te bepalen   | ✅ Afgerond                                                        |
+| US-15 | Wachtlijststatus bekijken             | Backend & Frontend           | Gemiddeld  | Nog te bepalen | Nog te bepalen   | ✅ Afgerond                                                        |
 | US-16 | Rollen en bevoegdheden vaststellen    | Backend & Security           | Hoog       | Nog te bepalen | Nog te bepalen   | ⬜ Besluit opdrachtgever nodig                                     |
 | US-17 | Onverwachte deelnemers afhandelen     | Backend & Frontend           | Gemiddeld  | Nog te bepalen | Nog te bepalen   | ⬜ Besluit opdrachtgever nodig                                     |
 | US-18 | Nederlandstalige, sportieve website   | Frontend                     | Gemiddeld  | Nog te bepalen | Nog te bepalen   | ⬜ Te valideren                                                    |
@@ -165,7 +165,7 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 - [ ] Een uitgeschakeld lid kan niet inloggen.
 - [ ] De accountgegevens en eerdere inschrijvingen van het lid blijven bewaard.
 
-> **Opm. status (10/11):** Inloggen is voor inactieve accounts al geblokkeerd (`LoginRequest`); de beheerdersactie om `is_active` aan/uit te zetten moet nog worden gebouwd.
+> **Opm. status (11/11):** Een beheerder kan een ledenaccount uitschakelen vanuit het deelnemersoverzicht. Inactieve accounts kunnen niet inloggen; gegevens en eerdere inschrijvingen blijven bewaard.
 
 #### US-09 — Traineraccounts beheren — Gemiddeld — Backend, Frontend & Security — Famke
 
@@ -177,7 +177,7 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 - [ ] Het systeem weigert een traineraccount met een e-mailadres dat al in gebruik is.
 - [ ] Een uitgeschakelde trainer kan niet aan nieuwe lessen worden gekoppeld.
 
-> **Opm. status (10/11):** Het traineroverzicht bestaat (`PeopleDirectoryController::trainers`); het aanmaken en bewerken van traineraccounts moet nog worden gebouwd. Trainers en beheerders zijn aparte rollen; beheerders beheren traineraccounts.
+> **Opm. status (11/11):** Beheerders kunnen traineraccounts aanmaken, bijwerken en uitschakelen. Alleen actieve trainers kunnen aan nieuwe lessen worden gekoppeld; trainer en beheerder zijn aparte rollen.
 
 #### US-10 — Eigen inschrijvingen bekijken — Gemiddeld — Backend & Frontend — Famke
 
@@ -206,9 +206,9 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 
 **Acceptatiecriteria**
 
-- [ ] Het overzicht toont per les de datum en tijd, sport, trainer, aantal inschrijvingen en maximale capaciteit.
-- [ ] Het overzicht maakt zichtbaar hoeveel plekken nog beschikbaar zijn en of een les vol is.
-- [ ] De manager kan lessen met weinig inschrijvingen herkennen aan de aantallen; een grens voor “weinig” moet nog met de opdrachtgever worden bepaald.
+- [x] Het overzicht toont per les de datum en tijd, sport, trainer, aantal inschrijvingen en maximale capaciteit.
+- [x] Het overzicht maakt zichtbaar hoeveel plekken nog beschikbaar zijn en of een les vol is.
+- [x] De manager kan lessen met weinig inschrijvingen herkennen aan de aantallen; een grens voor “weinig” moet nog met de opdrachtgever worden bepaald.
 
 #### US-13 — Afmelding door medewerker registreren — Hoog — Backend & Frontend — Nog te bepalen
 
@@ -227,10 +227,10 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 
 **Acceptatiecriteria**
 
-- [ ] Een trainer kan de komende lessen zien waaraan die als trainer is gekoppeld.
-- [ ] Per les zijn de ingeschreven deelnemers, het aantal inschrijvingen en de maximale capaciteit zichtbaar.
-- [ ] Deelnemers op de wachtlijst zijn herkenbaar als wachtlijstdeelnemers en tellen niet mee als bevestigde inschrijvingen.
-- [ ] Alleen bevoegde gebruikers kunnen namen van deelnemers bekijken.
+- [x] Een trainer kan de komende lessen zien waaraan die als trainer is gekoppeld.
+- [x] Per les zijn de ingeschreven deelnemers, het aantal inschrijvingen en de maximale capaciteit zichtbaar.
+- [x] Deelnemers op de wachtlijst zijn herkenbaar als wachtlijstdeelnemers en tellen niet mee als bevestigde inschrijvingen.
+- [x] Alleen bevoegde gebruikers kunnen namen van deelnemers bekijken.
 
 #### US-15 — Wachtlijststatus bekijken — Gemiddeld — Backend & Frontend — Nog te bepalen
 
@@ -238,9 +238,9 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 
 **Acceptatiecriteria**
 
-- [ ] In het overzicht van eigen inschrijvingen is per les zichtbaar of de status `enrolled` of `waitlisted` is.
-- [ ] Als een lid vanaf de wachtlijst wordt ingeschreven, wordt de status in het overzicht bijgewerkt.
-- [ ] De website toont de status; een melding via e-mail of sms valt buiten de huidige scope en is nog geen afgesproken eis.
+- [x] In het overzicht van eigen inschrijvingen is per les zichtbaar of de status `enrolled` of `waitlisted` is.
+- [x] Als een lid vanaf de wachtlijst wordt ingeschreven, wordt de status in het overzicht bijgewerkt.
+- [x] De website toont de status; een melding via e-mail of sms valt buiten de huidige scope en is nog geen afgesproken eis.
 
 #### US-16 — Rollen en bevoegdheden vaststellen — Hoog — Backend & Security — Nog te bepalen
 
@@ -281,7 +281,7 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 | NFE-3 | **Betrouwbaarheid:** een les wordt nooit overboekt; wachtlijst-promotie gebeurt automatisch en in volgorde van aanmelding.           | Exclusieve unieke constraint (`lesson_id`, `user_id`) en feature tests (volle les → wachtlijst; afmelden → promotie) |
 | NFE-4 | **Bruikbaarheid:** de interface en validatiefouten zijn volledig Nederlandstalig en begrijpelijk geformuleerd.                       | Form Requests met Nederlandstalige meldingen; handmatig doorlopen van de flows                                       |
 | NFE-5 | **Performance:** het rooster laadt binnen één seconde bij honderden leden en tientallen lessen, zonder N+1-queries.                  | Eager loading van relaties; controle met query-timing/debugbar                                                       |
-| NFE-6 | **Onderhoudbaarheid:** minimaal 10 feature tests en een consistente codestijl die met elke commit meekomt.                           | `vendor/bin/pint --test`; `vendor/bin/pest` (stand: 10/11 — 56 tests, 247 assertions, allemaal groen)                |
+| NFE-6 | **Onderhoudbaarheid:** minimaal 10 feature tests en een consistente codestijl die met elke commit meekomt.                           | `vendor/bin/pint --test`; `vendor/bin/pest` (stand: 11/11 — 109 tests, 482 assertions, allemaal groen)              |
 | NFE-7 | **Data-integriteit:** alleen geldige waarden voor rol, categorie, status en aanwezigheid komen in de database.                       | Enum-kolommen in migrations; uniek e-mailadres (`users.email`); validatie weigert ongeldige invoer                   |
 
 ## Technische eisen en randvoorwaarden

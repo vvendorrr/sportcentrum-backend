@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LessonAttendanceController;
 use App\Http\Controllers\LessonController;
+use App\Http\Controllers\LessonOccupancyController;
 use App\Http\Controllers\LessonRegistrationController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MemberAccountController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\PeopleDirectoryController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\TrainerAccountController;
+use App\Http\Controllers\TrainerUpcomingLessonsController;
 use App\Http\Middleware\EnsureActiveUser;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +35,9 @@ Route::middleware(['auth', EnsureActiveUser::class])->group(function (): void {
     Route::patch('/my/account/password', [AccountController::class, 'updatePassword'])->name('account.password.update');
     Route::delete('/my/account', [AccountController::class, 'destroy'])->name('account.destroy');
     Route::get('/lessons/create', [LessonController::class, 'create'])->name('lessons.create');
+    Route::get('/lessons/occupancy', [LessonOccupancyController::class, 'index'])->name('lessons.occupancy');
+    Route::get('/trainer/lessons', [TrainerUpcomingLessonsController::class, 'index'])
+        ->name('trainer-lessons.upcoming');
     Route::post('/lessons', [LessonController::class, 'store'])->name('lessons.store');
     Route::get('/lessons/{lesson}/edit', [LessonController::class, 'edit'])->name('lessons.edit');
     Route::patch('/lessons/{lesson}', [LessonController::class, 'update'])->name('lessons.update');

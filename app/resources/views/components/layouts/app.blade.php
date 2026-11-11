@@ -42,6 +42,17 @@
                     </a>
 
                     @auth
+                        @if (auth()->user()->role === 'trainer')
+                            <a @class([
+                                'flex shrink-0 items-center gap-3 rounded-xl px-4 py-3 text-sm font-bold transition focus-visible:outline-2 focus-visible:outline-brand-600',
+                                'bg-brand-50 text-brand-800' => request()->routeIs('trainer-lessons.*'),
+                                'text-slate-600 hover:bg-brand-50 hover:text-brand-800' => ! request()->routeIs('trainer-lessons.*'),
+                            ]) href="{{ route('trainer-lessons.upcoming') }}">
+                                <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 19V5m0 14h16M8 15l3-4 3 2 5-7" /></svg>
+                                Mijn komende lessen
+                            </a>
+                        @endif
+
                         @if (auth()->user()->role === 'member')
                             <a @class([
                                 'flex shrink-0 items-center gap-3 rounded-xl px-4 py-3 text-sm font-bold transition focus-visible:outline-2 focus-visible:outline-brand-600',
@@ -71,6 +82,14 @@
                             ]) href="{{ route('lessons.create') }}">
                                 <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" d="M12 5v14M5 12h14" /></svg>
                                 Les aanmaken
+                            </a>
+                            <a @class([
+                                'flex shrink-0 items-center gap-3 rounded-xl px-4 py-3 text-sm font-bold transition focus-visible:outline-2 focus-visible:outline-brand-600',
+                                'bg-brand-50 text-brand-800' => request()->routeIs('lessons.occupancy'),
+                                'text-slate-600 hover:bg-brand-50 hover:text-brand-800' => ! request()->routeIs('lessons.occupancy'),
+                            ]) href="{{ route('lessons.occupancy') }}">
+                                <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 19V5m0 14h16M8 15l3-4 3 2 5-7" /></svg>
+                                Bezetting
                             </a>
                             <a @class([
                                 'flex shrink-0 items-center gap-3 rounded-xl px-4 py-3 text-sm font-bold transition focus-visible:outline-2 focus-visible:outline-brand-600',

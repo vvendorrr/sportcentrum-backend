@@ -12,6 +12,16 @@ class LessonPolicy
         return $user->role === 'admin';
     }
 
+    public function viewOccupancy(User $user): bool
+    {
+        return $user->role === 'admin';
+    }
+
+    public function viewUpcomingLessons(User $user): bool
+    {
+        return $user->role === 'trainer';
+    }
+
     public function update(User $user, Lesson $lesson): bool
     {
         return $user->role === 'admin';

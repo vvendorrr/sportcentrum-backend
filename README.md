@@ -152,22 +152,32 @@ Deze sectie houdt bij hoe ver de user stories uit [`docs/plan-van-eisen.md`](doc
 | US-02 | Account aanmaken en inloggen | ✅ Afgerond | `RegistrationController`, `LoginController`, `resources/views/auth/` |
 | US-03 | Inschrijven voor een les (`enrolled` / wachtlijst) | ✅ Afgerond | `LessonRegistrationController::store`, `Lesson`-model, policies |
 | US-04 | Afmelden voor een les (tot 2 uur voor start, wachtlijst-promotie) | ✅ Afgerond | `LessonRegistrationController::destroy` |
-| US-05 | Deelnemers en aanwezigheid beheren | ✅ Afgerond | `LessonAttendanceController`, `PeopleDirectoryController::participants`, `resources/views/lessons/participants.blade.php` |
+| US-05 | Deelnemers en aanwezigheid beheren | ✅ Afgerond | `LessonAttendanceController`, `PeopleDirectoryController::participants` |
 | US-06 | Lessen aanmaken en inplannen | ✅ Afgerond | `LessonController::create/edit/store/update/destroy` |
-| US-07 | Accountgegevens beheren (profiel, e-mail, wachtwoord) | ✅ Afgerond | `AccountController::update/updateEmail/updatePassword` (`PATCH`-endpoints), Form Requests met Nederlandstalige meldingen, accountpagina met opslaan/wachtwoord-verificatie; account verwijderen (`AccountController::destroy`) |
-| US-08 | Ledenaccounts uitschakelen | ⬜ Te starten | — |
-| US-09 | Traineraccounts beheren | 🚧 Deels | `PeopleDirectoryController::trainers` (overzicht); aanmaken/bewerken ontbreekt nog |
+| US-07 | Accountgegevens beheren (profiel, e-mail, wachtwoord) | ✅ Afgerond | `AccountController::update/updateEmail/updatePassword` (`PATCH`-endpoints) |
+| US-08 | Ledenaccounts uitschakelen | ✅ Afgerond | `MemberAccountController::deactivate`, `UserPolicy::deactivate`, `EnsureActiveUser` |
+| US-09 | Traineraccounts beheren | ✅ Afgerond | `TrainerAccountController`, `StoreTrainerRequest`, `UpdateTrainerRequest` |
 | US-10 | Eigen inschrijvingen bekijken | ✅ Afgerond | `MyLessonRegistrationController::index` |
+| US-11 | Rooster filteren | ✅ Afgerond | `LessonIndexRequest`, `LessonController::index` |
+| US-12 | Bezettingsoverzicht voor beheerder | ✅ Afgerond | `LessonOccupancyController`, `resources/views/lessons/occupancy.blade.php` |
+| US-13 | Afmelding door medewerker registreren | ⬜ Besluit opdrachtgever nodig | Bevoegde rol en uitzondering op de afmeldtermijn zijn nog niet vastgesteld |
+| US-14 | Komende lessen voor trainer | ✅ Afgerond | `TrainerUpcomingLessonsController`, `resources/views/lessons/trainer-upcoming.blade.php` |
+| US-15 | Wachtlijststatus bekijken | ✅ Afgerond | `MyLessonRegistrationController::index`, `resources/views/registrations/index.blade.php` |
+| US-16 | Rollen en bevoegdheden vaststellen | ⬜ Besluit opdrachtgever nodig | Baliemedewerker en bevoegdheden per rol moeten nog met de opdrachtgever worden afgestemd |
+| US-17 | Onverwachte deelnemers afhandelen | ⬜ Besluit opdrachtgever nodig | Aansluiten zonder inschrijving en handelen bij volle lessen zijn nog niet vastgesteld |
+| US-18 | Nederlandstalige, sportieve website | ⬜ Opdrachtgeverbeoordeling nodig | Nederlandse teksten en blauw-witte vormgeving zijn aanwezig; definitieve goedkeuring ontbreekt |
 
-### Next steps (sprint 2)
+### Openstaande besluiten en validatie
 
-1. **US-08** — ledenaccounts uitschakelen (`is_active`): beheerder-actie, inloggen voor uitgeschakelde accounts weigeren, gegevens en inschrijvingen bewaren.
-2. **US-09** — traineraccounts aanmaken/bewerken met rollen-policies.
-3. **US-07 variant** — de resterende accountpagina-velden (geslacht/geboortedatum) koppelen aan echte databasekolommen, of verwijderen als de klant die data niet bewaard wil hebben.
+- **US-13** — bevestig welke medewerkers namens leden mogen afmelden en of zij na de twee-uursgrens mogen afmelden.
+- **US-16** — bevestig of een baliemedewerker een aparte rol is en leg de volledige bevoegdhedenmatrix vast.
+- **US-17** — bepaal hoe deelnemers zonder inschrijving en situaties zonder beschikbare plek worden afgehandeld.
+- **US-18** — laat de opdrachtgever de blauw-witte, Nederlandstalige vormgeving beoordelen.
+- **US-07 aanvullende velden** — de opdrachtgever moet nog bepalen of geslacht en geboortedatum worden bewaard; deze velden vallen buiten de uitgewerkte criteria voor US-07.
 
 ### Niet-functionele eisen (uit plan van eisen)
 
-- Minimaal 10 feature tests met Pest (de suite telt nu 56 tests, vrijwel allemaal feature tests).
+- Minimaal 10 feature tests met Pest (de suite telt nu 109 tests, vrijwel allemaal feature tests).
 - Blade-views met één gedeelde layout, Form Requests met Nederlandstalige meldingen.
 - Branches per user story, pull requests met review.
 
