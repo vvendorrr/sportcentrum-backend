@@ -12,29 +12,29 @@
 
 ## Teamleden, rollen en deelproducten
 
-| Naam     | Studentnummer | Scrum-rol     | Deelproduct        |
-| -------- | ------------- | ------------- | ------------------ |
+| Naam     | Studentnummer | Scrum-rol     | Deelproduct                                            |
+| -------- | ------------- | ------------- | ------------------------------------------------------ |
 | Famke    | D315950       | Product owner | Plan van eisen (scope & user stories), product backlog |
 | Giovanni | D316667       | Scrum master  | Datamodel (ERD) en wireframe-overzichten               |
 | Lucas    | D310739       | Developer     | Rooster en lessenbeheer (US-01, US-05, US-06)          |
 
 ## Versiebeheer
 
-| Versie | Datum | Wat is er gewijzigd                         | Door wie |
-| ------ | ----- | ------------------------------------------- | -------- |
-| 1.0    | 25/09 | Eerste versie                               | Famke    |
-| 1.1    | 02/10 | Lucas toegevoegd                            | Famke    |
-| 1.2    | 09/10 | Inleiding en doel verbeterd                 | Giovanni |
-| 1.3    | 09/10 | Doelgroepen ingevuld                        | Giovanni |
-| 1.4    | 09/10 | Basis ERD ingevuld; heeft herziening nodig  | Giovanni |
-| 1.5    | 09/10 | Pagina’s en wireframe tabel ingevuld        | Giovanni |
-| 1.6    | 09/10 | Studentennummers volledig ingevuld          | Giovanni |
-| 1.7    | 09/10 | Scrum rollen volledig ingevuld              | Giovanni |
-| 1.8    | 16/10 | Scope 'wel binnen dit project' aangevuld    | Famke    |
-| 1.9    | 29/10 | User stories aangevuld                      | Giovanni |
-| 2.0    | 06/11 | Userstories verdeeld tussen Lucas & Ik      | Famke    |
-| 2.1    | 06/11 | Userstories afgemaakt en verbeterd          | Famke    |
-| 2.2    | 10/11 | Realisatiestatus per user story toegevoegd, niet-functionele eisen ingevuld en database-verschillen bijgewerkt | Famke |
+| Versie | Datum | Wat is er gewijzigd                                                                                            | Door wie |
+| ------ | ----- | -------------------------------------------------------------------------------------------------------------- | -------- |
+| 1.0    | 25/09 | Eerste versie                                                                                                  | Famke    |
+| 1.1    | 02/10 | Lucas toegevoegd                                                                                               | Famke    |
+| 1.2    | 09/10 | Inleiding en doel verbeterd                                                                                    | Giovanni |
+| 1.3    | 09/10 | Doelgroepen ingevuld                                                                                           | Giovanni |
+| 1.4    | 09/10 | Basis ERD ingevuld; heeft herziening nodig                                                                     | Giovanni |
+| 1.5    | 09/10 | Pagina’s en wireframe tabel ingevuld                                                                           | Giovanni |
+| 1.6    | 09/10 | Studentennummers volledig ingevuld                                                                             | Giovanni |
+| 1.7    | 09/10 | Scrum rollen volledig ingevuld                                                                                 | Giovanni |
+| 1.8    | 16/10 | Scope 'wel binnen dit project' aangevuld                                                                       | Famke    |
+| 1.9    | 29/10 | User stories aangevuld                                                                                         | Giovanni |
+| 2.0    | 06/11 | Userstories verdeeld tussen Lucas & Ik                                                                         | Famke    |
+| 2.1    | 06/11 | Userstories afgemaakt en verbeterd                                                                             | Famke    |
+| 2.2    | 10/11 | Realisatiestatus per user story toegevoegd, niet-functionele eisen ingevuld en database-verschillen bijgewerkt | Famke    |
 
 ## Inleiding
 
@@ -50,12 +50,12 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 
 ### Scope
 
-| Wel binnen dit project                                                                                                                   | Bewust buiten dit project |
-| ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
-| - Database om makkelijk lessen bij te houden                                                                                             | Online betalingen en contributie-administratie   |
-| - CRUD-Systeem om lessen toe te voegen aan Rooster                                                                                       | E-mail- of SMS-notificaties en herinneringen     |
-| - Account-Systeem met Deelnemer, Trainer- en Admin accounts                                                                              | Mobiele app of koppelingen met externe systemen  |
-| - Gedetailleerd overzicht van les-informatie; Naam, Type les, Datum, Duur, Trainer, Hoeveelheid Deelnemers en Hoeveelheid plekken in les | Beheer van meerdere vestigingen of ruimtes       |
+| Wel binnen dit project                                                                                                                   | Bewust buiten dit project                       |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| - Database om makkelijk lessen bij te houden                                                                                             | Online betalingen en contributie-administratie  |
+| - CRUD-Systeem om lessen toe te voegen aan Rooster                                                                                       | E-mail- of SMS-notificaties en herinneringen    |
+| - Account-Systeem met Deelnemer, Trainer- en Admin accounts                                                                              | Mobiele app of koppelingen met externe systemen |
+| - Gedetailleerd overzicht van les-informatie; Naam, Type les, Datum, Duur, Trainer, Hoeveelheid Deelnemers en Hoeveelheid plekken in les | Beheer van meerdere vestigingen of ruimtes      |
 
 ### Doelgroepen
 
@@ -69,18 +69,19 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 
 ### Overzicht van de user stories
 
-| ID    | User story                         | Deelproduct                  | Prioriteit | Sprint          | Wie                | Status realisatie                                                         |
-| ----- | ---------------------------------- | ---------------------------- | ---------- | --------------- | ------------------ | ------------------------------------------------------------------------- |
-| US-01 | Rooster bekijken                   | Frontend                     | Hoog       | 1               | Lucas              | ✅ Afgerond   |
-| US-02 | Account aanmaken en inloggen       | Backend, Frontend & Security | Hoog       | 1               | Lucas & Famke      | ✅ Afgerond   |
-| US-03 | Inschrijven voor een les           | Backend & Frontend           | Hoog       | 1               | Famke              | ✅ Afgerond   |
-| US-04 | Afmelden voor een les              | Backend & Frontend           | Hoog       | 1               | Famke & Giovanni   | ✅ Afgerond   |
-| US-05 | Deelnemers en aanwezigheid beheren | Backend & Frontend           | Hoog       | 1               | Lucas              | 🚧 Deels (overzicht klaar; aanwezigheid registreren ontbreekt nog) |
-| US-06 | Lessen aanmaken en inplannen       | Backend & Frontend           | Hoog       | 2               | Lucas & Giovanni   | ✅ Afgerond   |
-| US-07 | Accountgegevens beheren            | Backend, Frontend & Security | Gemiddeld  | 2               | Lucas & Famke      | ✅ Afgerond   |
-| US-08 | Ledenaccounts uitschakelen         | Backend & Security           | Gemiddeld  | 2               | Lucas              | ⬜ Te starten (inlogblokkade voor inactieve accounts bestaat al) |
-| US-09 | Traineraccounts beheren            | Backend, Frontend & Security | Gemiddeld  | 2               | Famke              | 🚧 Deels (overzicht klaar; aanmaken/bewerken ontbreekt nog) |
-| US-10 | Eigen inschrijvingen bekijken      | Backend & Frontend           | Gemiddeld  | 2               | Famke & Giovanni   | ✅ Afgerond   |
+| ID    | User story                         | Deelproduct                  | Prioriteit | Sprint   | Wie              | Status realisatie                                                  |
+| ----- | ---------------------------------- | ---------------------------- | ---------- | -------- | ---------------- | ------------------------------------------------------------------ |
+| US-01 | Rooster bekijken                   | Frontend                     | Hoog       | 1        | Lucas            | ✅ Afgerond                                                        |
+| US-02 | Account aanmaken en inloggen       | Backend, Frontend & Security | Hoog       | 1        | Lucas & Famke    | ✅ Afgerond                                                        |
+| US-03 | Inschrijven voor een les           | Backend & Frontend           | Hoog       | 1        | Famke            | ✅ Afgerond                                                        |
+| US-04 | Afmelden voor een les              | Backend & Frontend           | Hoog       | 1        | Famke & Giovanni | ✅ Afgerond                                                        |
+| US-05 | Deelnemers en aanwezigheid beheren | Backend & Frontend           | Hoog       | 1        | Lucas            | 🚧 Deels (overzicht klaar; aanwezigheid registreren ontbreekt nog) |
+| US-06 | Lessen aanmaken en inplannen       | Backend & Frontend           | Hoog       | 2        | Lucas & Giovanni | ✅ Afgerond                                                        |
+| US-07 | Accountgegevens beheren            | Backend, Frontend & Security | Gemiddeld  | 2        | Lucas & Famke    | ✅ Afgerond                                                        |
+| US-08 | Ledenaccounts uitschakelen         | Backend & Security           | Gemiddeld  | 2        | Lucas            | ⬜ Te starten (inlogblokkade voor inactieve accounts bestaat al)   |
+| US-09 | Traineraccounts beheren            | Backend, Frontend & Security | Gemiddeld  | 2        | Famke            | 🚧 Deels (overzicht klaar; aanmaken/bewerken ontbreekt nog)        |
+| US-10 | Eigen inschrijvingen bekijken      | Backend & Frontend           | Gemiddeld  | 2        | Famke & Giovanni | ✅ Afgerond                                                        |
+| US-11 | Rooster filteren                   | Backend & Frontend           | Gemiddeld  | Giovanni | Nog te bepalen   | ✅ Afgerond                                                        |
 
 ### Uitgewerkte user stories
 
@@ -190,31 +191,42 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 - [ ] Per les wordt getoond of de inschrijving actief of op de wachtlijst staat.
 - [ ] Een lid kan geen inschrijvingen of persoonsgegevens van andere leden bekijken.
 
+#### US-11 — Rooster filteren — Gemiddeld — Backend & Frontend — Nog te bepalen
+
+> **Als** bezoeker wil ik het lesrooster kunnen filteren op week, categorie, trainer en sport, zodat ik snel lessen kan vinden die bij mijn voorkeuren passen.
+
+**Acceptatiecriteria**
+
+- [x] Een bezoeker kan het rooster filteren op week, categorie, trainer en sport/lesnaam.
+- [x] Meerdere filters kunnen tegelijk worden toegepast; alleen lessen die aan alle geselecteerde filters voldoen worden getoond.
+- [x] De gekozen filters blijven actief bij het navigeren naar de vorige of volgende week.
+- [x] Een bezoeker kan de filters wissen zonder de gekozen week te wijzigen.
+
 ## Niet-functionele eisen
 
-| Nr.   | Eis                                       | Hoe controleren we dit?                                                                                         |
-| ----- | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| NFE-1 | **Beveiliging:** wachtwoorden worden gehasht opgeslagen en de applicatie is beschermd tegen CSRF. | Feature tests voor registratie/inloggen; inspectie van migrations (`password_hash`) en Laravel-middleware |
-| NFE-2 | **Autorisatie:** bezoekers zien geen namen van deelnemers; alleen leden kunnen zich inschrijven en alleen beheerders lessen beheren. | Policies (`LessonPolicy`) en Pest feature tests op HTTP-statuscodes                              |
-| NFE-3 | **Betrouwbaarheid:** een les wordt nooit overboekt; wachtlijst-promotie gebeurt automatisch en in volgorde van aanmelding. | Exclusieve unieke constraint (`lesson_id`, `user_id`) en feature tests (volle les → wachtlijst; afmelden → promotie) |
-| NFE-4 | **Bruikbaarheid:** de interface en validatiefouten zijn volledig Nederlandstalig en begrijpelijk geformuleerd. | Form Requests met Nederlandstalige meldingen; handmatig doorlopen van de flows                                   |
-| NFE-5 | **Performance:** het rooster laadt binnen één seconde bij honderden leden en tientallen lessen, zonder N+1-queries. | Eager loading van relaties; controle met query-timing/debugbar                                                    |
-| NFE-6 | **Onderhoudbaarheid:** minimaal 10 feature tests en een consistente codestijl die met elke commit meekomt.         | `vendor/bin/pint --test`; `vendor/bin/pest` (stand: 10/11 — 56 tests, 247 assertions, allemaal groen)              |
-| NFE-7 | **Data-integriteit:** alleen geldige waarden voor rol, categorie, status en aanwezigheid komen in de database. | Enum-kolommen in migrations; uniek e-mailadres (`users.email`); validatie weigert ongeldige invoer                     |
+| Nr.   | Eis                                                                                                                                  | Hoe controleren we dit?                                                                                              |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| NFE-1 | **Beveiliging:** wachtwoorden worden gehasht opgeslagen en de applicatie is beschermd tegen CSRF.                                    | Feature tests voor registratie/inloggen; inspectie van migrations (`password_hash`) en Laravel-middleware            |
+| NFE-2 | **Autorisatie:** bezoekers zien geen namen van deelnemers; alleen leden kunnen zich inschrijven en alleen beheerders lessen beheren. | Policies (`LessonPolicy`) en Pest feature tests op HTTP-statuscodes                                                  |
+| NFE-3 | **Betrouwbaarheid:** een les wordt nooit overboekt; wachtlijst-promotie gebeurt automatisch en in volgorde van aanmelding.           | Exclusieve unieke constraint (`lesson_id`, `user_id`) en feature tests (volle les → wachtlijst; afmelden → promotie) |
+| NFE-4 | **Bruikbaarheid:** de interface en validatiefouten zijn volledig Nederlandstalig en begrijpelijk geformuleerd.                       | Form Requests met Nederlandstalige meldingen; handmatig doorlopen van de flows                                       |
+| NFE-5 | **Performance:** het rooster laadt binnen één seconde bij honderden leden en tientallen lessen, zonder N+1-queries.                  | Eager loading van relaties; controle met query-timing/debugbar                                                       |
+| NFE-6 | **Onderhoudbaarheid:** minimaal 10 feature tests en een consistente codestijl die met elke commit meekomt.                           | `vendor/bin/pint --test`; `vendor/bin/pest` (stand: 10/11 — 56 tests, 247 assertions, allemaal groen)                |
+| NFE-7 | **Data-integriteit:** alleen geldige waarden voor rol, categorie, status en aanwezigheid komen in de database.                       | Enum-kolommen in migrations; uniek e-mailadres (`users.email`); validatie weigert ongeldige invoer                   |
 
 ## Technische eisen en randvoorwaarden
 
-| Onderwerp      | Afspraak                                                        |
-| -------------- | --------------------------------------------------------------- |
-| Framework      | Laravel 13, PHP ≥ 8.3                                           |
-| Views          | Blade-views met één gedeelde layout; geen React, Vue of Inertia |
-| Styling        | Tailwind CSS via Vite                                           |
+| Onderwerp      | Afspraak                                                                                   |
+| -------------- | ------------------------------------------------------------------------------------------ |
+| Framework      | Laravel 13, PHP ≥ 8.3                                                                      |
+| Views          | Blade-views met één gedeelde layout; geen React, Vue of Inertia                            |
+| Styling        | Tailwind CSS via Vite                                                                      |
 | Database       | SQLite (standaard; MySQL kan via `.env`), alle tabellen via migrations, gevuld met seeders |
-| Authenticatie  | Session-based, met de rollen `member` (lid) en `admin` (beheerder/trainer) |
-| Validatie      | Form Requests met Nederlandstalige meldingen                    |
-| Testen         | Minimaal 10 feature tests met _Pest / PHPUnit_                  |
-| Versiebeheer   | GitHub, branches per user story, pull requests met review       |
-| Overige keuzes | Codestijl met Laravel Pint; routes en policies in de applicatiecode |
+| Authenticatie  | Session-based, met de rollen `member` (lid) en `admin` (beheerder/trainer)                 |
+| Validatie      | Form Requests met Nederlandstalige meldingen                                               |
+| Testen         | Minimaal 10 feature tests met _Pest / PHPUnit_                                             |
+| Versiebeheer   | GitHub, branches per user story, pull requests met review                                  |
+| Overige keuzes | Codestijl met Laravel Pint; routes en policies in de applicatiecode                        |
 
 ## Datamodel
 
@@ -289,10 +301,10 @@ De `id`- en foreign-keykolommen zijn `BIGINT UNSIGNED`; `duration_minutes` en `m
 
 ### Openstaande vragen
 
-| Vraag                                                                                                                     | Aan wie   | Sinds | Status |
-| ------------------------------------------------------------------------------------------------------------------------- | --------- | ----- | ------ |
+| Vraag                                                                                                                                   | Aan wie    | Sinds | Status |
+| --------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ----- | ------ |
 | Worden geslacht en geboortedatum van leden bewaard? Ja → kolommen toevoegen aan `users`; nee → velden van de accountpagina verwijderen. | Ron de Wit | 06/11 | Open   |
-| Is de combinatie "Beheerder/Trainer" in één rol (`admin`) voldoende, of moet een trainer aparte rechten krijgen dan een beheerder? | Ron de Wit | 10/11 | Open   |
+| Is de combinatie "Beheerder/Trainer" in één rol (`admin`) voldoende, of moet een trainer aparte rechten krijgen dan een beheerder?      | Ron de Wit | 10/11 | Open   |
 
 ## Wijzigingenlog
 
