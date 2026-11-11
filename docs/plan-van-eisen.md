@@ -130,11 +130,11 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 
 **Acceptatiecriteria**
 
-- [ ] Alleen een beheerder/trainer kan de namen van ingeschreven deelnemers bekijken.
-- [ ] Een beheerder/trainer kan na afloop per deelnemer `attended` of `absent` registreren.
-- [ ] Het aantal gemiste lessen van een lid is gebaseerd op diens afwezigheidsregistraties.
+- [x] Alleen een beheerder/trainer kan de namen van ingeschreven deelnemers bekijken.
+- [x] Een beheerder/trainer kan na afloop per deelnemer `attended` of `absent` registreren.
+- [x] Het aantal gemiste lessen van een lid is gebaseerd op diens afwezigheidsregistraties.
 
-> **Opm. status (10/11):** Het deelnemersoverzicht is afgerond (`PeopleDirectoryController::participants`). Het registreren van aanwezigheid (`attended`/`absent`) moet nog worden gebouwd; de databasekolom bestaat al.
+> **Opm. status (11/11):** US-05 is geïmplementeerd. Het deelnemersoverzicht per les en het registreren van aanwezigheid zijn beschikbaar voor beheerders/trainers; gemiste lessen worden afgeleid van afwezigheidsregistraties.
 
 #### US-06 — Lessen aanmaken en inplannen — Hoog — Backend & Frontend — Lucas
 

@@ -22,6 +22,17 @@ class LessonPolicy
         return $user->role === 'admin';
     }
 
+    public function viewParticipants(User $user, Lesson $lesson): bool
+    {
+        return $user->role === 'admin';
+    }
+
+    public function manageAttendance(User $user, Lesson $lesson): bool
+    {
+        return $user->role === 'admin'
+            && $lesson->starts_at->copy()->addMinutes($lesson->duration_minutes)->lessThanOrEqualTo(now());
+    }
+
     public function register(User $user, Lesson $lesson): bool
     {
         return $user->role === 'member' && $user->is_active;

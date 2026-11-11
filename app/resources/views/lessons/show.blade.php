@@ -70,6 +70,7 @@
                 <div class="flex flex-col gap-3 border-t border-slate-100 bg-slate-50 px-6 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-9">
                     <p class="text-sm text-slate-500">Beheer deze les en de bijbehorende inschrijvingen.</p>
                     <div class="flex flex-wrap gap-3">
+                        <a class="inline-flex items-center justify-center rounded-full border border-brand-200 bg-white px-5 py-3 text-sm font-bold text-brand-700 transition hover:bg-brand-50 focus-visible:outline-2 focus-visible:outline-brand-600" href="{{ route('lessons.participants', $lesson) }}">Deelnemers en aanwezigheid</a>
                         <a class="inline-flex items-center justify-center rounded-full border border-brand-200 bg-white px-5 py-3 text-sm font-bold text-brand-700 transition hover:bg-brand-50 focus-visible:outline-2 focus-visible:outline-brand-600" href="{{ route('lessons.edit', $lesson) }}">Les bewerken</a>
                         <form method="POST" action="{{ route('lessons.destroy', $lesson) }}" onsubmit="return confirm('Weet je zeker dat je deze les en alle inschrijvingen wilt verwijderen?')">
                             @csrf

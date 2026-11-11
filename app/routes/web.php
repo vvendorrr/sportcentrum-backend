@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LessonAttendanceController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LessonRegistrationController;
 use App\Http\Controllers\LoginController;
@@ -38,6 +39,10 @@ Route::middleware(['auth', EnsureActiveUser::class])->group(function (): void {
     Route::delete('/lessons/{lesson}', [LessonController::class, 'destroy'])->name('lessons.destroy');
     Route::post('/lessons/{lesson}/registrations', [LessonRegistrationController::class, 'store'])
         ->name('lessons.register');
+    Route::get('/lessons/{lesson}/participants', [LessonAttendanceController::class, 'show'])
+        ->name('lessons.participants');
+    Route::patch('/lessons/{lesson}/attendance', [LessonAttendanceController::class, 'update'])
+        ->name('lessons.attendance.update');
 
     Route::patch('/members/{member}/deactivate', [MemberAccountController::class, 'deactivate'])
         ->name('members.deactivate');

@@ -152,7 +152,7 @@ Deze sectie houdt bij hoe ver de user stories uit [`docs/plan-van-eisen.md`](doc
 | US-02 | Account aanmaken en inloggen | ✅ Afgerond | `RegistrationController`, `LoginController`, `resources/views/auth/` |
 | US-03 | Inschrijven voor een les (`enrolled` / wachtlijst) | ✅ Afgerond | `LessonRegistrationController::store`, `Lesson`-model, policies |
 | US-04 | Afmelden voor een les (tot 2 uur voor start, wachtlijst-promotie) | ✅ Afgerond | `LessonRegistrationController::destroy` |
-| US-05 | Deelnemers en aanwezigheid beheren | 🚧 Deels | `PeopleDirectoryController::participants` (overzicht klaar); aanwezigheid registreren ontbreekt nog |
+| US-05 | Deelnemers en aanwezigheid beheren | ✅ Afgerond | `LessonAttendanceController`, `PeopleDirectoryController::participants`, `resources/views/lessons/participants.blade.php` |
 | US-06 | Lessen aanmaken en inplannen | ✅ Afgerond | `LessonController::create/edit/store/update/destroy` |
 | US-07 | Accountgegevens beheren (profiel, e-mail, wachtwoord) | ✅ Afgerond | `AccountController::update/updateEmail/updatePassword` (`PATCH`-endpoints), Form Requests met Nederlandstalige meldingen, accountpagina met opslaan/wachtwoord-verificatie; account verwijderen (`AccountController::destroy`) |
 | US-08 | Ledenaccounts uitschakelen | ⬜ Te starten | — |
@@ -162,9 +162,8 @@ Deze sectie houdt bij hoe ver de user stories uit [`docs/plan-van-eisen.md`](doc
 ### Next steps (sprint 2)
 
 1. **US-08** — ledenaccounts uitschakelen (`is_active`): beheerder-actie, inloggen voor uitgeschakelde accounts weigeren, gegevens en inschrijvingen bewaren.
-2. **US-05** — per les attendance registreren (`attended`/`absent`) en gemiste lessen samenvatten in het deelnemersoverzicht.
-3. **US-09** — traineraccounts aanmaken/bewerken met rollen-policies.
-4. **US-07 variant** — de resterende accountpagina-velden (geslacht/geboortedatum) koppelen aan echte databasekolommen, of verwijderen als de klant die data niet bewaard wil hebben.
+2. **US-09** — traineraccounts aanmaken/bewerken met rollen-policies.
+3. **US-07 variant** — de resterende accountpagina-velden (geslacht/geboortedatum) koppelen aan echte databasekolommen, of verwijderen als de klant die data niet bewaard wil hebben.
 
 ### Niet-functionele eisen (uit plan van eisen)
 

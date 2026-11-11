@@ -120,6 +120,10 @@
                                         <dt class="text-xs font-bold uppercase tracking-wide text-slate-500">Accountstatus</dt>
                                         <dd class="mt-1 text-sm font-bold {{ $selectedPerson->is_active ? 'text-emerald-700' : 'text-red-700' }}">{{ $selectedPerson->is_active ? 'Actief' : 'Uitgeschakeld' }}</dd>
                                     </div>
+                                    <div>
+                                        <dt class="text-xs font-bold uppercase tracking-wide text-slate-500">Gemiste lessen</dt>
+                                        <dd class="mt-1 text-sm font-bold text-slate-800">{{ $selectedPerson->missed_lessons_count }}</dd>
+                                    </div>
                                 @endif
                             </dl>
 

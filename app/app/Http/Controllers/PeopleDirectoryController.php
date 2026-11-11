@@ -16,6 +16,9 @@ class PeopleDirectoryController extends Controller
 
         $participants = User::query()
             ->where('role', 'member')
+            ->withCount([
+                'lessonRegistrations as missed_lessons_count' => fn ($query) => $query->where('attendance', 'absent'),
+            ])
             ->orderBy('name')
             ->get();
         $selectedPerson = $participants->firstWhere('id', $request->integer('participant'))
