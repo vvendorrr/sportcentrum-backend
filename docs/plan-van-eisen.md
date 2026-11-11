@@ -48,38 +48,37 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 
 ### Doelgroepen
 
-| Gebruiker         | Wat doet deze persoon op de website                                                                                                                       |
-| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Bezoeker          | Bekijkt het lesrooster en per les het aantal inschrijvingen, zonder de namen te zien. Kan een account aanmaken.                                           |
-| Lid               | Schrijft zich in voor lessen en kan zich afmelden.                                                                                                        |
-| Trainer           | Bekijkt de deelnemers en aanwezigheid van de eigen lessen en registreert wie aanwezig of afwezig was. |
-| Beheerder         | Beheert leden- en traineraccounts, maakt lessen aan en plant deze in, en bekijkt de bezetting van het lesaanbod. |
-
+| Gebruiker | Wat doet deze persoon op de website                                                                              |
+| --------- | ---------------------------------------------------------------------------------------------------------------- |
+| Bezoeker  | Bekijkt het lesrooster en per les het aantal inschrijvingen, zonder de namen te zien. Kan een account aanmaken.  |
+| Lid       | Schrijft zich in voor lessen en kan zich afmelden.                                                               |
+| Trainer   | Bekijkt de deelnemers en aanwezigheid van de eigen lessen en registreert wie aanwezig of afwezig was.            |
+| Beheerder | Beheert leden- en traineraccounts, maakt lessen aan en plant deze in, en bekijkt de bezetting van het lesaanbod. |
 
 ## Functionele eisen
 
 ### Overzicht van de user stories
 
-| ID    | User story                            | Deelproduct                  | Prioriteit | Sprint         | Wie              | Status realisatie                                                  |
-| ----- | ------------------------------------- | ---------------------------- | ---------- | -------------- | ---------------- | ------------------------------------------------------------------ |
-| US-01 | Rooster bekijken                      | Frontend                     | Hoog       | 1              | Lucas            | ✅ Afgerond                                                        |
-| US-02 | Account aanmaken en inloggen          | Backend, Frontend & Security | Hoog       | 1              | Lucas & Famke    | ✅ Afgerond                                                        |
-| US-03 | Inschrijven voor een les              | Backend & Frontend           | Hoog       | 1              | Famke            | ✅ Afgerond                                                        |
-| US-04 | Afmelden voor een les                 | Backend & Frontend           | Hoog       | 1              | Famke & Giovanni | ✅ Afgerond                                                        |
-| US-05 | Deelnemers en aanwezigheid beheren    | Backend & Frontend           | Hoog       | 1              | Lucas            | ✅ Afgerond                                                        |
-| US-06 | Lessen aanmaken en inplannen          | Backend & Frontend           | Hoog       | 2              | Lucas & Giovanni | ✅ Afgerond                                                        |
-| US-07 | Accountgegevens beheren               | Backend, Frontend & Security | Gemiddeld  | 2              | Lucas & Famke    | ✅ Afgerond                                                        |
-| US-08 | Ledenaccounts uitschakelen            | Backend & Security           | Gemiddeld  | 2              | Lucas            | ✅ Afgerond                                                        |
-| US-09 | Traineraccounts beheren               | Backend, Frontend & Security | Gemiddeld  | 2              | Famke            | ✅ Afgerond                                                        |
-| US-10 | Eigen inschrijvingen bekijken         | Backend & Frontend           | Gemiddeld  | 2              | Famke & Giovanni | ✅ Afgerond                                                        |
-| US-11 | Rooster filteren                      | Backend & Frontend           | Gemiddeld  | Giovanni       | Nog te bepalen   | ✅ Afgerond                                                        |
-| US-12 | Bezettingsoverzicht voor beheerder    | Backend & Frontend           | Hoog       | Nog te bepalen | Nog te bepalen   | ✅ Afgerond                                                        |
-| US-13 | Afmelding door medewerker registreren | Backend & Frontend           | Hoog       | Nog te bepalen | Nog te bepalen   | ✅ Afgerond (teamuitgangspunt; akkoord opdrachtgever open)          |
-| US-14 | Komende lessen voor trainer           | Backend & Frontend           | Hoog       | Nog te bepalen | Nog te bepalen   | ✅ Afgerond                                                        |
-| US-15 | Wachtlijststatus bekijken             | Backend & Frontend           | Gemiddeld  | Nog te bepalen | Nog te bepalen   | ✅ Afgerond                                                        |
-| US-16 | Rollen en bevoegdheden vaststellen    | Backend & Security           | Hoog       | Nog te bepalen | Nog te bepalen   | ✅ Afgerond (teamuitgangspunt; akkoord opdrachtgever open)          |
-| US-17 | Onverwachte deelnemers afhandelen     | Backend & Frontend           | Gemiddeld  | Nog te bepalen | Nog te bepalen   | ✅ Afgerond (teamuitgangspunt; akkoord opdrachtgever open)          |
-| US-18 | Nederlandstalige, sportieve website   | Frontend                     | Gemiddeld  | Nog te bepalen | Nog te bepalen   | ⬜ Te valideren                                                    |
+| ID    | User story                            | Deelproduct                  | Prioriteit | Sprint | Wie              |
+| ----- | ------------------------------------- | ---------------------------- | ---------- | ------ | ---------------- |
+| US-01 | Rooster bekijken                      | Frontend                     | Hoog       | 1      | Lucas            |
+| US-02 | Account aanmaken en inloggen          | Backend, Frontend & Security | Hoog       | 1      | Lucas & Famke    |
+| US-03 | Inschrijven voor een les              | Backend & Frontend           | Hoog       | 1      | Famke            |
+| US-04 | Afmelden voor een les                 | Backend & Frontend           | Hoog       | 1      | Famke & Giovanni |
+| US-05 | Deelnemers en aanwezigheid beheren    | Backend & Frontend           | Hoog       | 1      | Lucas            |
+| US-06 | Lessen aanmaken en inplannen          | Backend & Frontend           | Hoog       | 2      | Lucas & Giovanni |
+| US-07 | Accountgegevens beheren               | Backend, Frontend & Security | Gemiddeld  | 2      | Lucas & Famke    |
+| US-08 | Ledenaccounts uitschakelen            | Backend & Security           | Gemiddeld  | 2      | Lucas            |
+| US-09 | Traineraccounts beheren               | Backend, Frontend & Security | Gemiddeld  | 2      | Famke            |
+| US-10 | Eigen inschrijvingen bekijken         | Backend & Frontend           | Gemiddeld  | 2      | Famke & Giovanni |
+| US-11 | Rooster filteren                      | Backend & Frontend           | Gemiddeld  | 2      | Nog te bepalen   |
+| US-12 | Bezettingsoverzicht voor beheerder    | Backend & Frontend           | Hoog       | 2      | Nog te bepalen   |
+| US-13 | Afmelding door medewerker registreren | Backend & Frontend           | Hoog       | 2      | Nog te bepalen   |
+| US-14 | Komende lessen voor trainer           | Backend & Frontend           | Hoog       | 2      | Nog te bepalen   |
+| US-15 | Wachtlijststatus bekijken             | Backend & Frontend           | Gemiddeld  | 2      | Nog te bepalen   |
+| US-16 | Rollen en bevoegdheden vaststellen    | Backend & Security           | Hoog       | 2      | Nog te bepalen   |
+| US-17 | Onverwachte deelnemers afhandelen     | Backend & Frontend           | Gemiddeld  | 2      | Nog te bepalen   |
+| US-18 | Nederlandstalige, sportieve website   | Frontend                     | Gemiddeld  | 2      | Nog te bepalen   |
 
 ### Uitgewerkte user stories
 
@@ -254,11 +253,11 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 - [x] De applicatie handhaaft bevoegdheden ook bij directe URL-aanroepen.
 - [x] Autorisatie is met featuretests gecontroleerd.
 
-| Rol | Bevoegdheden |
-| --- | --- |
-| Lid | Publiek rooster bekijken; eigen profiel, inschrijvingen en tijdige afmeldingen beheren. |
-| Trainer | Eigen komende lessen en deelnemers bekijken; eigen profiel beheren; aanwezigheid registreren na afloop. Geen lessen of andere accounts beheren en geen afmelding namens leden. |
-| Beheerder | Lessen en leden-/traineraccounts beheren; eigen profiel beheren; deelnemers van alle lessen bekijken; aanwezigheid registreren; namens leden afmelden tot de les start. |
+| Rol       | Bevoegdheden                                                                                                                                                                   |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Lid       | Publiek rooster bekijken; eigen profiel, inschrijvingen en tijdige afmeldingen beheren.                                                                                        |
+| Trainer   | Eigen komende lessen en deelnemers bekijken; eigen profiel beheren; aanwezigheid registreren na afloop. Geen lessen of andere accounts beheren en geen afmelding namens leden. |
+| Beheerder | Lessen en leden-/traineraccounts beheren; eigen profiel beheren; deelnemers van alle lessen bekijken; aanwezigheid registreren; namens leden afmelden tot de les start.        |
 
 #### US-17 — Onverwachte deelnemers afhandelen — Gemiddeld — Backend & Frontend — Teamuitgangspunt
 
@@ -283,75 +282,41 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 
 ## Niet-functionele eisen
 
-| Nr.   | Eis                                                                                                                                  | Hoe controleren we dit?                                                                                              |
-| ----- | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
-| NFE-1 | **Beveiliging:** wachtwoorden worden gehasht opgeslagen en de applicatie is beschermd tegen CSRF.                                    | Feature tests voor registratie/inloggen; inspectie van migrations (`password_hash`) en Laravel-middleware            |
-| NFE-2 | **Autorisatie:** bezoekers zien geen namen van deelnemers; alleen leden kunnen zich inschrijven en alleen beheerders lessen beheren. | Policies (`LessonPolicy`) en Pest feature tests op HTTP-statuscodes                                                  |
-| NFE-3 | **Betrouwbaarheid:** een les wordt nooit overboekt; wachtlijst-promotie gebeurt automatisch en in volgorde van aanmelding.           | Exclusieve unieke constraint (`lesson_id`, `user_id`) en feature tests (volle les → wachtlijst; afmelden → promotie) |
-| NFE-4 | **Bruikbaarheid:** de interface en validatiefouten zijn volledig Nederlandstalig en begrijpelijk geformuleerd.                       | Form Requests met Nederlandstalige meldingen; handmatig doorlopen van de flows                                       |
+| Nr.   | Eis                                                                                                                                  | Hoe controleren we dit?                                                                                                                                    |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| NFE-1 | **Beveiliging:** wachtwoorden worden gehasht opgeslagen en de applicatie is beschermd tegen CSRF.                                    | Feature tests voor registratie/inloggen; inspectie van migrations (`password_hash`) en Laravel-middleware                                                  |
+| NFE-2 | **Autorisatie:** bezoekers zien geen namen van deelnemers; alleen leden kunnen zich inschrijven en alleen beheerders lessen beheren. | Policies (`LessonPolicy`) en Pest feature tests op HTTP-statuscodes                                                                                        |
+| NFE-3 | **Betrouwbaarheid:** een les wordt nooit overboekt; wachtlijst-promotie gebeurt automatisch en in volgorde van aanmelding.           | Exclusieve unieke constraint (`lesson_id`, `user_id`) en feature tests (volle les → wachtlijst; afmelden → promotie)                                       |
+| NFE-4 | **Bruikbaarheid:** de interface en validatiefouten zijn volledig Nederlandstalig en begrijpelijk geformuleerd.                       | Form Requests met Nederlandstalige meldingen; handmatig doorlopen van de flows                                                                             |
 | NFE-5 | **Performance:** het rooster laadt binnen één seconde bij honderden leden en tientallen lessen, zonder N+1-queries.                  | Pest-regressietest met 200 leden en 30 lessen controleert lokaal minder dan één seconde en maximaal 10 SELECT-queries; benchmark in productie blijft nodig |
-| NFE-6 | **Onderhoudbaarheid:** minimaal 10 feature tests en een consistente codestijl die met elke commit meekomt.                           | `vendor/bin/pint`; `vendor/bin/pest` (stand: 11/11 — 117 tests, 527 assertions, allemaal groen)                    |
-| NFE-7 | **Data-integriteit:** alleen geldige waarden voor rol, categorie, status en aanwezigheid komen in de database.                       | Enum-kolommen in migrations; uniek e-mailadres (`users.email`); validatie weigert ongeldige invoer                   |
+| NFE-6 | **Onderhoudbaarheid:** minimaal 10 feature tests en een consistente codestijl die met elke commit meekomt.                           | `vendor/bin/pint`; `vendor/bin/pest` (stand: 11/11 — 117 tests, 527 assertions, allemaal groen)                                                            |
+| NFE-7 | **Data-integriteit:** alleen geldige waarden voor rol, categorie, status en aanwezigheid komen in de database.                       | Enum-kolommen in migrations; uniek e-mailadres (`users.email`); validatie weigert ongeldige invoer                                                         |
 
 ## Technische eisen en randvoorwaarden
 
-| Onderwerp      | Afspraak                                                                                   |
-| -------------- | ------------------------------------------------------------------------------------------ |
-| Framework      | Laravel 13, PHP ≥ 8.3                                                                      |
-| Views          | Blade-views met één gedeelde layout; geen React, Vue of Inertia                            |
-| Styling        | Tailwind CSS via Vite                                                                      |
-| Database       | SQLite (standaard; MySQL kan via `.env`), alle tabellen via migrations, gevuld met seeders |
-| Tijdzone       | Lestijden worden als `Europe/Amsterdam` ingevoerd en getoond; opgeslagen tijdstippen zijn UTC.           |
-| Taal           | Nederlands (`nl`) voor interface en validatiemeldingen.                                                   |
-| Authenticatie  | Session-based, met de rollen `member` (lid), `trainer` en `admin` (beheerder)                 |
-| Validatie      | Form Requests met Nederlandstalige meldingen                                               |
-| Testen         | Minimaal 10 feature tests met _Pest / PHPUnit_                                             |
-| Versiebeheer   | GitHub, branches per user story, pull requests met review                                  |
-| Overige keuzes | Codestijl met Laravel Pint; routes en policies in de applicatiecode                        |
+| Onderwerp      | Afspraak                                                                                       |
+| -------------- | ---------------------------------------------------------------------------------------------- |
+| Framework      | Laravel 13, PHP ≥ 8.3                                                                          |
+| Views          | Blade-views met één gedeelde layout; geen React, Vue of Inertia                                |
+| Styling        | Tailwind CSS via Vite                                                                          |
+| Database       | SQLite (standaard; MySQL kan via `.env`), alle tabellen via migrations, gevuld met seeders     |
+| Tijdzone       | Lestijden worden als `Europe/Amsterdam` ingevoerd en getoond; opgeslagen tijdstippen zijn UTC. |
+| Taal           | Nederlands (`nl`) voor interface en validatiemeldingen.                                        |
+| Authenticatie  | Session-based, met de rollen `member` (lid), `trainer` en `admin` (beheerder)                  |
+| Validatie      | Form Requests met Nederlandstalige meldingen                                                   |
+| Testen         | Minimaal 10 feature tests met _Pest / PHPUnit_                                                 |
+| Versiebeheer   | GitHub, branches per user story, pull requests met review                                      |
+| Overige keuzes | Codestijl met Laravel Pint; routes en policies in de applicatiecode                            |
 
 ## Datamodel
 
-```mermaid
-erDiagram
-    USERS ||--o{ LESSONS : teaches
-    USERS ||--o{ LESSON_REGISTRATIONS : makes
-    LESSONS ||--o{ LESSON_REGISTRATIONS : has
-
-    USERS {
-        BIGINT id PK
-        VARCHAR(255) name
-        VARCHAR(30) phone_number
-        VARCHAR(255) email UK
-        VARCHAR(255) password_hash
-        VARCHAR(20) role
-        TINYINT(1) is_active
-        DATETIME created_at
-    }
-    LESSONS {
-        BIGINT id PK
-        BIGINT instructor_id FK
-        DATETIME starts_at
-        SMALLINT duration_minutes
-        VARCHAR(30) category
-        VARCHAR(100) sport
-        SMALLINT max_participants
-    }
-    LESSON_REGISTRATIONS {
-        BIGINT id PK
-        BIGINT lesson_id FK
-        BIGINT user_id FK
-        VARCHAR(20) status
-        DATETIME registered_at
-        VARCHAR(10) attendance
-        DATETIME canceled_at
-    }
-```
+![ERD](erd.webp)
 
 De `id`- en foreign-keykolommen zijn `BIGINT UNSIGNED`; `duration_minutes` en `max_participants` zijn `SMALLINT UNSIGNED`. `phone_number`, `attendance` en `canceled_at` zijn nullable, net als `instructor_id`: die is nullable met `nullOnDelete`, zodat een account verwijderd kan worden zonder de lessen te verwijderen. De waarden voor `role` zijn `member`, `trainer` en `admin`; trainer en beheerder zijn aparte rollen. Voor `category` zijn dit `strength`, `cardio` en `relaxation`; `status` gebruikt `enrolled`, `waitlisted` en `cancelled`; `attendance` gebruikt `attended` en `absent`.
 
 | Entiteit               | Belangrijkste velden                                                                                                                       | Relaties                                                                                                                                             |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `users`                | `name`, `phone_number`, `email`, `password_hash`, `role` (`member`/`trainer`/`admin`), `is_active`, `created_at`                            | Een trainer kan meerdere lessen geven. Een gebruiker kan zich voor meerdere lessen inschrijven.                                                       |
+| `users`                | `name`, `phone_number`, `email`, `password_hash`, `role` (`member`/`trainer`/`admin`), `is_active`, `created_at`                           | Een trainer kan meerdere lessen geven. Een gebruiker kan zich voor meerdere lessen inschrijven.                                                      |
 | `lessons`              | `instructor_id`, `starts_at`, `duration_minutes`, `category`, `sport`, `max_participants`                                                  | Een les heeft één trainer en kan meerdere inschrijvingen hebben.                                                                                     |
 | `lesson_registrations` | `lesson_id`, `user_id`, `status` (`enrolled`/`waitlisted`/`cancelled`), `registered_at`, `attendance` (`attended`/`absent`), `canceled_at` | Koppelt een gebruiker aan een les. Een gebruiker kan per les maximaal één inschrijving hebben; een afgemelde inschrijving kan opnieuw actief worden. |
 
@@ -382,14 +347,14 @@ De `id`- en foreign-keykolommen zijn `BIGINT UNSIGNED`; `duration_minutes` en `m
 
 ### Openstaande vragen
 
-| Vraag                                                                                                                                                  | Aan wie    | Sinds              | Status |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | ------------------ | ------ |
-| Worden geslacht en geboortedatum van leden bewaard? Teamkeuze: niet verzamelen of opslaan zolang dit niet is goedgekeurd.                                 | Ron de Wit | 06/11              | Teamkeuze; klantbevestiging open |
-| Welke acties mogen trainers en beheerders elk uitvoeren, nu dit aparte rollen zijn? Teamvoorstel: rolmatrix bij US-16.                                 | Ron de Wit | 10/11              | Voorstel; bevestiging open |
-| Is een baliemedewerker een aparte rol? Teamvoorstel: nee; alleen lid, trainer en beheerder.                                                          | Ron de Wit | [Nog in te vullen] | Voorstel; bevestiging open |
-| Mogen leden zonder inschrijving aansluiten? Teamvoorstel: nee; alleen bevestigde inschrijvingen mogen deelnemen.                                        | Ron de Wit | [Nog in te vullen] | Voorstel; bevestiging open |
-| Moeten leden bij een wachtlijststatus of promotie alleen de website kunnen raadplegen, of is ook een melding gewenst? E-mail/sms valt nu buiten scope. | Ron de Wit | [Nog in te vullen] | Open   |
-| Welke grens bepaalt "weinig bezocht"? Teamvoorstel: minder dan 50% bezetting; de grens is instelbaar.                                                 | Ron de Wit | [Nog in te vullen] | Voorstel; bevestiging open |
+| Vraag                                                                                                                                                  | Aan wie    | Sinds              | Status                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | ------------------ | -------------------------------- |
+| Worden geslacht en geboortedatum van leden bewaard? Teamkeuze: niet verzamelen of opslaan zolang dit niet is goedgekeurd.                              | Ron de Wit | 06/11              | Teamkeuze; klantbevestiging open |
+| Welke acties mogen trainers en beheerders elk uitvoeren, nu dit aparte rollen zijn? Teamvoorstel: rolmatrix bij US-16.                                 | Ron de Wit | 10/11              | Voorstel; bevestiging open       |
+| Is een baliemedewerker een aparte rol? Teamvoorstel: nee; alleen lid, trainer en beheerder.                                                            | Ron de Wit | [Nog in te vullen] | Voorstel; bevestiging open       |
+| Mogen leden zonder inschrijving aansluiten? Teamvoorstel: nee; alleen bevestigde inschrijvingen mogen deelnemen.                                       | Ron de Wit | [Nog in te vullen] | Voorstel; bevestiging open       |
+| Moeten leden bij een wachtlijststatus of promotie alleen de website kunnen raadplegen, of is ook een melding gewenst? E-mail/sms valt nu buiten scope. | Ron de Wit | [Nog in te vullen] | Open                             |
+| Welke grens bepaalt "weinig bezocht"? Teamvoorstel: minder dan 50% bezetting; de grens is instelbaar.                                                  | Ron de Wit | [Nog in te vullen] | Voorstel; bevestiging open       |
 
 ## Wijzigingenlog
 
