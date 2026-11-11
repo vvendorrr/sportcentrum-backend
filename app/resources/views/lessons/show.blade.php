@@ -13,11 +13,11 @@
                 <dl class="grid gap-5 sm:grid-cols-2">
                     <div class="rounded-2xl bg-slate-50 p-4">
                         <dt class="text-xs font-bold uppercase tracking-wide text-slate-500">Begint</dt>
-                        <dd class="mt-2 text-lg font-extrabold text-brand-950">{{ $lesson->starts_at->format('d-m-Y H:i') }} UTC</dd>
+                        <dd class="mt-2 text-lg font-extrabold text-brand-950">{{ $lesson->starts_at->copy()->setTimezone(config('sportcentrum.schedule_timezone'))->format('d-m-Y H:i') }} (Nederlandse tijd)</dd>
                     </div>
                     <div class="rounded-2xl bg-slate-50 p-4">
                         <dt class="text-xs font-bold uppercase tracking-wide text-slate-500">Eindigt</dt>
-                        <dd class="mt-2 text-lg font-extrabold text-brand-950">{{ $lesson->starts_at->copy()->addMinutes($lesson->duration_minutes)->format('d-m-Y H:i') }} UTC</dd>
+                        <dd class="mt-2 text-lg font-extrabold text-brand-950">{{ $lesson->starts_at->copy()->addMinutes($lesson->duration_minutes)->setTimezone(config('sportcentrum.schedule_timezone'))->format('d-m-Y H:i') }} (Nederlandse tijd)</dd>
                     </div>
                     <div class="rounded-2xl bg-slate-50 p-4">
                         <dt class="text-xs font-bold uppercase tracking-wide text-slate-500">Duur</dt>
@@ -33,6 +33,7 @@
                     <p class="text-sm font-bold uppercase tracking-wide text-brand-700">Deelnemers</p>
                     <p class="mt-3 text-4xl font-black tracking-tight text-brand-950">{{ $lesson->enrolled_count }} <span class="text-xl text-slate-400">/ {{ $lesson->max_participants }}</span></p>
                     <p class="mt-1 text-sm font-semibold text-slate-600">{{ max(0, $lesson->max_participants - $lesson->enrolled_count) }} vrije plekken</p>
+                    <p class="mt-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-5 text-amber-950">Deelname is alleen mogelijk met een bevestigde inschrijving. Een plek op de wachtlijst is nog geen bevestiging.</p>
 
                     @auth
                         @if (auth()->user()->role === 'member')

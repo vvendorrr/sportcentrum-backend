@@ -27,7 +27,7 @@ it('allows an admin to create a lesson with a trainer instructor', function () {
 
     $this->assertDatabaseHas('lessons', [
         'instructor_id' => $instructor->id,
-        'starts_at' => '2026-10-11 09:00:00',
+        'starts_at' => '2026-10-11 07:00:00',
         'duration_minutes' => 45,
         'category' => 'cardio',
         'sport' => 'Spinning',

@@ -13,6 +13,15 @@ it('renders the login form', function () {
         ->assertSeeText('Inloggen');
 });
 
+it('shows Dutch validation messages for empty login fields', function () {
+    $this->from(route('login'))
+        ->post(route('login.store'), [])
+        ->assertRedirectBackWithErrors([
+            'email' => 'Vul je e-mailadres in.',
+            'password' => 'Vul je wachtwoord in.',
+        ]);
+});
+
 it('renders the registration form', function () {
     $response = $this->get(route('register'));
 

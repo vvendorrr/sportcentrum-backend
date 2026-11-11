@@ -189,3 +189,58 @@ it('does not let a member cancel another member’s registration', function () {
     $response->assertNotFound();
     expect($registration->fresh()->status)->toBe('enrolled');
 });
+
+it('allows only an admin to cancel for a member after the self-cancellation deadline and promotes the next waiter', function () {
+    $this->travelTo('2026-10-10 10:00:01');
+    $admin = User::factory()->admin()->create();
+    $member = User::factory()->create();
+    $waitlistedMember = User::factory()->create();
+    $lesson = Lesson::factory()->create([
+        'starts_at' => '2026-10-10 12:00:00',
+        'max_participants' => 1,
+    ]);
+    $enrolled = $lesson->registrations()->create([
+        'user_id' => $member->id,
+        'status' => 'enrolled',
+        'registered_at' => now()->subHour(),
+    ]);
+    $waitlisted = $lesson->registrations()->create([
+        'user_id' => $waitlistedMember->id,
+        'status' => 'waitlisted',
+        'registered_at' => now()->subMinutes(30),
+    ]);
+
+    $this->actingAs(User::factory()->trainer()->create())
+        ->delete(route('members.registrations.cancel', $enrolled))
+        ->assertForbidden();
+
+    $this->actingAs($admin)
+        ->delete(route('members.registrations.cancel', $enrolled))
+        ->assertRedirectToRoute('participants.index', ['participant' => $member->id])
+        ->assertSessionHas('status', 'De afmelding namens het lid is geregistreerd.');
+
+    expect($enrolled->fresh()->status)->toBe('cancelled')
+        ->and($enrolled->fresh()->canceled_at->toDateTimeString())->toBe(now()->toDateTimeString())
+        ->and($waitlisted->fresh()->status)->toBe('enrolled');
+});
+
+it('does not allow staff to cancel for a member after the lesson has started', function () {
+    $this->travelTo('2026-10-10 12:00:00');
+    $admin = User::factory()->admin()->create();
+    $member = User::factory()->create();
+    $lesson = Lesson::factory()->create([
+        'starts_at' => '2026-10-10 12:00:00',
+    ]);
+    $registration = $lesson->registrations()->create([
+        'user_id' => $member->id,
+        'status' => 'enrolled',
+        'registered_at' => now()->subHour(),
+    ]);
+
+    $this->actingAs($admin)
+        ->from(route('participants.index', ['participant' => $member->id]))
+        ->delete(route('members.registrations.cancel', $registration))
+        ->assertRedirectBackWithErrors(['registration']);
+
+    expect($registration->fresh()->status)->toBe('enrolled');
+});

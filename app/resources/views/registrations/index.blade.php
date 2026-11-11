@@ -28,7 +28,7 @@
                         </div>
 
                         <h2 class="mt-5 text-2xl font-black tracking-tight text-brand-950"><a class="rounded focus-visible:outline-2 focus-visible:outline-brand-600" href="{{ route('lessons.show', $registration->lesson) }}">{{ $registration->lesson->sport }}</a></h2>
-                        <p class="mt-2 text-sm font-semibold text-slate-500">{{ $registration->lesson->starts_at->format('d-m-Y · H:i') }} UTC</p>
+                        <p class="mt-2 text-sm font-semibold text-slate-500">{{ $registration->lesson->starts_at->copy()->setTimezone(config('sportcentrum.schedule_timezone'))->format('d-m-Y · H:i') }} Nederlandse tijd</p>
 
                         <dl class="mt-5 space-y-3 rounded-2xl bg-slate-50 p-4 text-sm">
                             <div class="flex justify-between gap-4">

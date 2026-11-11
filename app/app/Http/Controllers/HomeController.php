@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Lesson;
 use App\Models\LessonRegistration;
+use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
@@ -11,8 +12,9 @@ class HomeController extends Controller
 {
     public function __invoke(Request $request): View
     {
-        $now = now();
-        $weekStart = $now->copy()->startOfWeek();
+        $scheduleTimezone = config('sportcentrum.schedule_timezone');
+        $now = now($scheduleTimezone);
+        $weekStart = $now->copy()->startOfWeek(Carbon::MONDAY);
         $weekEnd = $weekStart->copy()->addDays(4)->endOfDay();
         $todayStart = $now->copy()->startOfDay();
         $tomorrowStart = $todayStart->copy()->addDay();
@@ -28,7 +30,7 @@ class HomeController extends Controller
             ->withCount([
                 'registrations as enrolled_count' => fn ($query) => $query->where('status', 'enrolled'),
             ])
-            ->whereBetween('starts_at', [$weekStart, $weekEnd])
+            ->whereBetween('starts_at', [$weekStart->copy()->utc(), $weekEnd->copy()->utc()])
             ->orderBy('starts_at')
             ->orderBy('id')
             ->get();
@@ -40,16 +42,16 @@ class HomeController extends Controller
                 'participants' => LessonRegistration::query()
                     ->where('status', 'enrolled')
                     ->whereHas('lesson', fn ($query) => $query
-                        ->where('starts_at', '>=', $todayStart)
-                        ->where('starts_at', '<', $tomorrowStart))
+                        ->where('starts_at', '>=', $todayStart->copy()->utc())
+                        ->where('starts_at', '<', $tomorrowStart->copy()->utc()))
                     ->count(),
                 'cancellations' => LessonRegistration::query()
-                    ->where('canceled_at', '>=', $todayStart)
-                    ->where('canceled_at', '<', $tomorrowStart)
+                    ->where('canceled_at', '>=', $todayStart->copy()->utc())
+                    ->where('canceled_at', '<', $tomorrowStart->copy()->utc())
                     ->count(),
                 'lessons' => Lesson::query()
-                    ->where('starts_at', '>=', $todayStart)
-                    ->where('starts_at', '<', $tomorrowStart)
+                    ->where('starts_at', '>=', $todayStart->copy()->utc())
+                    ->where('starts_at', '<', $tomorrowStart->copy()->utc())
                     ->count(),
             ];
         }
@@ -63,7 +65,7 @@ class HomeController extends Controller
         return view('home', [
             'greeting' => $greeting,
             'weekDays' => $weekDays,
-            'weekLessons' => $lessons->groupBy(fn (Lesson $lesson) => $lesson->starts_at->format('Y-m-d')),
+            'weekLessons' => $lessons->groupBy(fn (Lesson $lesson) => $lesson->starts_at->copy()->setTimezone($scheduleTimezone)->format('Y-m-d')),
             'weekRangeLabel' => $weekStart->format('d-m-Y').' t/m '.$weekEnd->format('d-m-Y'),
             'timeSlots' => range(6, 21),
             'stats' => $stats,

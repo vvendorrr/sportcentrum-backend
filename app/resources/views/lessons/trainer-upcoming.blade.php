@@ -19,7 +19,7 @@
                     <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
                         <div class="flex flex-wrap items-start justify-between gap-3">
                             <div>
-                                <p class="text-sm font-bold text-brand-600">{{ $lesson->starts_at->format('d-m-Y · H:i') }}</p>
+                                <p class="text-sm font-bold text-brand-600">{{ $lesson->starts_at->copy()->setTimezone(config('sportcentrum.schedule_timezone'))->format('d-m-Y · H:i') }}</p>
                                 <h2 class="mt-1 text-2xl font-black tracking-tight text-brand-950">{{ $lesson->sport }}</h2>
                             </div>
                             <span class="rounded-full bg-brand-50 px-3 py-1 text-xs font-bold text-brand-700">{{ $lesson->duration_minutes }} minuten</span>
@@ -35,6 +35,8 @@
                                 <dd class="mt-1 font-extrabold text-brand-950">{{ $lesson->waitlisted_count }}</dd>
                             </div>
                         </dl>
+
+                        <p class="mt-5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-950">Alleen leden met een bevestigde inschrijving mogen deelnemen. Laat deelnemers zonder geldige inschrijving of met alleen een wachtlijststatus niet aansluiten; verwijs hen naar de beheerder. Overschrijd de lescapaciteit niet.</p>
 
                         <section class="mt-5" aria-labelledby="enrolled-{{ $lesson->id }}">
                             <h3 id="enrolled-{{ $lesson->id }}" class="font-extrabold text-brand-950">Bevestigde deelnemers</h3>

@@ -2,11 +2,36 @@
 
 namespace App\Http\Requests;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Throwable;
 
 abstract class LessonFormRequest extends FormRequest
 {
+    protected function prepareForValidation(): void
+    {
+        $startsAt = $this->input('starts_at');
+
+        if (! is_string($startsAt) || ! preg_match('/^(\d{4}-\d{2}-\d{2})[T ](\d{2}:\d{2})(?::\d{2})?$/', $startsAt, $parts)) {
+            return;
+        }
+
+        try {
+            $localStartsAt = CarbonImmutable::parse($startsAt, config('sportcentrum.schedule_timezone'));
+        } catch (Throwable) {
+            return;
+        }
+
+        if ($localStartsAt->format('Y-m-d H:i') !== $parts[1].' '.$parts[2]) {
+            $this->merge(['starts_at' => null]);
+
+            return;
+        }
+
+        $this->merge(['starts_at' => $localStartsAt->utc()->format('Y-m-d H:i:s')]);
+    }
+
     /**
      * @return array<string, array<int, mixed>>
      */

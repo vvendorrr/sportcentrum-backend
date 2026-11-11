@@ -4,12 +4,14 @@
 
         <article class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl shadow-brand-950/5">
             <header class="bg-gradient-to-r from-brand-950 via-brand-800 to-brand-600 px-6 py-8 text-white sm:px-9 sm:py-10">
-                <p class="text-sm font-bold uppercase tracking-wide text-blue-100">{{ $lesson->starts_at->format('d-m-Y · H:i') }} · {{ $lesson->duration_minutes }} minuten</p>
+                <p class="text-sm font-bold uppercase tracking-wide text-blue-100">{{ $lesson->starts_at->copy()->setTimezone(config('sportcentrum.schedule_timezone'))->format('d-m-Y · H:i') }} · {{ $lesson->duration_minutes }} minuten</p>
                 <h1 id="participants-heading" class="mt-2 text-3xl font-black tracking-tight sm:text-4xl">{{ $lesson->sport }}</h1>
                 <p class="mt-2 text-blue-100">Deelnemers en aanwezigheid</p>
             </header>
 
             <div class="p-6 sm:p-9">
+                <p class="mb-6 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-950">Alleen leden met een bevestigde inschrijving mogen deelnemen. Laat deelnemers zonder geldige inschrijving of met alleen een wachtlijststatus niet aansluiten; verwijs hen naar de beheerder. Overschrijd de lescapaciteit niet.</p>
+
                 @if ($registrations->isEmpty())
                     <p class="rounded-2xl bg-slate-50 px-4 py-5 text-sm text-slate-500">Er zijn geen ingeschreven deelnemers voor deze les.</p>
                 @elseif ($lessonHasEnded)

@@ -24,6 +24,16 @@ it('shows upcoming lesson occupancy to admins without exposing participant names
         'status' => 'waitlisted',
         'registered_at' => now(),
     ]);
+    $lowOccupancyLesson = Lesson::factory()->create([
+        'sport' => 'Circuittraining',
+        'starts_at' => '2026-10-12 09:00:00',
+        'max_participants' => 4,
+    ]);
+    $lowOccupancyLesson->registrations()->create([
+        'user_id' => User::factory()->create()->id,
+        'status' => 'enrolled',
+        'registered_at' => now(),
+    ]);
     Lesson::factory()->create([
         'sport' => 'Past lesson',
         'starts_at' => '2026-10-09 09:00:00',
@@ -37,6 +47,9 @@ it('shows upcoming lesson occupancy to admins without exposing participant names
         ->assertSeeText('Ingeschreven')
         ->assertSeeText('Vrije plekken')
         ->assertSeeText('Beschikbaar')
+        ->assertSeeText('Lage bezetting')
+        ->assertSeeText('Circuittraining')
+        ->assertSeeText('50%')
         ->assertDontSeeText('Private Member Name')
         ->assertDontSeeText('Past lesson');
 });

@@ -28,6 +28,19 @@ class LoginRequest extends FormRequest
         ];
     }
 
+    /**
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'email.required' => 'Vul je e-mailadres in.',
+            'email.email' => 'Vul een geldig e-mailadres in.',
+            'password.required' => 'Vul je wachtwoord in.',
+            'password.string' => 'Het wachtwoord moet tekst zijn.',
+        ];
+    }
+
     public function authenticate(): void
     {
         $this->ensureIsNotRateLimited();

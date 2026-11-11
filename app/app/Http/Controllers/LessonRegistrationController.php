@@ -25,6 +25,21 @@ class LessonRegistrationController extends Controller
             ->with('status', $message);
     }
 
+    public function cancelOnBehalf(
+        Request $request,
+        LessonRegistration $lessonRegistration,
+        LessonRegistrationService $registrations,
+    ): RedirectResponse {
+        Gate::authorize('cancelOnBehalf', $lessonRegistration);
+
+        $memberId = $lessonRegistration->user_id;
+        $registrations->cancelOnBehalf($request->user(), $lessonRegistration);
+
+        return redirect()
+            ->route('participants.index', ['participant' => $memberId])
+            ->with('status', 'De afmelding namens het lid is geregistreerd.');
+    }
+
     public function destroy(
         Request $request,
         LessonRegistration $lessonRegistration,

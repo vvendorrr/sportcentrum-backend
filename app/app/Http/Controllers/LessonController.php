@@ -21,7 +21,9 @@ class LessonController extends Controller
     public function index(LessonIndexRequest $request): View
     {
         $filters = $request->validated();
-        $weekStart = Carbon::parse($filters['week'] ?? now()->toDateString())->startOfWeek(Carbon::MONDAY);
+        $scheduleTimezone = config('sportcentrum.schedule_timezone');
+        $weekStart = Carbon::parse($filters['week'] ?? now($scheduleTimezone)->toDateString(), $scheduleTimezone)
+            ->startOfWeek(Carbon::MONDAY);
         $weekEnd = $weekStart->copy()->addDays(4)->endOfDay();
         $sportSearch = trim($filters['sport'] ?? '');
 
@@ -30,7 +32,7 @@ class LessonController extends Controller
             ->withCount([
                 'registrations as enrolled_count' => fn ($query) => $query->where('status', 'enrolled'),
             ])
-            ->whereBetween('starts_at', [$weekStart, $weekEnd]);
+            ->whereBetween('starts_at', [$weekStart->copy()->utc(), $weekEnd->copy()->utc()]);
 
         if (isset($filters['category'])) {
             $query->where('category', $filters['category']);
@@ -72,7 +74,7 @@ class LessonController extends Controller
 
         return view('lessons.index', [
             'lessons' => $lessons,
-            'lessonsByDay' => $lessons->groupBy(fn (Lesson $lesson) => $lesson->starts_at->format('Y-m-d')),
+            'lessonsByDay' => $lessons->groupBy(fn (Lesson $lesson) => $lesson->starts_at->copy()->setTimezone($scheduleTimezone)->format('Y-m-d')),
             'registrationsByLesson' => $registrationsByLesson,
             'weekDays' => $weekDays,
             'timeSlots' => range(6, 19),

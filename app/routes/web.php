@@ -69,6 +69,8 @@ Route::middleware(['auth', EnsureActiveUser::class])->group(function (): void {
         ->name('trainers.lessons.detach');
     Route::delete('/my/registrations/{lessonRegistration}', [LessonRegistrationController::class, 'destroy'])
         ->name('registrations.cancel');
+    Route::delete('/members/registrations/{lessonRegistration}', [LessonRegistrationController::class, 'cancelOnBehalf'])
+        ->name('members.registrations.cancel');
 });
 
 Route::get('/lessons/{lesson}', [LessonController::class, 'show'])->name('lessons.show');

@@ -1,5 +1,6 @@
 @php
-    $endsAt = $lesson->starts_at->copy()->addMinutes($lesson->duration_minutes);
+    $startsAt = $lesson->starts_at->copy()->setTimezone(config('sportcentrum.schedule_timezone'));
+    $endsAt = $startsAt->copy()->addMinutes($lesson->duration_minutes);
     $memberCount = $lesson->registrations->where('status', 'enrolled')->count();
     $categoryLabels = [
         'strength' => 'Kracht',
@@ -14,8 +15,8 @@
     <dl>
         <dt>Begintijd</dt>
         <dd>
-            <time datetime="{{ $lesson->starts_at->toIso8601String() }}">
-                {{ $lesson->starts_at->format('H:i') }}
+            <time datetime="{{ $startsAt->toIso8601String() }}">
+                {{ $startsAt->format('H:i') }}
             </time>
         </dd>
 

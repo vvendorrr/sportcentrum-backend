@@ -82,12 +82,12 @@
                                     @foreach ($weekDays as $day)
                                         @php
                                             $dayKey = $day['date']->format('Y-m-d');
-                                            $lessonsAtHour = $weekLessons->get($dayKey, collect())->filter(fn ($lesson) => $lesson->starts_at->hour === $hour);
+                                            $lessonsAtHour = $weekLessons->get($dayKey, collect())->filter(fn ($lesson) => $lesson->starts_at->copy()->setTimezone(config('sportcentrum.schedule_timezone'))->hour === $hour);
                                         @endphp
                                         <td class="h-10 border-l border-t border-slate-100 p-1 align-top transition group-hover:bg-blue-50/30">
                                             @foreach ($lessonsAtHour as $lesson)
                                                 <a class="mb-1 block rounded-xl border-l-4 border-brand-500 bg-brand-50 px-3 py-2 text-xs text-brand-950 transition hover:bg-brand-100 focus-visible:outline-2 focus-visible:outline-brand-600" href="{{ route('lessons.show', $lesson) }}">
-                                                    <span class="block font-extrabold">{{ $lesson->starts_at->format('H:i') }}–{{ $lesson->starts_at->copy()->addMinutes($lesson->duration_minutes)->format('H:i') }}</span>
+                                                    <span class="block font-extrabold">{{ $lesson->starts_at->copy()->setTimezone(config('sportcentrum.schedule_timezone'))->format('H:i') }}–{{ $lesson->starts_at->copy()->addMinutes($lesson->duration_minutes)->setTimezone(config('sportcentrum.schedule_timezone'))->format('H:i') }}</span>
                                                     <span class="block truncate font-bold">{{ $lesson->sport }}</span>
                                                     <span class="mt-1 block truncate text-brand-700">Trainer: {{ $lesson->instructor?->name ?? 'Geen trainer' }}</span>
                                                     <span class="mt-1 block text-brand-700">{{ $lesson->enrolled_count }} / {{ $lesson->max_participants }} deelnemers</span>

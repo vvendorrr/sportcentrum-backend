@@ -8,7 +8,15 @@
 ])
 
 @php
-    $oldStartsAt = old('starts_at', $lesson?->starts_at?->format('Y-m-d\\TH:i'));
+    $oldStartsAt = old('starts_at', $lesson?->starts_at?->copy()->setTimezone(config('sportcentrum.schedule_timezone'))->format('Y-m-d\\TH:i'));
+    if (old('starts_at') !== null && is_string($oldStartsAt)) {
+        try {
+            $oldStartsAt = \Carbon\Carbon::parse($oldStartsAt, 'UTC')
+                ->setTimezone(config('sportcentrum.schedule_timezone'))
+                ->format('Y-m-d\\TH:i');
+        } catch (\Throwable) {
+        }
+    }
     $oldInstructor = old('instructor_id', $lesson?->instructor_id);
     $oldDuration = old('duration_minutes', $lesson?->duration_minutes);
     $oldCategory = old('category', $lesson?->category);
@@ -35,7 +43,7 @@
         </div>
 
         <div>
-            <label class="mb-2 block text-sm font-bold text-slate-700" for="starts_at">Startdatum en -tijd (UTC)</label>
+            <label class="mb-2 block text-sm font-bold text-slate-700" for="starts_at">Startdatum en -tijd (Nederlandse tijd)</label>
             <input class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-brand-500 focus:ring-4 focus:ring-brand-100" id="starts_at" type="datetime-local" name="starts_at" value="{{ is_scalar($oldStartsAt) ? $oldStartsAt : '' }}" required>
             @error('starts_at') <p class="mt-2 text-sm font-semibold text-red-700">{{ $message }}</p> @enderror
         </div>

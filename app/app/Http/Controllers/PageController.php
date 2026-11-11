@@ -28,8 +28,8 @@ class PageController extends Controller
                 ->get()
                 ->map(fn (Lesson $lesson) => [
                     'name' => $lesson->sport,
-                    'date' => $lesson->starts_at->toDateString(),
-                    'time' => $lesson->starts_at->format('H:i'),
+                    'date' => $lesson->starts_at->copy()->setTimezone(config('sportcentrum.schedule_timezone'))->toDateString(),
+                    'time' => $lesson->starts_at->copy()->setTimezone(config('sportcentrum.schedule_timezone'))->format('H:i'),
                     'category' => $this->categoryLabel($lesson->category),
                 ])
                 ->all()
@@ -94,7 +94,7 @@ class PageController extends Controller
                 ->map(fn (LessonRegistration $registration) => [
                     'sport' => $registration->lesson->sport,
                     'category' => $this->categoryLabel($registration->lesson->category),
-                    'starts_at' => $registration->lesson->starts_at->toIso8601String(),
+                    'starts_at' => $registration->lesson->starts_at->copy()->setTimezone(config('sportcentrum.schedule_timezone'))->toIso8601String(),
                 ])
                 ->all()
             : [];

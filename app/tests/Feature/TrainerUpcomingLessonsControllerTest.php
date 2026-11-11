@@ -45,6 +45,7 @@ it('shows a trainer their upcoming lessons with enrolled and waitlisted attendee
         ->assertSeeText('Waitlisted Member')
         ->assertSeeText('Bevestigde deelnemers')
         ->assertSeeText('Wachtlijstdeelnemers')
+        ->assertSeeText('Laat deelnemers zonder geldige inschrijving')
         ->assertDontSeeText('Another trainer’s lesson')
         ->assertDontSeeText('Past lesson');
 });

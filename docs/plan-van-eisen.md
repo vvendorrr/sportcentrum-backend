@@ -74,11 +74,11 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 | US-10 | Eigen inschrijvingen bekijken         | Backend & Frontend           | Gemiddeld  | 2              | Famke & Giovanni | ✅ Afgerond                                                        |
 | US-11 | Rooster filteren                      | Backend & Frontend           | Gemiddeld  | Giovanni       | Nog te bepalen   | ✅ Afgerond                                                        |
 | US-12 | Bezettingsoverzicht voor beheerder    | Backend & Frontend           | Hoog       | Nog te bepalen | Nog te bepalen   | ✅ Afgerond                                                        |
-| US-13 | Afmelding door medewerker registreren | Backend & Frontend           | Hoog       | Nog te bepalen | Nog te bepalen   | ⬜ Besluit opdrachtgever nodig                                     |
+| US-13 | Afmelding door medewerker registreren | Backend & Frontend           | Hoog       | Nog te bepalen | Nog te bepalen   | ✅ Afgerond (teamuitgangspunt; akkoord opdrachtgever open)          |
 | US-14 | Komende lessen voor trainer           | Backend & Frontend           | Hoog       | Nog te bepalen | Nog te bepalen   | ✅ Afgerond                                                        |
 | US-15 | Wachtlijststatus bekijken             | Backend & Frontend           | Gemiddeld  | Nog te bepalen | Nog te bepalen   | ✅ Afgerond                                                        |
-| US-16 | Rollen en bevoegdheden vaststellen    | Backend & Security           | Hoog       | Nog te bepalen | Nog te bepalen   | ⬜ Besluit opdrachtgever nodig                                     |
-| US-17 | Onverwachte deelnemers afhandelen     | Backend & Frontend           | Gemiddeld  | Nog te bepalen | Nog te bepalen   | ⬜ Besluit opdrachtgever nodig                                     |
+| US-16 | Rollen en bevoegdheden vaststellen    | Backend & Security           | Hoog       | Nog te bepalen | Nog te bepalen   | ✅ Afgerond (teamuitgangspunt; akkoord opdrachtgever open)          |
+| US-17 | Onverwachte deelnemers afhandelen     | Backend & Frontend           | Gemiddeld  | Nog te bepalen | Nog te bepalen   | ✅ Afgerond (teamuitgangspunt; akkoord opdrachtgever open)          |
 | US-18 | Nederlandstalige, sportieve website   | Frontend                     | Gemiddeld  | Nog te bepalen | Nog te bepalen   | ⬜ Te valideren                                                    |
 
 ### Uitgewerkte user stories
@@ -208,7 +208,7 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 
 - [x] Het overzicht toont per les de datum en tijd, sport, trainer, aantal inschrijvingen en maximale capaciteit.
 - [x] Het overzicht maakt zichtbaar hoeveel plekken nog beschikbaar zijn en of een les vol is.
-- [x] De manager kan lessen met weinig inschrijvingen herkennen aan de aantallen; een grens voor “weinig” moet nog met de opdrachtgever worden bepaald.
+- [x] Een bezetting onder 50% is herkenbaar als laag; deze voorlopige grens is instelbaar en moet met de opdrachtgever worden bevestigd.
 
 #### US-13 — Afmelding door medewerker registreren — Hoog — Backend & Frontend — Nog te bepalen
 
@@ -216,10 +216,11 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 
 **Acceptatiecriteria**
 
-- [ ] Een bevoegde medewerker kan een actieve inschrijving van een lid annuleren.
-- [ ] Het systeem registreert het tijdstip van de afmelding en werkt het aantal beschikbare plekken bij.
-- [ ] Bij een vrijgekomen plek wordt de eerstvolgende deelnemer op de wachtlijst volgens de bestaande regel gepromoveerd.
-- [ ] Welke medewerkers deze actie mogen uitvoeren en of zij ook na de termijn van twee uur mogen afmelden, moet met de opdrachtgever worden bevestigd.
+- [x] Alleen een beheerder kan namens een lid een actieve inschrijving annuleren.
+- [x] Een beheerder mag na de zelfafmeldtermijn afmelden, maar alleen vóór de les begint; het afmeldtijdstip wordt geregistreerd.
+- [x] Een vrijgekomen plek wordt automatisch aan de eerstvolgende wachtende toegekend.
+
+> **Teamuitgangspunt:** trainers kunnen niet namens leden afmelden; beheerders mogen dit tot de start van de les. Bevestiging door de opdrachtgever blijft gewenst.
 
 #### US-14 — Komende lessen voor trainer — Hoog — Backend & Frontend — Nog te bepalen
 
@@ -248,19 +249,27 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 
 **Acceptatiecriteria**
 
-- [ ] Trainer en beheerder zijn aparte rollen; met de opdrachtgever wordt nog vastgelegd of baliemedewerker ook een aparte rol is.
-- [ ] Per rol is vastgelegd wie lessen mag beheren, deelnemers mag inzien of afmelden, aanwezigheid mag registreren en accounts mag beheren.
-- [ ] De applicatie handhaaft de goedgekeurde bevoegdheden; onbevoegde acties zijn ook via directe URL-aanroepen niet mogelijk.
-- [ ] De rollen en bevoegdheden zijn met autorisatietests gecontroleerd.
+- [x] Lid, trainer en beheerder zijn aparte rollen; er is voorlopig geen aparte baliemedewerkerrol.
+- [x] Bevoegdheden zijn vastgelegd in de rolmatrix hieronder.
+- [x] De applicatie handhaaft bevoegdheden ook bij directe URL-aanroepen.
+- [x] Autorisatie is met featuretests gecontroleerd.
 
-#### US-17 — Onverwachte deelnemers afhandelen — Gemiddeld — Backend & Frontend — Nog te bepalen _(concept; besluit opdrachtgever nodig)_
+| Rol | Bevoegdheden |
+| --- | --- |
+| Lid | Publiek rooster bekijken; eigen profiel, inschrijvingen en tijdige afmeldingen beheren. |
+| Trainer | Eigen komende lessen en deelnemers bekijken; eigen profiel beheren; aanwezigheid registreren na afloop. Geen lessen of andere accounts beheren en geen afmelding namens leden. |
+| Beheerder | Lessen en leden-/traineraccounts beheren; eigen profiel beheren; deelnemers van alle lessen bekijken; aanwezigheid registreren; namens leden afmelden tot de les start. |
 
-> **Als** trainer of baliemedewerker wil ik weten hoe ik een deelnemer afhandel die zonder geldige inschrijving bij een les verschijnt, zodat de groepsgrootte niet ongemerkt boven de capaciteit uitkomt.
+#### US-17 — Onverwachte deelnemers afhandelen — Gemiddeld — Backend & Frontend — Teamuitgangspunt
+
+> **Als** trainer of beheerder wil ik weten hoe ik een deelnemer afhandel die zonder geldige inschrijving bij een les verschijnt, zodat de groepsgrootte niet ongemerkt boven de capaciteit uitkomt.
 
 **Acceptatiecriteria**
 
-- [ ] De opdrachtgever bepaalt of deelnemers zonder inschrijving mogen aansluiten en wat medewerkers doen als er geen plek beschikbaar is.
-- [ ] Na dit besluit wordt vastgelegd welke informatie of registratie de website nodig heeft om de afgesproken werkwijze te ondersteunen.
+- [x] Deelnemers zonder bevestigde inschrijving mogen niet aansluiten; een wachtlijststatus is geen bevestiging.
+- [x] Trainers verwijzen iemand zonder bevestigde inschrijving naar de beheerder en overschrijden nooit de capaciteit. Er wordt geen aparte registratie voor inloopdeelnemers bijgehouden.
+
+> **Teamuitgangspunt:** geen inloop zonder bevestigde inschrijving. Bevestiging door de opdrachtgever blijft gewenst.
 
 #### US-18 — Nederlandstalige, sportieve website — Gemiddeld — Frontend — Nog te bepalen
 
@@ -268,8 +277,8 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 
 **Acceptatiecriteria**
 
-- [ ] De zichtbare teksten en navigatie zijn Nederlandstalig.
-- [ ] De vormgeving gebruikt blauw en wit en wordt met de opdrachtgever afgestemd op de gewenste sportieve, energieke uitstraling.
+- [x] De zichtbare teksten en navigatie zijn Nederlandstalig; de standaard applicatietaal is Nederlands.
+- [x] De vormgeving gebruikt blauw en wit met een sportieve uitstraling.
 - [ ] De vormgeving wordt ter beoordeling aan de opdrachtgever voorgelegd voordat deze als definitief geldt.
 
 ## Niet-functionele eisen
@@ -280,8 +289,8 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 | NFE-2 | **Autorisatie:** bezoekers zien geen namen van deelnemers; alleen leden kunnen zich inschrijven en alleen beheerders lessen beheren. | Policies (`LessonPolicy`) en Pest feature tests op HTTP-statuscodes                                                  |
 | NFE-3 | **Betrouwbaarheid:** een les wordt nooit overboekt; wachtlijst-promotie gebeurt automatisch en in volgorde van aanmelding.           | Exclusieve unieke constraint (`lesson_id`, `user_id`) en feature tests (volle les → wachtlijst; afmelden → promotie) |
 | NFE-4 | **Bruikbaarheid:** de interface en validatiefouten zijn volledig Nederlandstalig en begrijpelijk geformuleerd.                       | Form Requests met Nederlandstalige meldingen; handmatig doorlopen van de flows                                       |
-| NFE-5 | **Performance:** het rooster laadt binnen één seconde bij honderden leden en tientallen lessen, zonder N+1-queries.                  | Eager loading van relaties; controle met query-timing/debugbar                                                       |
-| NFE-6 | **Onderhoudbaarheid:** minimaal 10 feature tests en een consistente codestijl die met elke commit meekomt.                           | `vendor/bin/pint --test`; `vendor/bin/pest` (stand: 11/11 — 109 tests, 482 assertions, allemaal groen)              |
+| NFE-5 | **Performance:** het rooster laadt binnen één seconde bij honderden leden en tientallen lessen, zonder N+1-queries.                  | Pest-regressietest met 200 leden en 30 lessen controleert lokaal minder dan één seconde en maximaal 10 SELECT-queries; benchmark in productie blijft nodig |
+| NFE-6 | **Onderhoudbaarheid:** minimaal 10 feature tests en een consistente codestijl die met elke commit meekomt.                           | `vendor/bin/pint`; `vendor/bin/pest` (stand: 11/11 — 117 tests, 527 assertions, allemaal groen)                    |
 | NFE-7 | **Data-integriteit:** alleen geldige waarden voor rol, categorie, status en aanwezigheid komen in de database.                       | Enum-kolommen in migrations; uniek e-mailadres (`users.email`); validatie weigert ongeldige invoer                   |
 
 ## Technische eisen en randvoorwaarden
@@ -292,6 +301,8 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 | Views          | Blade-views met één gedeelde layout; geen React, Vue of Inertia                            |
 | Styling        | Tailwind CSS via Vite                                                                      |
 | Database       | SQLite (standaard; MySQL kan via `.env`), alle tabellen via migrations, gevuld met seeders |
+| Tijdzone       | Lestijden worden als `Europe/Amsterdam` ingevoerd en getoond; opgeslagen tijdstippen zijn UTC.           |
+| Taal           | Nederlands (`nl`) voor interface en validatiemeldingen.                                                   |
 | Authenticatie  | Session-based, met de rollen `member` (lid), `trainer` en `admin` (beheerder)                 |
 | Validatie      | Form Requests met Nederlandstalige meldingen                                               |
 | Testen         | Minimaal 10 feature tests met _Pest / PHPUnit_                                             |
@@ -348,7 +359,7 @@ De `id`- en foreign-keykolommen zijn `BIGINT UNSIGNED`; `duration_minutes` en `m
 
 - Het maximaal aantal deelnemers wordt per les opgeslagen. Richtwaarden zijn 16 voor spinning, 12 voor yoga en 20 voor aquagym/zwemlessen.
 - Als een les vol is, krijgt een nieuwe inschrijving de status wachtlijst. Bij een vrijgekomen plek wordt de eerstvolgende op de wachtlijst automatisch ingeschreven.
-- Een lid kan zichzelf tot twee uur voor aanvang afmelden. Een bevoegde medewerker kan een deelnemer ook later afmelden; welke rollen dit mogen, wordt nog bevestigd.
+- Een lid kan zichzelf tot twee uur voor aanvang afmelden. Volgens het teamuitgangspunt kan alleen een beheerder namens een lid afmelden, ook na die termijn maar alleen vóór de les start; bevestiging door de opdrachtgever blijft open.
 - De gekoppelde trainer of een beheerder registreert na de les wie aanwezig of afwezig was. Het aantal gemiste lessen per lid kan worden berekend uit diens afwezigheidsregistraties.
 
 ## Pagina's en wireframes
@@ -373,12 +384,12 @@ De `id`- en foreign-keykolommen zijn `BIGINT UNSIGNED`; `duration_minutes` en `m
 
 | Vraag                                                                                                                                                  | Aan wie    | Sinds              | Status |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | ------------------ | ------ |
-| Worden geslacht en geboortedatum van leden bewaard? Ja → kolommen toevoegen aan `users`; nee → velden van de accountpagina verwijderen.                | Ron de Wit | 06/11              | Open   |
-| Welke acties mogen trainers en beheerders elk uitvoeren, nu dit aparte rollen zijn?                                                                  | Ron de Wit | 10/11              | Open   |
-| Is een baliemedewerker een aparte rol, en welke acties mag deze uitvoeren (zoals deelnemers bekijken of afmeldingen registreren)?                      | Ron de Wit | [Nog in te vullen] | Open   |
-| Mogen leden zonder inschrijving aansluiten als er plek is, en wat gebeurt er als de lescapaciteit al is bereikt?                                       | Ron de Wit | [Nog in te vullen] | Open   |
+| Worden geslacht en geboortedatum van leden bewaard? Teamkeuze: niet verzamelen of opslaan zolang dit niet is goedgekeurd.                                 | Ron de Wit | 06/11              | Teamkeuze; klantbevestiging open |
+| Welke acties mogen trainers en beheerders elk uitvoeren, nu dit aparte rollen zijn? Teamvoorstel: rolmatrix bij US-16.                                 | Ron de Wit | 10/11              | Voorstel; bevestiging open |
+| Is een baliemedewerker een aparte rol? Teamvoorstel: nee; alleen lid, trainer en beheerder.                                                          | Ron de Wit | [Nog in te vullen] | Voorstel; bevestiging open |
+| Mogen leden zonder inschrijving aansluiten? Teamvoorstel: nee; alleen bevestigde inschrijvingen mogen deelnemen.                                        | Ron de Wit | [Nog in te vullen] | Voorstel; bevestiging open |
 | Moeten leden bij een wachtlijststatus of promotie alleen de website kunnen raadplegen, of is ook een melding gewenst? E-mail/sms valt nu buiten scope. | Ron de Wit | [Nog in te vullen] | Open   |
-| Welke aantallen of grens bepalen dat een les "weinig bezocht" is, en is een bezettingsoverzicht voldoende voor de manager?                             | Ron de Wit | [Nog in te vullen] | Open   |
+| Welke grens bepaalt "weinig bezocht"? Teamvoorstel: minder dan 50% bezetting; de grens is instelbaar.                                                 | Ron de Wit | [Nog in te vullen] | Voorstel; bevestiging open |
 
 ## Wijzigingenlog
 

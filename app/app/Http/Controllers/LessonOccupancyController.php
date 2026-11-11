@@ -12,6 +12,7 @@ class LessonOccupancyController extends Controller
     {
         Gate::authorize('viewOccupancy', Lesson::class);
 
+        $lowOccupancyPercent = max(1, min(100, (int) config('sportcentrum.low_occupancy_percent', 50)));
         $lessons = Lesson::query()
             ->with('instructor:id,name')
             ->withCount([
@@ -22,6 +23,9 @@ class LessonOccupancyController extends Controller
             ->orderBy('id')
             ->get();
 
-        return view('lessons.occupancy', ['lessons' => $lessons]);
+        return view('lessons.occupancy', [
+            'lessons' => $lessons,
+            'lowOccupancyPercent' => $lowOccupancyPercent,
+        ]);
     }
 }

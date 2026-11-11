@@ -78,7 +78,7 @@
                                     @foreach ($weekDays as $day)
                                         @php
                                             $dayKey = $day['date']->format('Y-m-d');
-                                            $lessonsAtHour = $lessonsByDay->get($dayKey, collect())->filter(fn ($lesson) => $lesson->starts_at->hour === $hour);
+                                            $lessonsAtHour = $lessonsByDay->get($dayKey, collect())->filter(fn ($lesson) => $lesson->starts_at->copy()->setTimezone(config('sportcentrum.schedule_timezone'))->hour === $hour);
                                         @endphp
                                         <td class="h-10 border-l border-t border-slate-100 p-1 align-top">
                                             <div class="space-y-1">
@@ -88,7 +88,7 @@
                                                         $categoryLabel = ['strength' => 'Kracht', 'cardio' => 'Cardio', 'relaxation' => 'Ontspanning'][$lesson->category] ?? $lesson->category;
                                                     @endphp
                                                     <a class="block rounded-lg border-l-4 border-brand-500 bg-brand-50 px-2 py-1.5 text-xs text-brand-950 transition hover:bg-brand-100 focus-visible:outline-2 focus-visible:outline-brand-600" href="{{ route('lessons.show', $lesson) }}">
-                                                        <span class="block font-extrabold">{{ $lesson->starts_at->format('H:i') }} · {{ $lesson->sport }}</span>
+                                                        <span class="block font-extrabold">{{ $lesson->starts_at->copy()->setTimezone(config('sportcentrum.schedule_timezone'))->format('H:i') }} · {{ $lesson->sport }}</span>
                                                         <span class="mt-0.5 block text-brand-700">{{ $categoryLabel }} · {{ $lesson->enrolled_count }}/{{ $lesson->max_participants }}</span>
                                                         @if ($lessonRegistration !== null)
                                                             <span class="mt-0.5 block font-bold">Jouw plek: {{ $lessonRegistration->status === 'enrolled' ? 'ingeschreven' : 'wachtlijst' }}</span>

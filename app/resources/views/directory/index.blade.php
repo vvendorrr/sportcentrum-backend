@@ -70,18 +70,21 @@
                     <div class="grid gap-5 p-4 sm:p-6 xl:grid-cols-[minmax(0,1.2fr)_minmax(16rem,0.9fr)]">
                         <section class="min-h-72 rounded-3xl border border-slate-200 p-4 sm:p-5" aria-labelledby="directory-items-heading">
                             <h3 id="directory-items-heading" class="mb-4 text-sm font-extrabold text-slate-500">{{ $itemsHeading }}</h3>
+                            @if ($directoryType === 'participants')
+                                <p class="mb-3 text-xs leading-5 text-slate-500">Beheerders kunnen tot de start namens een lid afmelden, ook na de zelfafmeldtermijn.</p>
+                            @endif
                             @if ($items->isEmpty())
                                 <p class="rounded-2xl bg-slate-50 px-4 py-5 text-sm text-slate-500">{{ $emptyItemsMessage }}</p>
                             @else
                                 <ul class="divide-y divide-slate-100">
                                     @foreach ($items as $item)
                                         @php($lesson = $directoryType === 'participants' ? $item->lesson : $item)
-                                        <li class="flex items-center gap-1">
+                                        <li class="flex flex-col gap-2 py-2 sm:flex-row sm:items-center">
                                             <a class="min-w-0 flex-1 flex items-center justify-between gap-4 rounded-xl px-3 py-3 transition hover:bg-brand-50 focus-visible:outline-2 focus-visible:outline-brand-600" href="{{ route('lessons.show', $lesson) }}">
                                                 <span class="min-w-0">
                                                     <span class="block truncate text-sm font-bold text-brand-950">{{ $lesson->sport }}</span>
-                                                    <span class="mt-1 block text-xs font-semibold text-slate-500">
-                                                        {{ $lesson->starts_at->format('d-m-Y · H:i') }}
+                                                    <span class="mt-1 block whitespace-nowrap text-xs font-semibold text-slate-500">
+                                                        {{ $lesson->starts_at->copy()->setTimezone(config('sportcentrum.schedule_timezone'))->format('d-m-Y · H:i') }}
                                                         @if ($directoryType === 'participants' && $item->status === 'waitlisted')
                                                             · Wachtlijst
                                                         @endif
@@ -89,6 +92,15 @@
                                                 </span>
                                                 <span class="shrink-0 text-slate-400" aria-hidden="true">→</span>
                                             </a>
+                                            @if ($directoryType === 'participants' && in_array($item->status, ['enrolled', 'waitlisted'], true) && $lesson->starts_at->isFuture())
+                                                <form class="shrink-0 pr-2" method="POST" action="{{ route('members.registrations.cancel', $item) }}" onsubmit="return confirm('Deze inschrijving namens het lid annuleren?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="rounded-lg px-2.5 py-2 text-xs font-bold text-red-700 transition hover:bg-red-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600" type="submit">
+                                                        Afmelden
+                                                    </button>
+                                                </form>
+                                            @endif
                                             @if ($directoryType === 'trainers')
                                                 <form class="shrink-0 pr-2" method="POST" action="{{ route('trainers.lessons.detach', [$selectedPerson, $lesson]) }}" onsubmit="return confirm('Toewijzing van deze les opheffen? De les blijft bestaan zonder trainer.')">
                                                     @csrf
@@ -149,7 +161,7 @@
                                                     <span class="min-w-0">
                                                         <span class="block truncate text-sm font-bold text-brand-950">{{ $assignableLesson->sport }}</span>
                                                         <span class="mt-0.5 block text-xs font-semibold text-slate-500">
-                                                            {{ $assignableLesson->starts_at->format('d-m-Y · H:i') }} · Trainer: {{ $assignableLesson->instructor?->name ?? 'geen' }}
+                                                            {{ $assignableLesson->starts_at->copy()->setTimezone(config('sportcentrum.schedule_timezone'))->format('d-m-Y · H:i') }} · Trainer: {{ $assignableLesson->instructor?->name ?? 'geen' }}
                                                         </span>
                                                     </span>
                                                 </label>
