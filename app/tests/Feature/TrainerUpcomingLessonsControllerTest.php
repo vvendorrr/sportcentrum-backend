@@ -3,7 +3,7 @@
 use App\Models\Lesson;
 use App\Models\User;
 
-it('shows a trainer their upcoming lessons with enrolled and waitlisted attendees', function () {
+it('shows a trainer their upcoming lessons with enrolled and waitlisted counts', function () {
     $this->travelTo('2026-10-10 09:00:00');
     $trainer = User::factory()->trainer()->create();
     $member = User::factory()->create(['name' => 'Confirmed Member']);
@@ -41,10 +41,9 @@ it('shows a trainer their upcoming lessons with enrolled and waitlisted attendee
         ->get(route('trainer-lessons.upcoming'))
         ->assertOk()
         ->assertSeeText('Morning yoga')
-        ->assertSeeText('Confirmed Member')
-        ->assertSeeText('Waitlisted Member')
-        ->assertSeeText('Bevestigde deelnemers')
-        ->assertSeeText('Wachtlijstdeelnemers')
+        ->assertSeeText('1 / 1')
+        ->assertDontSeeText('Confirmed Member')
+        ->assertDontSeeText('Waitlisted Member')
         ->assertSeeText('Laat deelnemers zonder geldige inschrijving')
         ->assertDontSeeText('Another trainer’s lesson')
         ->assertDontSeeText('Past lesson');
