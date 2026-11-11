@@ -23,7 +23,7 @@ class LessonIndexRequest extends FormRequest
             'instructor_id' => [
                 'nullable',
                 'integer',
-                Rule::exists('users', 'id')->where('role', 'admin'),
+                Rule::exists('users', 'id')->where('role', 'trainer'),
             ],
             'sport' => ['nullable', 'string', 'max:100'],
         ];

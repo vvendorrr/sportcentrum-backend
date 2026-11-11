@@ -83,7 +83,7 @@ class LessonController extends Controller
                 'instructor_id' => $filters['instructor_id'] ?? '',
                 'sport' => $sportSearch,
             ],
-            'instructors' => User::query()->where('role', 'admin')->orderBy('name')->get(['id', 'name']),
+            'instructors' => User::query()->where('role', 'trainer')->orderBy('name')->get(['id', 'name']),
             'previousWeekUrl' => route('lessons.index', [...$preservedFilters, 'week' => $weekStart->copy()->subWeek()->toDateString()]),
             'nextWeekUrl' => route('lessons.index', [...$preservedFilters, 'week' => $weekStart->copy()->addWeek()->toDateString()]),
         ]);
@@ -183,7 +183,7 @@ class LessonController extends Controller
     private function instructors(): Collection
     {
         return User::query()
-            ->where('role', 'admin')
+            ->where('role', 'trainer')
             ->where('is_active', true)
             ->orderBy('name')
             ->get(['id', 'name']);

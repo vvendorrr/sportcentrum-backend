@@ -30,7 +30,7 @@ class TrainerAccountController extends Controller
             'email' => $attributes['email'],
             'phone_number' => $attributes['phone_number'] ?? null,
             'password_hash' => $attributes['password'],
-            'role' => 'admin',
+            'role' => 'trainer',
             'is_active' => $attributes['is_active'],
         ]);
 

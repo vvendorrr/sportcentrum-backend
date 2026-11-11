@@ -19,7 +19,7 @@ class LessonFactory extends Factory
     public function definition(): array
     {
         return [
-            'instructor_id' => User::factory()->admin(),
+            'instructor_id' => User::factory()->trainer(),
             'starts_at' => fake()->dateTimeBetween('+1 day', '+2 weeks'),
             'duration_minutes' => fake()->randomElement([30, 45, 60, 90]),
             'category' => fake()->randomElement(['strength', 'cardio', 'relaxation']),

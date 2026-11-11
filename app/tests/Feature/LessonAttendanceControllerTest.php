@@ -35,6 +35,43 @@ it('shows enrolled participant names only to admins', function () {
         ->assertForbidden();
 });
 
+it('allows the assigned trainer to view participants and record attendance for their lesson', function () {
+    $this->travelTo('2026-10-10 10:00:00');
+    $trainer = User::factory()->trainer()->create();
+    $otherTrainer = User::factory()->trainer()->create();
+    $member = User::factory()->create(['name' => 'Assigned Member']);
+    $lesson = Lesson::factory()->create([
+        'instructor_id' => $trainer->id,
+        'starts_at' => '2026-10-10 09:00:00',
+        'duration_minutes' => 60,
+    ]);
+    $registration = $lesson->registrations()->create([
+        'user_id' => $member->id,
+        'status' => 'enrolled',
+        'registered_at' => now(),
+    ]);
+
+    $this->actingAs($trainer)
+        ->get(route('lessons.participants', $lesson))
+        ->assertOk()
+        ->assertSeeText('Assigned Member');
+
+    $this->actingAs($trainer)
+        ->patch(route('lessons.attendance.update', $lesson), [
+            'attendance' => [['registration_id' => $registration->id, 'status' => 'attended']],
+        ])
+        ->assertRedirectToRoute('lessons.participants', $lesson);
+
+    $this->assertDatabaseHas('lesson_registrations', [
+        'id' => $registration->id,
+        'attendance' => 'attended',
+    ]);
+
+    $this->actingAs($otherTrainer)
+        ->get(route('lessons.participants', $lesson))
+        ->assertForbidden();
+});
+
 it('allows an admin to record, correct, and clear attendance after a lesson ends', function () {
     $this->travelTo('2026-10-10 10:00:00');
     $admin = User::factory()->admin()->create();

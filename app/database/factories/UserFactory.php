@@ -53,6 +53,13 @@ class UserFactory extends Factory
         ]);
     }
 
+    public function trainer(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => 'trainer',
+        ]);
+    }
+
     public function inactive(): static
     {
         return $this->state(fn (array $attributes) => [

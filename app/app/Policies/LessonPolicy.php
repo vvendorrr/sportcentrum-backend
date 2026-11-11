@@ -24,12 +24,14 @@ class LessonPolicy
 
     public function viewParticipants(User $user, Lesson $lesson): bool
     {
-        return $user->role === 'admin';
+        return $user->role === 'admin'
+            || ($user->role === 'trainer' && $lesson->instructor_id === $user->getKey());
     }
 
     public function manageAttendance(User $user, Lesson $lesson): bool
     {
-        return $user->role === 'admin'
+        return ($user->role === 'admin'
+                || ($user->role === 'trainer' && $lesson->instructor_id === $user->getKey()))
             && $lesson->starts_at->copy()->addMinutes($lesson->duration_minutes)->lessThanOrEqualTo(now());
     }
 

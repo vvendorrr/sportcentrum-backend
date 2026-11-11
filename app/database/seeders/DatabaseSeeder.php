@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory()->admin()->count(4)->create();
+        User::factory()->trainer()->count(4)->create();
 
         $this->call(DemoMemberSeeder::class);
 

@@ -148,7 +148,7 @@ it('requires the current password before deleting an account', function () {
 });
 
 it('deletes the account, frees enrolled places, promotes waitlisted members, and keeps taught lessons', function () {
-    $member = User::factory()->admin()->create();
+    $member = User::factory()->trainer()->create();
     $waitlistedMember = User::factory()->create();
     $lesson = Lesson::factory()->create([
         'instructor_id' => $member->id,

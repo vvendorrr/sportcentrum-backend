@@ -3,10 +3,10 @@
 use App\Models\Lesson;
 use App\Models\User;
 
-it('allows an admin to create a lesson with an admin instructor', function () {
+it('allows an admin to create a lesson with a trainer instructor', function () {
     $this->travelTo('2026-10-10 09:00:00');
     $admin = User::factory()->admin()->create();
-    $instructor = User::factory()->admin()->create();
+    $instructor = User::factory()->trainer()->create();
 
     $response = $this->actingAs($admin)
         ->from(route('lessons.create'))
@@ -35,20 +35,20 @@ it('allows an admin to create a lesson with an admin instructor', function () {
     ]);
 });
 
-it('forbids a member from creating a lesson', function () {
-    $member = User::factory()->create();
+it('forbids members and trainers from creating a lesson', function () {
+    foreach ([User::factory()->create(), User::factory()->trainer()->create()] as $user) {
+        $this->actingAs($user)
+            ->post(route('lessons.store'), [])
+            ->assertForbidden();
+    }
 
-    $response = $this->actingAs($member)
-        ->post(route('lessons.store'), []);
-
-    $response->assertForbidden();
     $this->assertDatabaseCount('lessons', 0);
 });
 
 it('rejects a lesson with zero capacity', function () {
     $this->travelTo('2026-10-10 09:00:00');
     $admin = User::factory()->admin()->create();
-    $instructor = User::factory()->admin()->create();
+    $instructor = User::factory()->trainer()->create();
 
     $response = $this->actingAs($admin)
         ->from(route('lessons.create'))
@@ -87,10 +87,30 @@ it('rejects a member as the lesson instructor', function () {
     expect(Lesson::query()->count())->toBe(0);
 });
 
+it('rejects an admin as the lesson instructor because only trainers may teach lessons', function () {
+    $this->travelTo('2026-10-10 09:00:00');
+    $admin = User::factory()->admin()->create();
+    $instructor = User::factory()->admin()->create();
+
+    $response = $this->actingAs($admin)
+        ->from(route('lessons.create'))
+        ->post(route('lessons.store'), [
+            'instructor_id' => $instructor->id,
+            'starts_at' => '2026-10-11 09:00:00',
+            'duration_minutes' => 45,
+            'category' => 'cardio',
+            'sport' => 'Spinning',
+            'max_participants' => 16,
+        ]);
+
+    $response->assertRedirectBackWithErrors(['instructor_id']);
+    expect(Lesson::query()->count())->toBe(0);
+});
+
 it('rejects an inactive trainer as the lesson instructor', function () {
     $this->travelTo('2026-10-10 09:00:00');
     $admin = User::factory()->admin()->create();
-    $inactiveTrainer = User::factory()->admin()->inactive()->create();
+    $inactiveTrainer = User::factory()->trainer()->inactive()->create();
 
     $response = $this->actingAs($admin)
         ->from(route('lessons.create'))
@@ -103,17 +123,14 @@ it('rejects an inactive trainer as the lesson instructor', function () {
             'max_participants' => 16,
         ]);
 
-    $response
-        ->assertRedirectBackWithErrors([
-            'instructor_id' => 'De geselecteerde trainer bestaat niet of is geen actieve beheerder.',
-        ]);
+    $response->assertRedirectBackWithErrors(['instructor_id']);
     expect(Lesson::query()->count())->toBe(0);
 });
 
 it('only offers active trainers in the lesson creation form', function () {
     $admin = User::factory()->admin()->create();
-    User::factory()->admin()->create(['name' => 'Actieve Trainer']);
-    User::factory()->admin()->inactive()->create(['name' => 'Inactieve Trainer']);
+    User::factory()->trainer()->create(['name' => 'Actieve Trainer']);
+    User::factory()->trainer()->inactive()->create(['name' => 'Inactieve Trainer']);
 
     $this->actingAs($admin)
         ->get(route('lessons.create'))
@@ -130,7 +147,7 @@ it('redirects guests away from lesson management', function () {
 
 it('renders the lesson creation form for an admin', function () {
     $admin = User::factory()->admin()->create();
-    $instructor = User::factory()->admin()->create(['name' => 'Lesson Instructor']);
+    $instructor = User::factory()->trainer()->create(['name' => 'Lesson Instructor']);
 
     $response = $this->actingAs($admin)->get(route('lessons.create'));
 
@@ -198,8 +215,8 @@ it('makes the lesson schedule public without exposing member names', function ()
 
 it('filters the weekly roster by category, trainer and sport', function () {
     $this->travelTo('2026-10-12 09:00:00');
-    $selectedTrainer = User::factory()->admin()->create();
-    $otherTrainer = User::factory()->admin()->create();
+    $selectedTrainer = User::factory()->trainer()->create();
+    $otherTrainer = User::factory()->trainer()->create();
     $selectedLesson = Lesson::factory()->create([
         'instructor_id' => $selectedTrainer->id,
         'starts_at' => '2026-10-13 09:00:00',
@@ -316,7 +333,7 @@ it('does not show lesson management actions to members', function () {
 it('allows an admin to update a lesson', function () {
     $this->travelTo('2026-10-10 09:00:00');
     $admin = User::factory()->admin()->create();
-    $instructor = User::factory()->admin()->create();
+    $instructor = User::factory()->trainer()->create();
     $lesson = Lesson::factory()->create([
         'sport' => 'Old lesson name',
         'starts_at' => '2026-10-11 09:00:00',
@@ -346,7 +363,7 @@ it('allows an admin to update a lesson', function () {
 it('does not allow an admin to reduce capacity below current enrollment', function () {
     $this->travelTo('2026-10-10 09:00:00');
     $admin = User::factory()->admin()->create();
-    $instructor = User::factory()->admin()->create();
+    $instructor = User::factory()->trainer()->create();
     $lesson = Lesson::factory()->create([
         'starts_at' => '2026-10-11 09:00:00',
         'max_participants' => 2,

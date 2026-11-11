@@ -60,12 +60,12 @@ it('shows a selected participant’s active registrations and contact informatio
 it('shows only upcoming lessons for a trainer and their contact information', function () {
     $this->travelTo('2026-10-10 09:00:00');
     $admin = User::factory()->admin()->create();
-    $trainer = User::factory()->admin()->create([
+    $trainer = User::factory()->trainer()->create([
         'name' => 'D. Jones',
         'email' => 'd.jones@example.com',
     ]);
-    $otherTrainer = User::factory()->admin()->create(['name' => 'Another Trainer']);
-    User::factory()->admin()->create(['name' => 'Trainer without lessons']);
+    $otherTrainer = User::factory()->trainer()->create(['name' => 'Another Trainer']);
+    User::factory()->trainer()->create(['name' => 'Trainer without lessons']);
     $otherTrainerLesson = Lesson::factory()->create([
         'instructor_id' => $otherTrainer->id,
         'sport' => 'Other trainer’s class',

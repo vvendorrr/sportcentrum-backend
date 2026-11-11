@@ -5,7 +5,7 @@ use App\Models\User;
 
 it('shows the home page with the weekday schedule and available places', function () {
     $this->travelTo('2026-10-12 07:00:00');
-    $instructor = User::factory()->admin()->create(['name' => 'Lotte Trainer']);
+    $instructor = User::factory()->trainer()->create(['name' => 'Lotte Trainer']);
     $lesson = Lesson::factory()->create([
         'instructor_id' => $instructor->id,
         'sport' => 'Morning yoga',

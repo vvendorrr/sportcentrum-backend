@@ -110,6 +110,7 @@ class PageController extends Controller
     {
         $trainers = $this->hasTable('users') && $this->hasTable('lessons')
             ? User::query()
+                ->where('role', 'trainer')
                 ->whereHas('taughtLessons')
                 ->orderBy('name')
                 ->get()

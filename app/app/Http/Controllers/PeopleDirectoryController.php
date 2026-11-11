@@ -51,7 +51,7 @@ class PeopleDirectoryController extends Controller
         Gate::authorize('create', Lesson::class);
 
         $trainers = User::query()
-            ->where('role', 'admin')
+            ->where('role', 'trainer')
             ->withCount([
                 'taughtLessons as upcoming_lessons_count' => fn ($query) => $query->where('starts_at', '>', now()),
             ])

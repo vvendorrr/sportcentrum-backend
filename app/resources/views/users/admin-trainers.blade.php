@@ -25,7 +25,7 @@
             <dd>{{ $trainer['phone_number'] }}</dd>
 
             <dt>Accounttype</dt>
-            <dd>{{ $trainer['role'] === 'admin' ? 'Beheerder' : 'Lid' }}</dd>
+            <dd>Trainer</dd>
 
             <dt>Accountstatus</dt>
             <dd>{{ $trainer['is_active'] ? 'Actief' : 'Inactief' }}</dd>
@@ -45,11 +45,6 @@
             <label for="trainer-phone">Telefoonnummer</label>
             <input id="trainer-phone" name="phone_number" type="tel" value="{{ $trainer['phone_number'] }}">
 
-            <label for="trainer-role">Accounttype</label>
-            <select id="trainer-role" name="role">
-                <option value="admin" @selected($trainer['role'] === 'admin')>Beheerder</option>
-                <option value="member" @selected($trainer['role'] === 'member')>Lid</option>
-            </select>
 
             <label for="trainer-status">Accountstatus</label>
             <select id="trainer-status" name="is_active">

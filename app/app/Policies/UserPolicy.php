@@ -13,7 +13,7 @@ class UserPolicy
 
     public function update(User $actor, User $trainer): bool
     {
-        return $actor->role === 'admin' && $trainer->role === 'admin';
+        return $actor->role === 'admin' && $trainer->role === 'trainer';
     }
 
     public function assignLessons(User $actor, User $trainer): bool

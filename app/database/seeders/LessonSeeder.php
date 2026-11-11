@@ -21,7 +21,7 @@ class LessonSeeder extends Seeder
             ['starts_at' => now()->addDays(4)->setTime(9, 30), 'duration_minutes' => 60, 'category' => 'cardio', 'sport' => 'Zwemmen', 'max_participants' => 20],
         ] as $lesson) {
             $instructor = User::query()
-                ->where('role', 'admin')
+                ->where('role', 'trainer')
                 ->inRandomOrder()
                 ->firstOrFail();
 

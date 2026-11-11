@@ -47,7 +47,7 @@ it('does not allow a member to disable another member account', function () {
 
 it('does not allow an admin to disable a trainer account through the member action', function () {
     $admin = User::factory()->admin()->create();
-    $trainer = User::factory()->admin()->create();
+    $trainer = User::factory()->trainer()->create();
 
     $this->actingAs($admin)
         ->patch(route('members.deactivate', $trainer))

@@ -5,7 +5,7 @@ use App\Models\User;
 
 it('allows an admin to update a trainer account', function () {
     $admin = User::factory()->admin()->create();
-    $trainer = User::factory()->admin()->create([
+    $trainer = User::factory()->trainer()->create([
         'name' => 'Oude Naam',
         'email' => 'oud@example.com',
         'phone_number' => '0612345678',
@@ -32,7 +32,7 @@ it('allows an admin to update a trainer account', function () {
 
 it('allows an admin to deactivate a trainer account', function () {
     $admin = User::factory()->admin()->create();
-    $trainer = User::factory()->admin()->create();
+    $trainer = User::factory()->trainer()->create();
 
     $this->actingAs($admin)
         ->patch(route('trainers.update', $trainer), [
@@ -49,8 +49,8 @@ it('allows an admin to deactivate a trainer account', function () {
 it('unassigns all lessons when a trainer account is deactivated', function () {
     $this->travelTo('2026-10-10 09:00:00');
     $admin = User::factory()->admin()->create();
-    $trainer = User::factory()->admin()->create();
-    $otherTrainer = User::factory()->admin()->create();
+    $trainer = User::factory()->trainer()->create();
+    $otherTrainer = User::factory()->trainer()->create();
     $upcomingLesson = Lesson::factory()->create([
         'instructor_id' => $trainer->id,
         'starts_at' => '2026-10-11 09:00:00',
@@ -82,7 +82,7 @@ it('unassigns all lessons when a trainer account is deactivated', function () {
 it('keeps lessons assigned when a trainer account stays active', function () {
     $this->travelTo('2026-10-10 09:00:00');
     $admin = User::factory()->admin()->create();
-    $trainer = User::factory()->admin()->create();
+    $trainer = User::factory()->trainer()->create();
     $lesson = Lesson::factory()->create([
         'instructor_id' => $trainer->id,
         'starts_at' => '2026-10-11 09:00:00',
@@ -104,7 +104,7 @@ it('keeps lessons assigned when a trainer account stays active', function () {
 
 it('does not repeat the unassignment message when editing an already inactive trainer', function () {
     $admin = User::factory()->admin()->create();
-    $trainer = User::factory()->admin()->inactive()->create();
+    $trainer = User::factory()->trainer()->inactive()->create();
 
     $this->actingAs($admin)
         ->patch(route('trainers.update', $trainer), [
@@ -122,7 +122,7 @@ it('does not repeat the unassignment message when editing an already inactive tr
 it('rejects a duplicate email when updating a trainer account', function () {
     $admin = User::factory()->admin()->create();
     User::factory()->admin()->create(['email' => 'bezocht@example.com']);
-    $trainer = User::factory()->admin()->create();
+    $trainer = User::factory()->trainer()->create();
 
     $this->actingAs($admin)
         ->patch(route('trainers.update', $trainer), [
@@ -138,7 +138,7 @@ it('rejects a duplicate email when updating a trainer account', function () {
 
 it('does not allow a member to update a trainer account', function () {
     $member = User::factory()->create();
-    $trainer = User::factory()->admin()->create();
+    $trainer = User::factory()->trainer()->create();
 
     $this->actingAs($member)
         ->patch(route('trainers.update', $trainer), [
@@ -169,8 +169,8 @@ it('does not allow an admin to update a member account through the trainer actio
 it('allows an admin to assign upcoming lessons to a trainer', function () {
     $this->travelTo('2026-10-10 09:00:00');
     $admin = User::factory()->admin()->create();
-    $trainer = User::factory()->admin()->create();
-    $otherTrainer = User::factory()->admin()->create();
+    $trainer = User::factory()->trainer()->create();
+    $otherTrainer = User::factory()->trainer()->create();
     $orphanedLesson = Lesson::factory()->create([
         'instructor_id' => null,
         'starts_at' => '2026-10-11 09:00:00',
@@ -199,8 +199,8 @@ it('allows an admin to assign upcoming lessons to a trainer', function () {
 it('rejects assigning past lessons to a trainer', function () {
     $this->travelTo('2026-10-10 09:00:00');
     $admin = User::factory()->admin()->create();
-    $trainer = User::factory()->admin()->create();
-    $otherTrainer = User::factory()->admin()->create();
+    $trainer = User::factory()->trainer()->create();
+    $otherTrainer = User::factory()->trainer()->create();
     $pastLesson = Lesson::factory()->create([
         'instructor_id' => $otherTrainer->id,
         'starts_at' => '2026-10-09 09:00:00',
@@ -218,7 +218,7 @@ it('rejects assigning past lessons to a trainer', function () {
 
 it('rejects an empty lesson selection when assigning lessons', function () {
     $admin = User::factory()->admin()->create();
-    $trainer = User::factory()->admin()->create();
+    $trainer = User::factory()->trainer()->create();
 
     $this->actingAs($admin)
         ->post(route('trainers.lessons.assign', $trainer), [
@@ -231,7 +231,7 @@ it('rejects an empty lesson selection when assigning lessons', function () {
 
 it('does not allow a member to assign lessons to a trainer', function () {
     $member = User::factory()->create();
-    $trainer = User::factory()->admin()->create();
+    $trainer = User::factory()->trainer()->create();
     $lesson = Lesson::factory()->create(['starts_at' => now()->addDay()]);
 
     $this->actingAs($member)
@@ -246,7 +246,7 @@ it('does not allow a member to assign lessons to a trainer', function () {
 it('allows an admin to detach an upcoming lesson from a trainer', function () {
     $this->travelTo('2026-10-10 09:00:00');
     $admin = User::factory()->admin()->create();
-    $trainer = User::factory()->admin()->create();
+    $trainer = User::factory()->trainer()->create();
     $lesson = Lesson::factory()->create([
         'instructor_id' => $trainer->id,
         'starts_at' => '2026-10-11 09:00:00',
@@ -262,8 +262,8 @@ it('allows an admin to detach an upcoming lesson from a trainer', function () {
 
 it('does not allow detaching a lesson that is not taught by the trainer', function () {
     $admin = User::factory()->admin()->create();
-    $trainer = User::factory()->admin()->create();
-    $otherTrainer = User::factory()->admin()->create();
+    $trainer = User::factory()->trainer()->create();
+    $otherTrainer = User::factory()->trainer()->create();
     $lesson = Lesson::factory()->create([
         'instructor_id' => $otherTrainer->id,
         'starts_at' => now()->addDay(),
@@ -279,7 +279,7 @@ it('does not allow detaching a lesson that is not taught by the trainer', functi
 it('renders the trainer edit and assignment forms for admins', function () {
     $this->travelTo('2026-10-10 09:00:00');
     $admin = User::factory()->admin()->create();
-    $trainer = User::factory()->admin()->create(['name' => 'D. Jones']);
+    $trainer = User::factory()->trainer()->create(['name' => 'D. Jones']);
     $assignableLesson = Lesson::factory()->create([
         'instructor_id' => null,
         'sport' => 'Assign yoga',
@@ -306,7 +306,7 @@ it('renders the trainer edit and assignment forms for admins', function () {
 
 it('hides the trainer management UI until a trainer is selected', function () {
     $admin = User::factory()->admin()->create();
-    User::factory()->admin()->create(['name' => 'D. Jones']);
+    User::factory()->trainer()->create(['name' => 'D. Jones']);
 
     $this->actingAs($admin)
         ->get(route('trainers.index'))
@@ -320,8 +320,8 @@ it('hides the trainer management UI until a trainer is selected', function () {
 it('does not allow assigning lessons to an inactive trainer', function () {
     $this->travelTo('2026-10-10 09:00:00');
     $admin = User::factory()->admin()->create();
-    $trainer = User::factory()->admin()->inactive()->create();
-    $otherTrainer = User::factory()->admin()->create();
+    $trainer = User::factory()->trainer()->inactive()->create();
+    $otherTrainer = User::factory()->trainer()->create();
     $lesson = Lesson::factory()->create([
         'instructor_id' => $otherTrainer->id,
         'starts_at' => '2026-10-11 09:00:00',
@@ -339,7 +339,7 @@ it('does not allow assigning lessons to an inactive trainer', function () {
 it('does not show the assignment form for an inactive trainer', function () {
     $this->travelTo('2026-10-10 09:00:00');
     $admin = User::factory()->admin()->create();
-    $trainer = User::factory()->admin()->inactive()->create(['name' => 'I. Trainer']);
+    $trainer = User::factory()->trainer()->inactive()->create(['name' => 'I. Trainer']);
     $lesson = Lesson::factory()->create([
         'instructor_id' => $trainer->id,
         'starts_at' => '2026-10-11 09:00:00',
@@ -357,7 +357,7 @@ it('does not show the assignment form for an inactive trainer', function () {
 it('allows an admin to detach a lesson from an inactive trainer', function () {
     $this->travelTo('2026-10-10 09:00:00');
     $admin = User::factory()->admin()->create();
-    $trainer = User::factory()->admin()->inactive()->create();
+    $trainer = User::factory()->trainer()->inactive()->create();
     $lesson = Lesson::factory()->create([
         'instructor_id' => $trainer->id,
         'starts_at' => '2026-10-11 09:00:00',
@@ -373,7 +373,7 @@ it('allows an admin to detach a lesson from an inactive trainer', function () {
 
 it('keeps the trainer editor collapsed until the trainer name is pressed', function () {
     $admin = User::factory()->admin()->create();
-    $trainer = User::factory()->admin()->create();
+    $trainer = User::factory()->trainer()->create();
 
     $this->actingAs($admin)
         ->get(route('trainers.index', ['trainer' => $trainer->id]))
@@ -386,7 +386,7 @@ it('keeps the trainer editor collapsed until the trainer name is pressed', funct
 
 it('reveals the trainer editor when saving fails validation', function () {
     $admin = User::factory()->admin()->create();
-    $trainer = User::factory()->admin()->create();
+    $trainer = User::factory()->trainer()->create();
     User::factory()->admin()->create(['email' => 'bezocht@example.com']);
 
     $this->actingAs($admin)
@@ -446,7 +446,7 @@ it('allows an admin to create a trainer account', function () {
         'name' => 'N. Trainer',
         'email' => 'n.trainer@example.com',
         'phone_number' => '0612345678',
-        'role' => 'admin',
+        'role' => 'trainer',
         'is_active' => true,
     ]);
 });
@@ -472,7 +472,7 @@ it('allows an admin to create an inactive trainer without a phone number', funct
 
 it('rejects a duplicate email when creating a trainer account', function () {
     $admin = User::factory()->admin()->create();
-    User::factory()->admin()->create(['email' => 'bezocht@example.com']);
+    User::factory()->trainer()->create(['email' => 'bezocht@example.com']);
 
     $this->actingAs($admin)
         ->post(route('trainers.store'), [
