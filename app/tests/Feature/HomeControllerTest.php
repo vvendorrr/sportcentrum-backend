@@ -5,14 +5,16 @@ use App\Models\User;
 
 it('shows the home page with the weekday schedule and available places', function () {
     $this->travelTo('2026-10-12 07:00:00');
+    $instructor = User::factory()->admin()->create(['name' => 'Lotte Trainer']);
     $lesson = Lesson::factory()->create([
+        'instructor_id' => $instructor->id,
         'sport' => 'Morning yoga',
         'starts_at' => '2026-10-13 09:00:00',
         'max_participants' => 8,
     ]);
 
     $lesson->registrations()->create([
-        'user_id' => User::factory()->create()->id,
+        'user_id' => User::factory()->create(['name' => 'Private Member'])->id,
         'status' => 'enrolled',
         'registered_at' => now(),
     ]);
@@ -27,7 +29,9 @@ it('shows the home page with the weekday schedule and available places', functio
         ->assertSeeText('Account aanmaken')
         ->assertSeeText('13 Di')
         ->assertSeeText('Morning yoga')
+        ->assertSeeText('Trainer: Lotte Trainer')
         ->assertSeeText('1 / 8 deelnemers')
+        ->assertDontSeeText('Private Member')
         ->assertSee(route('lessons.show', $lesson), false)
         ->assertDontSeeText('Aantal deelnemers vandaag');
 });
