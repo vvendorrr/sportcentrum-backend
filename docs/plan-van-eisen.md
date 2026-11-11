@@ -7,7 +7,7 @@
 | Team          | —                                                                                      |
 | Opdrachtgever | Ron de Wit, Sportcentrum De Linde                                                      |
 | Repository    | [Sportcentrum-backend](https://github.com/vvendorrr/sportcentrum-backend "Repository") |
-| Versie        | 0.2                                                                                    |
+| Versie        | 0.4                                                                                    |
 | Datum         | 10-11                                                                                  |
 
 ## Teamleden, rollen en deelproducten
@@ -58,19 +58,26 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 
 ### Overzicht van de user stories
 
-| ID    | User story                         | Deelproduct                  | Prioriteit | Sprint   | Wie              | Status realisatie                                                  |
-| ----- | ---------------------------------- | ---------------------------- | ---------- | -------- | ---------------- | ------------------------------------------------------------------ |
-| US-01 | Rooster bekijken                   | Frontend                     | Hoog       | 1        | Lucas            | ✅ Afgerond                                                        |
-| US-02 | Account aanmaken en inloggen       | Backend, Frontend & Security | Hoog       | 1        | Lucas & Famke    | ✅ Afgerond                                                        |
-| US-03 | Inschrijven voor een les           | Backend & Frontend           | Hoog       | 1        | Famke            | ✅ Afgerond                                                        |
-| US-04 | Afmelden voor een les              | Backend & Frontend           | Hoog       | 1        | Famke & Giovanni | ✅ Afgerond                                                        |
-| US-05 | Deelnemers en aanwezigheid beheren | Backend & Frontend           | Hoog       | 1        | Lucas            | 🚧 Deels (overzicht klaar; aanwezigheid registreren ontbreekt nog) |
-| US-06 | Lessen aanmaken en inplannen       | Backend & Frontend           | Hoog       | 2        | Lucas & Giovanni | ✅ Afgerond                                                        |
-| US-07 | Accountgegevens beheren            | Backend, Frontend & Security | Gemiddeld  | 2        | Lucas & Famke    | ✅ Afgerond                                                        |
-| US-08 | Ledenaccounts uitschakelen         | Backend & Security           | Gemiddeld  | 2        | Lucas            | ⬜ Te starten (inlogblokkade voor inactieve accounts bestaat al)   |
-| US-09 | Traineraccounts beheren            | Backend, Frontend & Security | Gemiddeld  | 2        | Famke            | 🚧 Deels (overzicht klaar; aanmaken/bewerken ontbreekt nog)        |
-| US-10 | Eigen inschrijvingen bekijken      | Backend & Frontend           | Gemiddeld  | 2        | Famke & Giovanni | ✅ Afgerond                                                        |
-| US-11 | Rooster filteren                   | Backend & Frontend           | Gemiddeld  | Giovanni | Nog te bepalen   | ✅ Afgerond                                                        |
+| ID    | User story                            | Deelproduct                  | Prioriteit | Sprint         | Wie              | Status realisatie                                                  |
+| ----- | ------------------------------------- | ---------------------------- | ---------- | -------------- | ---------------- | ------------------------------------------------------------------ |
+| US-01 | Rooster bekijken                      | Frontend                     | Hoog       | 1              | Lucas            | ✅ Afgerond                                                        |
+| US-02 | Account aanmaken en inloggen          | Backend, Frontend & Security | Hoog       | 1              | Lucas & Famke    | ✅ Afgerond                                                        |
+| US-03 | Inschrijven voor een les              | Backend & Frontend           | Hoog       | 1              | Famke            | ✅ Afgerond                                                        |
+| US-04 | Afmelden voor een les                 | Backend & Frontend           | Hoog       | 1              | Famke & Giovanni | ✅ Afgerond                                                        |
+| US-05 | Deelnemers en aanwezigheid beheren    | Backend & Frontend           | Hoog       | 1              | Lucas            | 🚧 Deels (overzicht klaar; aanwezigheid registreren ontbreekt nog) |
+| US-06 | Lessen aanmaken en inplannen          | Backend & Frontend           | Hoog       | 2              | Lucas & Giovanni | ✅ Afgerond                                                        |
+| US-07 | Accountgegevens beheren               | Backend, Frontend & Security | Gemiddeld  | 2              | Lucas & Famke    | ✅ Afgerond                                                        |
+| US-08 | Ledenaccounts uitschakelen            | Backend & Security           | Gemiddeld  | 2              | Lucas            | ⬜ Te starten (inlogblokkade voor inactieve accounts bestaat al)   |
+| US-09 | Traineraccounts beheren               | Backend, Frontend & Security | Gemiddeld  | 2              | Famke            | 🚧 Deels (overzicht klaar; aanmaken/bewerken ontbreekt nog)        |
+| US-10 | Eigen inschrijvingen bekijken         | Backend & Frontend           | Gemiddeld  | 2              | Famke & Giovanni | ✅ Afgerond                                                        |
+| US-11 | Rooster filteren                      | Backend & Frontend           | Gemiddeld  | Giovanni       | Nog te bepalen   | ✅ Afgerond                                                        |
+| US-12 | Bezettingsoverzicht voor beheerder    | Backend & Frontend           | Hoog       | Nog te bepalen | Nog te bepalen   | ⬜ Te valideren                                                    |
+| US-13 | Afmelding door medewerker registreren | Backend & Frontend           | Hoog       | Nog te bepalen | Nog te bepalen   | ⬜ Te valideren                                                    |
+| US-14 | Komende lessen voor trainer           | Backend & Frontend           | Hoog       | Nog te bepalen | Nog te bepalen   | ⬜ Te valideren                                                    |
+| US-15 | Wachtlijststatus bekijken             | Backend & Frontend           | Gemiddeld  | Nog te bepalen | Nog te bepalen   | ⬜ Te valideren                                                    |
+| US-16 | Rollen en bevoegdheden vaststellen    | Backend & Security           | Hoog       | Nog te bepalen | Nog te bepalen   | ⬜ Besluit opdrachtgever nodig                                     |
+| US-17 | Onverwachte deelnemers afhandelen     | Backend & Frontend           | Gemiddeld  | Nog te bepalen | Nog te bepalen   | ⬜ Besluit opdrachtgever nodig                                     |
+| US-18 | Nederlandstalige, sportieve website   | Frontend                     | Gemiddeld  | Nog te bepalen | Nog te bepalen   | ⬜ Te valideren                                                    |
 
 ### Uitgewerkte user stories
 
@@ -191,6 +198,78 @@ De website geeft leden een duidelijk overzicht van de groepslessen en laat hen o
 - [x] De gekozen filters blijven actief bij het navigeren naar de vorige of volgende week.
 - [x] Een bezoeker kan de filters wissen zonder de gekozen week te wijzigen.
 
+#### US-12 — Bezettingsoverzicht voor beheerder — Hoog — Backend & Frontend — Nog te bepalen
+
+> **Als** manager wil ik in één overzicht de bezetting van lessen kunnen zien, zodat ik weet welke lessen vol zitten en welke nog veel vrije plekken hebben.
+
+**Acceptatiecriteria**
+
+- [ ] Het overzicht toont per les de datum en tijd, sport, trainer, aantal inschrijvingen en maximale capaciteit.
+- [ ] Het overzicht maakt zichtbaar hoeveel plekken nog beschikbaar zijn en of een les vol is.
+- [ ] De manager kan lessen met weinig inschrijvingen herkennen aan de aantallen; een grens voor “weinig” moet nog met de opdrachtgever worden bepaald.
+
+#### US-13 — Afmelding door medewerker registreren — Hoog — Backend & Frontend — Nog te bepalen
+
+> **Als** bevoegde medewerker wil ik een afmelding namens een lid registreren, zodat een afmelding niet verloren gaat en de vrijgekomen plek beschikbaar komt.
+
+**Acceptatiecriteria**
+
+- [ ] Een bevoegde medewerker kan een actieve inschrijving van een lid annuleren.
+- [ ] Het systeem registreert het tijdstip van de afmelding en werkt het aantal beschikbare plekken bij.
+- [ ] Bij een vrijgekomen plek wordt de eerstvolgende deelnemer op de wachtlijst volgens de bestaande regel gepromoveerd.
+- [ ] Welke medewerkers deze actie mogen uitvoeren en of zij ook na de termijn van twee uur mogen afmelden, moet met de opdrachtgever worden bevestigd.
+
+#### US-14 — Komende lessen voor trainer — Hoog — Backend & Frontend — Nog te bepalen
+
+> **Als** trainer wil ik vóór mijn les de actuele deelnemerslijst en verwachte groepsgrootte kunnen bekijken, zodat ik weet hoeveel deelnemers ik kan verwachten.
+
+**Acceptatiecriteria**
+
+- [ ] Een trainer kan de komende lessen zien waaraan die als trainer is gekoppeld.
+- [ ] Per les zijn de ingeschreven deelnemers, het aantal inschrijvingen en de maximale capaciteit zichtbaar.
+- [ ] Deelnemers op de wachtlijst zijn herkenbaar als wachtlijstdeelnemers en tellen niet mee als bevestigde inschrijvingen.
+- [ ] Alleen bevoegde gebruikers kunnen namen van deelnemers bekijken.
+
+#### US-15 — Wachtlijststatus bekijken — Gemiddeld — Backend & Frontend — Nog te bepalen
+
+> **Als** lid wil ik de actuele status van mijn lesinschrijving kunnen zien, zodat ik weet of ik een plek heb of op de wachtlijst sta.
+
+**Acceptatiecriteria**
+
+- [ ] In het overzicht van eigen inschrijvingen is per les zichtbaar of de status `enrolled` of `waitlisted` is.
+- [ ] Als een lid vanaf de wachtlijst wordt ingeschreven, wordt de status in het overzicht bijgewerkt.
+- [ ] De website toont de status; een melding via e-mail of sms valt buiten de huidige scope en is nog geen afgesproken eis.
+
+#### US-16 — Rollen en bevoegdheden vaststellen — Hoog — Backend & Security — Nog te bepalen
+
+> **Als** manager wil ik vastgelegde rollen en bevoegdheden, zodat leden, trainers, beheerders en eventueel baliemedewerkers alleen passende acties kunnen uitvoeren.
+
+**Acceptatiecriteria**
+
+- [ ] De opdrachtgever bevestigt welke rollen er zijn en of trainer, beheerder en baliemedewerker aparte rollen zijn.
+- [ ] Per bevestigde rol is vastgelegd wie lessen mag beheren, deelnemers mag inzien of afmelden, aanwezigheid mag registreren en accounts mag beheren.
+- [ ] De applicatie handhaaft de goedgekeurde bevoegdheden; onbevoegde acties zijn ook via directe URL-aanroepen niet mogelijk.
+- [ ] De rollen en bevoegdheden zijn met autorisatietests gecontroleerd.
+
+#### US-17 — Onverwachte deelnemers afhandelen — Gemiddeld — Backend & Frontend — Nog te bepalen _(concept; besluit opdrachtgever nodig)_
+
+> **Als** trainer of baliemedewerker wil ik weten hoe ik een deelnemer afhandel die zonder geldige inschrijving bij een les verschijnt, zodat de groepsgrootte niet ongemerkt boven de capaciteit uitkomt.
+
+**Acceptatiecriteria**
+
+- [ ] De opdrachtgever bepaalt of deelnemers zonder inschrijving mogen aansluiten en wat medewerkers doen als er geen plek beschikbaar is.
+- [ ] Na dit besluit wordt vastgelegd welke informatie of registratie de website nodig heeft om de afgesproken werkwijze te ondersteunen.
+
+#### US-18 — Nederlandstalige, sportieve website — Gemiddeld — Frontend — Nog te bepalen
+
+> **Als** lid wil ik een Nederlandstalige website met een sportieve en energieke uitstraling, zodat het lesaanbod duidelijk en passend bij het sportcentrum wordt gepresenteerd.
+
+**Acceptatiecriteria**
+
+- [ ] De zichtbare teksten en navigatie zijn Nederlandstalig.
+- [ ] De vormgeving gebruikt blauw en wit en wordt met de opdrachtgever afgestemd op de gewenste sportieve, energieke uitstraling.
+- [ ] De vormgeving wordt ter beoordeling aan de opdrachtgever voorgelegd voordat deze als definitief geldt.
+
 ## Niet-functionele eisen
 
 | Nr.   | Eis                                                                                                                                  | Hoe controleren we dit?                                                                                              |
@@ -290,10 +369,14 @@ De `id`- en foreign-keykolommen zijn `BIGINT UNSIGNED`; `duration_minutes` en `m
 
 ### Openstaande vragen
 
-| Vraag                                                                                                                                   | Aan wie    | Sinds | Status |
-| --------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ----- | ------ |
-| Worden geslacht en geboortedatum van leden bewaard? Ja → kolommen toevoegen aan `users`; nee → velden van de accountpagina verwijderen. | Ron de Wit | 06/11 | Open   |
-| Is de combinatie "Beheerder/Trainer" in één rol (`admin`) voldoende, of moet een trainer aparte rechten krijgen dan een beheerder?      | Ron de Wit | 10/11 | Open   |
+| Vraag                                                                                                                                                  | Aan wie    | Sinds              | Status |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | ------------------ | ------ |
+| Worden geslacht en geboortedatum van leden bewaard? Ja → kolommen toevoegen aan `users`; nee → velden van de accountpagina verwijderen.                | Ron de Wit | 06/11              | Open   |
+| Is de combinatie "Beheerder/Trainer" in één rol (`admin`) voldoende, of moet een trainer aparte rechten krijgen dan een beheerder?                     | Ron de Wit | 10/11              | Open   |
+| Is een baliemedewerker een aparte rol, en welke acties mag deze uitvoeren (zoals deelnemers bekijken of afmeldingen registreren)?                      | Ron de Wit | [Nog in te vullen] | Open   |
+| Mogen leden zonder inschrijving aansluiten als er plek is, en wat gebeurt er als de lescapaciteit al is bereikt?                                       | Ron de Wit | [Nog in te vullen] | Open   |
+| Moeten leden bij een wachtlijststatus of promotie alleen de website kunnen raadplegen, of is ook een melding gewenst? E-mail/sms valt nu buiten scope. | Ron de Wit | [Nog in te vullen] | Open   |
+| Welke aantallen of grens bepalen dat een les "weinig bezocht" is, en is een bezettingsoverzicht voldoende voor de manager?                             | Ron de Wit | [Nog in te vullen] | Open   |
 
 ## Wijzigingenlog
 
